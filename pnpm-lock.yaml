@@ -8,6 +8,9 @@ dependencies:
   clsx:
     specifier: ^2.0.0
     version: 2.0.0
+  lunar-typescript:
+    specifier: ^1.6.13
+    version: 1.6.13
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -1559,6 +1562,10 @@ packages:
     dependencies:
       yallist: 4.0.0
     dev: true
+
+  /lunar-typescript@1.6.13:
+    resolution: {integrity: sha512-6gBJepWWRiCvpbxxeiogsd/ZIggBbH1xmS090Kat/FiM0AGFnso0bmYXL1q/opr8qrMdnjsBlMZqBvNiRKACGA==}
+    dev: false
 
   /merge2@1.4.1:
     resolution: {integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==}
