@@ -19,15 +19,17 @@ function App() {
   const renderDate = (day: Day) => {
     const { date, lunarDate, isCurrentMonth, isToday } = day;
     const dateOfMonth = date.getDate();
+    const isSelectDay = selectDay?.date === date;
 
     return (
       <div
         key={date.toString()}
         className={clsxm(
-          'flex flex-col justify-center p-2 text-center text-gray-500 w-16 h-16 rounded-md cursor-pointer transition-all duration-100 hover:bg-blue-100',
+          'flex flex-col justify-center p-2 text-center text-gray-500 w-16 h-16 rounded-md cursor-pointer transition-all duration-100',
           isCurrentMonth && 'text-black',
           isToday && 'bg-gray-200',
-          selectDay?.date === date && 'bg-blue-400 text-white'
+          !isSelectDay && 'hover:bg-blue-100',
+          isSelectDay && 'bg-blue-400 text-white'
         )}
         onClick={() => setSelectDay(day)}
       >
