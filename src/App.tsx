@@ -1,8 +1,8 @@
 import './App.css';
-import clsxm from './libs/clsxm';
 import { days } from './configs/constant';
 import useCalendar, { Day } from './hooks/useCalendar';
 import { useState } from 'react';
+import DateComponent from './components/DateComponent';
 
 function App() {
   const {
@@ -15,29 +15,6 @@ function App() {
     calendarDays,
   } = useCalendar();
   const [selectDay, setSelectDay] = useState<Day>();
-
-  const renderDate = (day: Day) => {
-    const { date, lunarDate, isCurrentMonth, isToday } = day;
-    const dateOfMonth = date.getDate();
-    const isSelectDay = selectDay?.date === date;
-
-    return (
-      <div
-        key={date.toString()}
-        className={clsxm(
-          'flex flex-col justify-center p-2 text-center text-gray-500 w-16 h-16 rounded-md cursor-pointer transition-all duration-100',
-          isCurrentMonth && 'text-black',
-          isToday && 'bg-gray-200',
-          !isSelectDay && 'hover:bg-blue-100',
-          isSelectDay && 'bg-blue-400 text-white'
-        )}
-        onClick={() => setSelectDay(day)}
-      >
-        <span className='font-semibold text-xl'>{dateOfMonth}</span>
-        <span className='font-thin text-xs'>{lunarDate}</span>
-      </div>
-    );
-  };
 
   return (
     <div className='flex flex-col items-center h-screen pt-40 bg-slate-200'>
@@ -71,13 +48,20 @@ function App() {
             下一年
           </button>
         </div>
-        <div className='grid grid-cols-7 gap-2'>
+        <div className='grid grid-cols-7 gap-4'>
           {days.map((day) => (
             <div key={day} className='p-2 text-center font-light'>
               {day}
             </div>
           ))}
-          {calendarDays.map(renderDate)}
+          {calendarDays.map((day) => (
+            <DateComponent
+              key={day.date.toString()}
+              day={day}
+              selectDay={selectDay}
+              setSelectDay={setSelectDay}
+            />
+          ))}
         </div>
       </div>
     </div>
