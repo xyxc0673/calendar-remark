@@ -3,6 +3,7 @@ import useCalendar, { Day } from './hooks/useCalendar';
 import { useState } from 'react';
 import DateComponent from './components/DateComponent';
 import WeekdayHeader from './components/WeekdayHeader';
+import CalendarHeader from './components/CalendarHeader';
 
 function App() {
   const {
@@ -19,35 +20,14 @@ function App() {
   return (
     <div className='flex flex-col items-center h-screen pt-40 bg-slate-200'>
       <div className='shadow-md bg-white p-6 rounded-lg'>
-        <div className='flex gap-4 items-center mb-4 border-gray-200 border p-2 text-sm'>
-          <button
-            className='px-2 py-1 bg-gray-100 rounded'
-            onClick={handlePreviousYear}
-          >
-            上一年
-          </button>
-          <button
-            className='px-2 py-1 bg-gray-100 rounded'
-            onClick={handlePreviousMonth}
-          >
-            上个月
-          </button>
-          <h3 className='text-xl font-bold flex-1 text-center'>
-            {`${currentYear}年`} {`${currentMonth + 1}月`}
-          </h3>
-          <button
-            className='px-2 py-1 bg-gray-100 rounded'
-            onClick={handleNextMonth}
-          >
-            下个月
-          </button>
-          <button
-            className='px-2 py-1 bg-gray-100 rounded'
-            onClick={handleNextYear}
-          >
-            下一年
-          </button>
-        </div>
+        <CalendarHeader
+          onPreviousYear={handlePreviousYear}
+          onPreviousMonth={handlePreviousMonth}
+          onNextMonth={handleNextMonth}
+          onNextYear={handleNextYear}
+          currentYear={currentYear}
+          currentMonth={currentMonth}
+        />
         <div className='grid grid-cols-7 gap-4'>
           <WeekdayHeader />
           {calendarDays.map((day) => (
