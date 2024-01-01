@@ -2,7 +2,7 @@ import { holidayDetails } from '../configs/holidays';
 import { Day } from '../hooks/useCalendar';
 import useHoliday from '../hooks/useHoliday';
 import useIsWeekend from '../hooks/useIsWeekend';
-import useRestDay from '../hooks/useRestday';
+import useRestDay from '../hooks/useRestDay';
 import clsxm from '../libs/clsxm';
 
 const DateComponent = ({
