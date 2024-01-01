@@ -52,6 +52,12 @@ export const holidayDetails: { [key in HOLIDAY]: HolidayDetails } = {
   },
 };
 
+export enum DAY_TYPE {
+  HOLIDAY = 'holiday',
+  REST_DAY = 'rest-day',
+  WORKDAY = 'workday',
+}
+
 export const holidays = new Map([
   ['2024-01-01', HOLIDAY.NEW_YEARS_DAY],
   ['2024-02-10', HOLIDAY.SPRING_FESTIVAL],
@@ -88,4 +94,15 @@ export const restDays = new Map([
   ['2024-10-05', HOLIDAY.NATIONAL_DAY],
   ['2024-10-06', HOLIDAY.NATIONAL_DAY],
   ['2024-10-07', HOLIDAY.NATIONAL_DAY],
+]);
+
+export const workdays = new Map([
+  ['2024-02-04', HOLIDAY.SPRING_FESTIVAL],
+  ['2024-02-18', HOLIDAY.SPRING_FESTIVAL],
+  ['2024-04-07', HOLIDAY.TOMB_SWEEPING_DAY],
+  ['2024-04-28', HOLIDAY.LABOUR_DAY],
+  ['2024-05-11', HOLIDAY.LABOUR_DAY],
+  ['2024-09-14', HOLIDAY.MID_AUTUMN_FESTIVAL],
+  ['2024-09-29', HOLIDAY.NATIONAL_DAY],
+  ['2024-10-12', HOLIDAY.NATIONAL_DAY],
 ]);

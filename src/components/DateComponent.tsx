@@ -1,9 +1,21 @@
-import { holidayDetails } from '../configs/holidays';
+import { DAY_TYPE, holidayDetails } from '../configs/holidays';
 import { Day } from '../hooks/useCalendar';
 import useHoliday from '../hooks/useHoliday';
 import useIsWeekend from '../hooks/useIsWeekend';
 import useRestDay from '../hooks/useRestDay';
+import useWorkday from '../hooks/useWorkday';
 import clsxm from '../libs/clsxm';
+
+const getBadgeText = (dayType: DAY_TYPE) => {
+  switch (dayType) {
+    case DAY_TYPE.REST_DAY:
+      return '休';
+    case DAY_TYPE.WORKDAY:
+      return '班';
+    default:
+      return '';
+  }
+};
 
 const DateComponent = ({
   day,
@@ -20,7 +32,14 @@ const DateComponent = ({
   const isWeekend = useIsWeekend(date);
   const holiday = useHoliday(date);
   const restDay = useRestDay(date);
+  const workday = useWorkday(date);
+
   const isRestDay = holiday !== undefined || restDay !== undefined;
+  const isWorkday = workday !== undefined;
+
+  const showBadge = isRestDay || isWorkday;
+
+  const dayType = isRestDay ? DAY_TYPE.REST_DAY : DAY_TYPE.WORKDAY;
 
   return (
     <div
@@ -46,9 +65,15 @@ const DateComponent = ({
       >
         {holiday ? holidayDetails[holiday].chinese : lunarDate}
       </span>
-      {isRestDay && (
-        <span className='absolute w-5 h-5 leading-5 top-0 right-0 text-xs bg-red-500 text-white translate-x-1/2 -translate-y-1/2'>
-          休
+      {showBadge && (
+        <span
+          className={clsxm(
+            'absolute w-5 h-5 !leading-5 top-0 right-0 text-xs text-white translate-x-1/2 -translate-y-1/2',
+            dayType === DAY_TYPE.REST_DAY && 'bg-red-500',
+            dayType === DAY_TYPE.WORKDAY && 'bg-blue-500'
+          )}
+        >
+          {getBadgeText(dayType)}
         </span>
       )}
     </div>
