@@ -1,8 +1,8 @@
 import './App.css';
-import { days } from './configs/constant';
 import useCalendar, { Day } from './hooks/useCalendar';
 import { useState } from 'react';
 import DateComponent from './components/DateComponent';
+import WeekdayHeader from './components/WeekdayHeader';
 
 function App() {
   const {
@@ -49,11 +49,7 @@ function App() {
           </button>
         </div>
         <div className='grid grid-cols-7 gap-4'>
-          {days.map((day) => (
-            <div key={day} className='p-2 text-center font-light'>
-              {day}
-            </div>
-          ))}
+          <WeekdayHeader />
           {calendarDays.map((day) => (
             <DateComponent
               key={day.date.toString()}

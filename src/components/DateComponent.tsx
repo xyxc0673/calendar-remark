@@ -1,4 +1,5 @@
 import { Day } from '../hooks/useCalendar';
+import useIsWeekend from '../hooks/useIsWeekend';
 import clsxm from '../libs/clsxm';
 
 const DateComponent = ({
@@ -13,21 +14,23 @@ const DateComponent = ({
   const { date, lunarDate, isCurrentMonth, isToday } = day;
   const dateOfMonth = date.getDate();
   const isSelectDay = selectDay?.date === date;
+  const isWeekend = useIsWeekend(date);
 
   return (
     <div
       key={date.toString()}
       className={clsxm(
-        'relative flex flex-col justify-center p-2 text-center text-gray-500 w-16 h-16 rounded-md cursor-pointer transition-all duration-100',
-        isCurrentMonth && 'text-black',
+        'relative flex flex-col justify-center p-2 text-center text-gray-700 w-20 h-20 rounded-md cursor-pointer transition-all duration-100',
         isToday && 'bg-gray-200',
         !isSelectDay && 'hover:bg-blue-100',
-        isSelectDay && 'bg-blue-400 text-white'
+        isSelectDay && 'bg-blue-400 text-white',
+        isWeekend && 'text-red-500',
+        !isCurrentMonth && 'opacity-50'
       )}
       onClick={() => setSelectDay(day)}
     >
-      <span className='font-bold text-2xl'>{dateOfMonth}</span>
-      <span className='font-thin text-xs'>{lunarDate}</span>
+      <span className='text-2xl'>{dateOfMonth}</span>
+      <span className='font-light text-xs'>{lunarDate}</span>
     </div>
   );
 };
