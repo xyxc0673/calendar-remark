@@ -55,6 +55,9 @@ devDependencies:
   postcss:
     specifier: ^8.4.32
     version: 8.4.32
+  tailwind-scrollbar:
+    specifier: ^3.0.5
+    version: 3.0.5(tailwindcss@3.4.0)
   tailwindcss:
     specifier: ^3.4.0
     version: 3.4.0
@@ -2021,6 +2024,15 @@ packages:
     dependencies:
       '@babel/runtime': 7.23.6
     dev: false
+
+  /tailwind-scrollbar@3.0.5(tailwindcss@3.4.0):
+    resolution: {integrity: sha512-0ZwxTivevqq9BY9fRP9zDjHl7Tu+J5giBGbln+0O1R/7nHtBUKnjQcA1aTIhK7Oyjp6Uc/Dj6/dn8Dq58k5Uww==}
+    engines: {node: '>=12.13.0'}
+    peerDependencies:
+      tailwindcss: 3.x
+    dependencies:
+      tailwindcss: 3.4.0
+    dev: true
 
   /tailwindcss@3.4.0:
     resolution: {integrity: sha512-VigzymniH77knD1dryXbyxR+ePHihHociZbXnLZHUyzf2MMs2ZVqlUrZ3FvpXP8pno9JzmILt1sZPD19M3IxtA==}

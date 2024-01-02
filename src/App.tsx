@@ -11,8 +11,8 @@ function App() {
     currentMonth,
     handlePreviousMonth,
     handleNextMonth,
-    handlePreviousYear,
-    handleNextYear,
+    setCurrentMonth,
+    setCurrentYear,
     dateList,
   } = useCalendar();
 
@@ -20,10 +20,10 @@ function App() {
     <div className='flex flex-col items-center h-screen p-20 bg-slate-200'>
       <div className='overflow-hidden bg-white rounded-lg shadow-md'>
         <CalendarHeader
-          onPreviousYear={handlePreviousYear}
           onPreviousMonth={handlePreviousMonth}
           onNextMonth={handleNextMonth}
-          onNextYear={handleNextYear}
+          setCurrentMonth={setCurrentMonth}
+          setCurrentYear={setCurrentYear}
           currentYear={currentYear}
           currentMonth={currentMonth}
         />

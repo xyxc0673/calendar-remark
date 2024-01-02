@@ -80,6 +80,8 @@ const useCalendar = () => {
     handleNextMonth,
     handlePreviousYear,
     handleNextYear,
+    setCurrentMonth,
+    setCurrentYear,
     dateList,
   };
 };
