@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import useCalendar, { Day } from '../hooks/useCalendar';
+import useCalendar from '../hooks/useCalendar';
 import CalendarHeader from './CalendarHeader';
-import DateComponent from './DateComponent';
 import WeekdayHeader from './WeekdayHeader';
+import DateContainer from './DateContainer';
 
 const Calendar = () => {
   const {
@@ -12,9 +12,9 @@ const Calendar = () => {
     handleNextMonth,
     handlePreviousYear,
     handleNextYear,
-    calendarDays,
+    dateList,
   } = useCalendar();
-  const [selectDay, setSelectDay] = useState<Day>();
+  const [selectDate, setSelectDate] = useState<Date>();
 
   return (
     <div className='p-6 bg-white rounded-lg shadow-md'>
@@ -28,12 +28,13 @@ const Calendar = () => {
       />
       <div className='grid grid-cols-7 gap-4'>
         <WeekdayHeader />
-        {calendarDays.map((day) => (
-          <DateComponent
-            key={day.date.toString()}
-            day={day}
-            selectDay={selectDay}
-            setSelectDay={setSelectDay}
+        {dateList.map((date) => (
+          <DateContainer
+            key={date.toString()}
+            date={date}
+            currentMonth={currentMonth}
+            isSelected={date === selectDate}
+            onClick={() => setSelectDate(date)}
           />
         ))}
       </div>
