@@ -17,7 +17,7 @@ const Calendar = () => {
   const [selectDate, setSelectDate] = useState<Date>();
 
   return (
-    <div className='p-6 bg-white rounded-lg shadow-md'>
+    <div className='p-6'>
       <CalendarHeader
         onPreviousYear={handlePreviousYear}
         onPreviousMonth={handlePreviousMonth}
