@@ -1,8 +1,14 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
+import { atom, useAtom, useAtomValue } from 'jotai';
+
+export const todayAtom = atom(new Date());
+export const currentMonthAtom = atom(new Date().getMonth());
+export const currentYearAtom = atom(new Date().getFullYear());
 
 const useCalendar = () => {
-  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
-  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+  const [currentMonth, setCurrentMonth] = useAtom(currentMonthAtom);
+  const [currentYear, setCurrentYear] = useAtom(currentYearAtom);
+  const today = useAtomValue(todayAtom);
 
   const handlePreviousMonth = () => {
     if (currentMonth === 0) {
@@ -74,6 +80,7 @@ const useCalendar = () => {
   }, [currentMonth, currentYear]);
 
   return {
+    today,
     currentMonth,
     currentYear,
     handlePreviousMonth,

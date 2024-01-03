@@ -1,7 +1,9 @@
+import useCalendar from '../hooks/useCalendar';
 import useNextHoliday from '../hooks/useRecentHoliday';
 
-const RecentHoliday = ({ date }: { date: Date }) => {
-  const recentHoliday = useNextHoliday(date);
+const RecentHoliday = () => {
+  const { today } = useCalendar();
+  const recentHoliday = useNextHoliday(today);
 
   if (!recentHoliday) {
     return null;

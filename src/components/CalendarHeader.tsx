@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { ChevronDown } from '../assets/icons';
 import clsxm from '../libs/clsxm';
+import useCalendar from '../hooks/useCalendar';
 
 const DateSelector = ({
   valueList,
@@ -56,21 +57,11 @@ const DateSelector = ({
   );
 };
 
-const CalendarHeader = ({
-  setCurrentMonth,
-  setCurrentYear,
-  currentYear,
-  currentMonth,
-}: {
-  onPreviousMonth: () => void;
-  onNextMonth: () => void;
-  setCurrentMonth: (value: number) => void;
-  setCurrentYear: (value: number) => void;
-  currentYear: number;
-  currentMonth: number;
-}) => {
+const CalendarHeader = () => {
   const yearList = Array.from({ length: 151 }, (_, i) => i + 1900);
   const monthList = Array.from({ length: 12 }, (_, i) => i + 1);
+  const { currentYear, currentMonth, setCurrentMonth, setCurrentYear } =
+    useCalendar();
 
   return (
     <div className='flex items-center justify-center gap-4 px-3 py-2 md:px-6 md:py-4 bg-slate-100'>

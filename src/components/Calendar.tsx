@@ -1,9 +1,11 @@
-import { useState } from 'react';
 import WeekdayHeader from './WeekdayHeader';
 import DateContainer from './DateContainer';
+import { useSelectedDate } from '../hooks/useSelectedDate';
+import useCalendar from '../hooks/useCalendar';
 
-const Calendar = ({ month, dateList }: { month: number; dateList: Date[] }) => {
-  const [selectDate, setSelectDate] = useState<Date>();
+const Calendar = () => {
+  const { currentMonth, dateList } = useCalendar();
+  const { selectedDate, setSelectedDate } = useSelectedDate();
 
   return (
     <div className='grid w-full grid-cols-7 gap-2 p-2 md:gap-4 md:p-6'>
@@ -12,9 +14,9 @@ const Calendar = ({ month, dateList }: { month: number; dateList: Date[] }) => {
         <DateContainer
           key={date.toString()}
           date={date}
-          currentMonth={month}
-          isSelected={date === selectDate}
-          onClick={() => setSelectDate(date)}
+          currentMonth={currentMonth}
+          isSelected={date === selectedDate}
+          onClick={() => setSelectedDate(date)}
         />
       ))}
     </div>
