@@ -2,6 +2,7 @@ import WeekdayHeader from './WeekdayHeader';
 import DateContainer from './DateContainer';
 import { useSelectedDate } from '../hooks/useSelectedDate';
 import useCalendar from '../hooks/useCalendar';
+import { isSameDate } from '../libs/date';
 
 const Calendar = () => {
   const { currentMonth, dateList } = useCalendar();
@@ -15,7 +16,7 @@ const Calendar = () => {
           key={date.toString()}
           date={date}
           currentMonth={currentMonth}
-          isSelected={date === selectedDate}
+          isSelected={isSameDate(date, selectedDate)}
           onClick={() => setSelectedDate(date)}
         />
       ))}
