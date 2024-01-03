@@ -34,7 +34,6 @@ const DateContainer = ({
       badgeText={badgeText}
       showBadge={showBadge}
       className={clsxm(
-        'relative flex flex-col justify-center p-2 text-center text-gray-700 w-20 h-20 rounded-md cursor-pointer transition-all duration-100',
         !isSelected && !isToday && 'hover:bg-blue-100',
         isRestDay && 'bg-red-100/50',
         !isCurrentMonth && 'opacity-50',

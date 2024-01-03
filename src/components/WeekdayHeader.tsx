@@ -8,7 +8,7 @@ const WeekdayHeader = () => {
         <div
           key={key}
           className={clsxm(
-            'p-2 text-center font-light',
+            'p-1 md:p-2 text-center font-light text-sm md:text-base',
             key === 0 && 'text-red-500',
             key === 6 && 'text-red-500'
           )}

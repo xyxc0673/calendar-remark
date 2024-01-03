@@ -17,8 +17,8 @@ function App() {
   } = useCalendar();
 
   return (
-    <div className='flex flex-col items-center h-screen p-20 bg-slate-200'>
-      <div className='overflow-hidden bg-white rounded-lg shadow-md'>
+    <div className='flex flex-col items-center h-screen p-2 md:p-20 bg-slate-200'>
+      <div className='w-full md:w-[37.5rem] overflow-hidden bg-white rounded-lg shadow-md'>
         <CalendarHeader
           onPreviousMonth={handlePreviousMonth}
           onNextMonth={handleNextMonth}

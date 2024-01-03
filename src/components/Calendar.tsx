@@ -6,7 +6,7 @@ const Calendar = ({ month, dateList }: { month: number; dateList: Date[] }) => {
   const [selectDate, setSelectDate] = useState<Date>();
 
   return (
-    <div className='grid grid-cols-7 gap-4 p-6'>
+    <div className='grid w-full grid-cols-7 gap-2 p-2 md:gap-4 md:p-6'>
       <WeekdayHeader />
       {dateList.map((date) => (
         <DateContainer

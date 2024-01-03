@@ -26,19 +26,24 @@ const DateComponent = ({
   return (
     <div
       className={clsxm(
-        'relative flex flex-col justify-center p-2 text-center text-gray-700 w-20 h-20 rounded-md cursor-pointer transition-all duration-100',
+        'gap-0.5 relative flex flex-col justify-center p-1 md:p-2 text-center text-gray-700 w-full aspect-square rounded-xl cursor-pointer transition-all duration-100',
         className
       )}
       onClick={onClick}
     >
-      <span className='text-2xl'>{dateOfMonth}</span>
-      <span className={clsxm('text-xs text-gray-400', dateClassName)}>
+      <span className='text-2xl leading-6 max-md:scale-75'>{dateOfMonth}</span>
+      <span
+        className={clsxm(
+          'max-md:scale-75 text-xs text-gray-400',
+          dateClassName
+        )}
+      >
         {content}
       </span>
       {canShowBadge && (
         <span
           className={clsxm(
-            'absolute w-5 h-5 !leading-5 top-0 right-0 text-xs text-white translate-x-1/2 -translate-y-1/2 bg-red-500',
+            'absolute max-md:scale-75 w-5 h-5 !leading-5 top-0 right-0 text-xs text-white md:translate-x-1/2 md:-translate-y-1/2 translate-x-1/3 -translate-y-1/3 bg-red-500',
             badgeClassName
           )}
         >
