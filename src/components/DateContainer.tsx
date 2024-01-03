@@ -1,8 +1,20 @@
 import { DAY_TYPE, holidayDetails } from '../configs/holidays';
-import useDay from '../hooks/useDay';
+import useDay, { Day } from '../hooks/useDay';
 import clsxm from '../libs/clsxm';
 import { getBadgeText } from '../libs/dayUtil';
 import DateComponent from './DateComponent';
+
+const getContent = (day: Day) => {
+  if (day.holiday) {
+    return holidayDetails[day.holiday].chinese;
+  }
+
+  if (day.solarTerm) {
+    return day.solarTerm;
+  }
+
+  return day.lunarDate;
+};
 
 const DateContainer = ({
   date,
@@ -20,9 +32,7 @@ const DateContainer = ({
   const isCurrentMonth = date.getMonth() === currentMonth;
   const badgeText = getBadgeText(day.dayType);
 
-  const content = day.holiday
-    ? holidayDetails[day.holiday].chinese
-    : day.lunarDate;
+  const content = getContent(day);
 
   const showBadge = day.isRestDay || day.isWorkDay;
 
