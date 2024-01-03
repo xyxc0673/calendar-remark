@@ -2,6 +2,8 @@ import { useEffect, useRef } from 'react';
 import { ChevronDown } from '../assets/icons';
 import clsxm from '../libs/clsxm';
 import useCalendar from '../hooks/useCalendar';
+import { useSelectedDate } from '../hooks/useSelectedDate';
+import { isAfterDate, isSameDate } from '../libs/date';
 
 const DateSelector = ({
   valueList,
@@ -60,11 +62,28 @@ const DateSelector = ({
 const CalendarHeader = () => {
   const yearList = Array.from({ length: 151 }, (_, i) => i + 1900);
   const monthList = Array.from({ length: 12 }, (_, i) => i + 1);
-  const { currentYear, currentMonth, setCurrentMonth, setCurrentYear } =
+  const { today, currentYear, currentMonth, setCurrentMonth, setCurrentYear } =
     useCalendar();
+  const { selectedDate, setSelectedDate } = useSelectedDate();
+
+  const resetDate = () => {
+    setSelectedDate(today);
+    setCurrentMonth(today.getMonth());
+    setCurrentYear(today.getFullYear());
+  };
+
+  const showBackToToday =
+    !isSameDate(selectedDate, today) ||
+    currentMonth !== today.getMonth() ||
+    currentYear !== today.getFullYear();
+
+  const isAfterToday =
+    isAfterDate(selectedDate, today) ||
+    currentYear > today.getFullYear() ||
+    currentMonth > today.getMonth();
 
   return (
-    <div className='flex items-center justify-center gap-4 px-3 py-2 md:px-6 md:py-4 bg-slate-100'>
+    <div className='relative flex items-center justify-center gap-4 px-3 py-2 md:px-6 md:py-4 bg-slate-100'>
       <DateSelector
         valueList={yearList}
         value={currentYear}
@@ -77,6 +96,21 @@ const CalendarHeader = () => {
         render={(value) => `${value}月`}
         onChange={(value) => setCurrentMonth(value - 1)}
       />
+      <button
+        className={clsxm(
+          'flex items-center translate-x-full opacity-0 overflow-hidden transition-all duration-200 text-xs md:text-sm leading-none absolute right-3 pr-2 py-1 rounded-md text-slate-600',
+          showBackToToday && 'w-fit bg-slate-200 opacity-100 -translate-x-0'
+        )}
+        onClick={resetDate}
+      >
+        <ChevronDown
+          className={clsxm(
+            'w-6 h-6 text-gray-500 -rotate-90 transition-transform duration-200',
+            isAfterToday && 'rotate-90'
+          )}
+        />
+        返回今日
+      </button>
     </div>
   );
 };
