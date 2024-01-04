@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ChevronDown } from '../assets/icons';
 import clsxm from '../libs/clsxm';
 import useCalendar from '../hooks/useCalendar';
@@ -16,6 +16,7 @@ const DateSelector = ({
   render: (value: number) => string;
   onChange: (value: number) => void;
 }) => {
+  const [active, setActive] = useState(false);
   const listRef = useRef<HTMLDivElement | null>(null);
   const refs = useRef(new Map<number, HTMLSpanElement | null>());
 
@@ -29,17 +30,33 @@ const DateSelector = ({
     }
   }, []);
 
+  const handleValueChange = (value: number) => {
+    onChange(value);
+    setActive(false);
+  };
+
   return (
-    <div className='relative group before:absolute before:left-0 before:right-0 before:top-0 before:block before:leading-tight before:cursor-pointer before:text-lg before:content-[""] before:-bottom-1'>
-      <div className='flex items-center md:py-1 py-0.5 pl-3 pr-0.5 md:pr-1 transition-colors duration-200 bg-white border border-transparent rounded cursor-pointer hover:border-gray-600'>
-        <span className='text-sm group-hover:scale-100 md:text-base'>
-          {render(value)}
-        </span>
-        <ChevronDown className='w-6 h-6 ml-1 text-gray-500 transition-transform duration-200 group-hover:rotate-180' />
+    <div className='relative' onMouseLeave={() => setActive(false)}>
+      <div
+        className='flex items-center md:py-1 py-0.5 pl-3 pr-0.5 md:pr-1 transition-colors duration-200 bg-white border border-transparent rounded cursor-pointer hover:border-gray-600'
+        onClick={() => setActive(!active)}
+        onMouseEnter={() => setActive(true)}
+      >
+        <span className='text-sm md:text-base'>{render(value)}</span>
+        <ChevronDown
+          className={clsxm(
+            'w-6 h-6 ml-1 text-gray-500 transition-transform duration-200rotate-180',
+            active && 'rotate-180'
+          )}
+        />
       </div>
+      <div className='h-1 opacity-0 top-full'></div>
       <div
         ref={listRef}
-        className='absolute z-50 flex flex-col invisible w-full gap-1 p-1 overflow-hidden overflow-y-scroll transition-all duration-300 translate-y-0 bg-white rounded shadow opacity-0 h-60 md:h-96 shadow-slate-200 group-hover:translate-y-1 top-full group-hover:opacity-100 group-hover:visible scrollbar-track-white scrollbar-thumb-slate-300 scrollbar-thin scrollbar-thumb-rounded-full'
+        className={clsxm(
+          'absolute z-50 flex flex-col invisible w-full -translate-y-1 gap-1 p-1 overflow-hidden overflow-y-scroll transition-all duration-300 bg-white rounded shadow opacity-0 h-60 md:h-96 shadow-slate-200 top-full scrollbar-track-white scrollbar-thumb-slate-300 scrollbar-thin scrollbar-thumb-rounded-full',
+          active && 'translate-y-0 opacity-100 visible'
+        )}
       >
         {valueList.map((item) => (
           <span
@@ -49,7 +66,7 @@ const DateSelector = ({
               'text-zinc-500 opacity-80 hover:opacity-100 whitespace-nowrap hover:text-slate-900 inline-block w-full px-3 py-1 text-center border border-transparent rounded cursor-pointer hover:border-gray-600 transition-all duration-200 text-sm md:text-base',
               item === value && 'bg-slate-200 opacity-100 text-slate-900'
             )}
-            onClick={() => onChange(item)}
+            onClick={() => handleValueChange(item)}
           >
             {render(item)}
           </span>
