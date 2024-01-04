@@ -50,12 +50,12 @@ const DateSelector = ({
           )}
         />
       </div>
-      <div className='h-1 opacity-0 top-full'></div>
+      <div className='absolute w-full h-1 opacity-0 top-full'></div>
       <div
         ref={listRef}
         className={clsxm(
-          'absolute z-50 flex flex-col invisible w-full -translate-y-1 gap-1 p-1 overflow-hidden overflow-y-scroll transition-all duration-300 bg-white rounded shadow opacity-0 h-60 md:h-96 shadow-slate-200 top-full scrollbar-track-white scrollbar-thumb-slate-300 scrollbar-thin scrollbar-thumb-rounded-full',
-          active && 'translate-y-0 opacity-100 visible'
+          'absolute z-50 flex flex-col invisible w-full translate-y-0 gap-1 p-1 overflow-hidden overflow-y-scroll transition-all duration-300 bg-white rounded shadow opacity-0 h-60 md:h-96 shadow-slate-200 top-full scrollbar-track-white scrollbar-thumb-slate-300 scrollbar-thin scrollbar-thumb-rounded-full',
+          active && 'translate-y-1 opacity-100 visible'
         )}
       >
         {valueList.map((item) => (
