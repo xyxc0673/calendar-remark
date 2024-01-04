@@ -33,7 +33,7 @@ const LunarInfoCard = () => {
           </span>
           <div className='flex gap-1'>
             {yiList.map((yi) => (
-              <span key={yi} className='px-1 text-gray-600'>
+              <span key={yi} className='px-1 text-xs text-gray-600 md:text-sm'>
                 {yi}
               </span>
             ))}
@@ -45,7 +45,7 @@ const LunarInfoCard = () => {
           </span>
           <div className='flex gap-1'>
             {jiList.map((ji) => (
-              <span key={ji} className='px-1 text-gray-600'>
+              <span key={ji} className='px-1 text-xs text-gray-600 md:text-sm'>
                 {ji}
               </span>
             ))}
