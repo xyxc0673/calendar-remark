@@ -17,7 +17,7 @@ export type Day = {
   isHoliday: boolean;
   isRestDay: boolean;
   isWorkDay: boolean;
-  dayType: DAY_TYPE;
+  dayType?: DAY_TYPE;
   solarTerm?: string;
 };
 
@@ -49,7 +49,15 @@ const useDay = (date: Date): Day => {
     date.getMonth() === currentDate.getMonth() &&
     date.getFullYear() === currentDate.getFullYear();
 
-  const dayType = isRestDay ? DAY_TYPE.REST_DAY : DAY_TYPE.WORKDAY;
+  let dayType: DAY_TYPE | undefined = undefined;
+
+  if (isRestDay) {
+    dayType = DAY_TYPE.REST_DAY;
+  }
+
+  if (isWorkDay) {
+    dayType = DAY_TYPE.WORKDAY;
+  }
 
   return {
     date,

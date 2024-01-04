@@ -30,11 +30,11 @@ const DateContainer = ({
   const day = useDay(date);
   const { isToday, isRestDay, isWeekend } = day;
   const isCurrentMonth = date.getMonth() === currentMonth;
-  const badgeText = getBadgeText(day.dayType);
+  const badgeText = getBadgeText(day);
 
   const content = getContent(day);
 
-  const showBadge = day.isRestDay || day.isWorkDay;
+  const showBadge = day.isToday || day.isRestDay || day.isWorkDay;
 
   return (
     <DateComponent
@@ -44,19 +44,23 @@ const DateContainer = ({
       badgeText={badgeText}
       showBadge={showBadge}
       className={clsxm(
-        !isSelected && !isToday && 'hover:bg-blue-100',
+        !isSelected && 'hover:bg-blue-100',
         isRestDay && 'bg-red-100/50',
         !isCurrentMonth && 'opacity-50',
         (isWeekend || isRestDay) && 'text-red-500',
         isRestDay && 'opacity-100',
+        isToday && 'text-blue-500',
         isSelected && 'bg-blue-400 text-white'
       )}
       dateClassName={clsxm(
         (isWeekend || isRestDay) && 'text-red-500',
+        isToday && 'text-blue-500',
         isSelected && 'text-white'
       )}
       badgeClassName={clsxm(
-        day.dayType === DAY_TYPE.REST_DAY ? 'bg-red-500' : 'bg-blue-500'
+        day.dayType === DAY_TYPE.REST_DAY && 'bg-red-500',
+        day.dayType === DAY_TYPE.WORKDAY && 'bg-blue-900',
+        day.isToday && 'bg-blue-500'
       )}
       onClick={onClick}
     />

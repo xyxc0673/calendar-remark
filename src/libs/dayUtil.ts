@@ -1,12 +1,15 @@
 import { DAY_TYPE } from '../configs/holidays';
+import { Day } from '../hooks/useDay';
 
-export const getBadgeText = (dayType: DAY_TYPE) => {
-  switch (dayType) {
-    case DAY_TYPE.REST_DAY:
-      return '休';
-    case DAY_TYPE.WORKDAY:
-      return '班';
-    default:
-      return '';
+export const getBadgeText = (day: Day) => {
+  if (day.dayType === DAY_TYPE.REST_DAY) {
+    return '休';
   }
+  if (day.dayType === DAY_TYPE.WORKDAY) {
+    return '班';
+  }
+  if (day.isToday) {
+    return '今';
+  }
+  return '';
 };
