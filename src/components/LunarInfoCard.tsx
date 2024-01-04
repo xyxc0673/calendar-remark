@@ -41,7 +41,7 @@ const LunarInfoCard = () => {
 
   return (
     <InfoCard className='flex gap-4 md:gap-10'>
-      <div className='flex flex-col gap-2 h-fit text-nowrap'>
+      <div className='flex flex-col gap-2 h-fit text-nowrap shrink-0'>
         <span className='text-lg'>{`${lunarMonth}月${lunarDay}`}</span>
         <div className='flex gap-2 text-sm text-nowrap'>
           <span>{`${yearInGanZhi}年`}</span>
