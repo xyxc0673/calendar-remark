@@ -126,7 +126,7 @@ const CalendarHeader = () => {
             isAfterToday && 'rotate-90'
           )}
         />
-        返回今日
+        今日
       </button>
     </div>
   );
