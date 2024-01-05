@@ -115,15 +115,19 @@ const CalendarHeader = () => {
       />
       <button
         className={clsxm(
-          'flex items-center translate-x-full opacity-0 overflow-hidden transition-all duration-200 text-xs md:text-sm leading-none absolute right-3 pr-2 py-1 rounded-md text-slate-600',
-          showBackToToday && 'w-fit bg-slate-200 opacity-100 -translate-x-0'
+          'h-8 flex items-center translate-x-full opacity-0 overflow-hidden transition-all duration-200 text-xs md:text-sm leading-none absolute right-3 px-2 py-1 rounded-md text-slate-600 border border-transparent hover:border-gray-600',
+          showBackToToday &&
+            'w-fit bg-slate-200 opacity-100 -translate-x-0 pl-0'
         )}
         onClick={resetDate}
       >
         <ChevronDown
           className={clsxm(
-            'w-6 h-6 text-gray-500 -rotate-90 transition-transform duration-200',
-            isAfterToday && 'rotate-90'
+            'h-6 w-0 text-gray-500 transition-all duration-300 rotate-0 scale-50',
+            showBackToToday && 'w-6 scale-100',
+            isAfterToday && 'rotate-90',
+            !isAfterToday && '-rotate-90',
+            !showBackToToday && 'rotate-0'
           )}
         />
         今日
