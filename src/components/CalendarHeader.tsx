@@ -3,7 +3,9 @@ import clsxm from '../libs/clsxm';
 import useCalendar from '../hooks/useCalendar';
 import { useSelectedDate } from '../hooks/useSelectedDate';
 import { isAfterDate, isSameDate } from '../libs/date';
+import { HolidaySelect, useHolidays } from '../hooks/useHolidays';
 import Dropdown from './Dropdown';
+import { useSelectedHoliday } from '../hooks/useSelectedHoliday';
 
 const CalendarHeader = () => {
   const yearList = Array.from({ length: 151 }, (_, i) => ({
@@ -17,11 +19,23 @@ const CalendarHeader = () => {
   const { today, currentYear, currentMonth, setCurrentMonth, setCurrentYear } =
     useCalendar();
   const { selectedDate, setSelectedDate } = useSelectedDate();
+  const { selectedHoliday, setSelectedHoliday } = useSelectedHoliday();
+
+  const holidayList = useHolidays();
+
+  const navigateToHoliday = (nextHoliday: HolidaySelect) => {
+    const date = new Date(nextHoliday.date);
+    setSelectedDate(date);
+    setCurrentMonth(date.getMonth());
+    setCurrentYear(date.getFullYear());
+    setSelectedHoliday(nextHoliday.value);
+  };
 
   const resetDate = () => {
     setSelectedDate(today);
     setCurrentMonth(today.getMonth());
     setCurrentYear(today.getFullYear());
+    setSelectedHoliday(undefined);
   };
 
   const showBackToToday =
@@ -36,6 +50,13 @@ const CalendarHeader = () => {
 
   return (
     <div className='relative flex items-center justify-center gap-1.5 px-3 py-2 md:gap-4 md:px-6 md:py-4 bg-slate-100'>
+      <Dropdown
+        options={holidayList}
+        value={selectedHoliday}
+        placeholder='假期'
+        className='absolute left-3 min-w-9'
+        onChange={navigateToHoliday}
+      />
       <Dropdown
         options={yearList}
         value={currentYear}
