@@ -20,11 +20,13 @@ const DateContainer = ({
   date,
   currentMonth,
   isSelected,
+  disabled,
   onClick,
 }: {
   date: Date;
   currentMonth: number;
   isSelected: boolean;
+  disabled?: boolean;
   onClick?: () => void;
 }) => {
   const day = useDay(date);
@@ -44,13 +46,14 @@ const DateContainer = ({
       badgeText={badgeText}
       showBadge={showBadge}
       className={clsxm(
-        !isSelected && 'hover:bg-blue-100',
+        !isSelected && !disabled && 'hover:bg-blue-100',
         isRestDay && 'bg-red-100/50',
         !isCurrentMonth && 'opacity-50',
         (isWeekend || isRestDay) && 'text-red-500',
         isRestDay && 'opacity-100',
         isToday && 'text-blue-500',
-        isSelected && 'bg-blue-400 text-white'
+        isSelected && 'bg-blue-400 text-white',
+        disabled && 'cursor-default'
       )}
       dateClassName={clsxm(
         (isWeekend || isRestDay) && 'text-red-500',

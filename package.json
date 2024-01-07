@@ -11,6 +11,7 @@
     "generate-pwa-assets": "pwa-assets-generator"
   },
   "dependencies": {
+    "@hugocxl/react-to-image": "^0.0.9",
     "clsx": "^2.0.0",
     "dayjs": "^1.11.10",
     "jotai": "^2.6.1",
