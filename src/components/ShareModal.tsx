@@ -37,7 +37,7 @@ const ShareModal = () => {
           <div className='p-1 md:p-4'>
             <div>
               <div ref={ref} className='p-2 bg-white'>
-                <div className='bg-white w-full md:w-[37.5rem] rounded-lg overflow-hidden shadow-lg shadow-slate-200 text-sm md:text-base'>
+                <div className='bg-white w-full md:w-[37.5rem] rounded-lg overflow-hidden  md:shadow-lg shadow-slate-200 text-sm md:text-base'>
                   <div className='w-full px-1 py-2 text-center md:px-2 md:py-4 bg-slate-100'>
                     Calendar Remark
                   </div>
