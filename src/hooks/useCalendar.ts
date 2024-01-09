@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { atom, useAtom, useAtomValue } from 'jotai';
+import { usePreference } from './usePreference';
 
 export const todayAtom = atom(new Date());
 export const currentMonthAtom = atom(new Date().getMonth());
@@ -9,6 +10,9 @@ const useCalendar = () => {
   const [currentMonth, setCurrentMonth] = useAtom(currentMonthAtom);
   const [currentYear, setCurrentYear] = useAtom(currentYearAtom);
   const today = useAtomValue(todayAtom);
+  const {
+    preference: { firstDayOfWeek },
+  } = usePreference();
 
   const handlePreviousMonth = () => {
     if (currentMonth === 0) {
@@ -49,7 +53,7 @@ const useCalendar = () => {
       const daysInCurrentMonth = getDaysInMonth(currentMonth, currentYear);
       const daysInPreviousMonth = getDaysInMonth(currentMonth - 1, currentYear);
       const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
-      const startingDay = firstDayOfMonth === 0 ? 6 : firstDayOfMonth;
+      const startingDay = (firstDayOfMonth - firstDayOfWeek + 7) % 7;
 
       const dateList: Date[] = [];
 
@@ -77,7 +81,7 @@ const useCalendar = () => {
 
       return dateList;
     }
-  }, [currentMonth, currentYear]);
+  }, [currentMonth, currentYear, firstDayOfWeek]);
 
   return {
     today,

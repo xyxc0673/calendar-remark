@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { CrossCircle, Settings } from '../assets/icons';
-import { usePreference } from '../hooks/usePreference';
+import { FirstDayOfWeek, usePreference } from '../hooks/usePreference';
 import clsxm from '../libs/clsxm';
+import { RadioButtonGroup } from '../components/Radio';
 
 const SettingPage = ({
   isOpen,
@@ -10,7 +11,24 @@ const SettingPage = ({
   isOpen: boolean;
   onCancel: () => void;
 }) => {
-  const { preference, toggleShowExtraDays } = usePreference();
+  const {
+    preference: { firstDayOfWeek, showExtraDays },
+    toggleShowExtraDays,
+    setFirstDayOfWeekToMonday,
+    setFirstDayOfWeekToSunday,
+  } = usePreference();
+  const options = [
+    { value: FirstDayOfWeek.Monday, label: '周一' },
+    { value: FirstDayOfWeek.Sunday, label: '周日' },
+  ];
+
+  const handleOptionChange = (value: string | number) => {
+    if (value === FirstDayOfWeek.Monday) {
+      setFirstDayOfWeekToMonday();
+    } else if (value === FirstDayOfWeek.Sunday) {
+      setFirstDayOfWeekToSunday();
+    }
+  };
 
   return (
     <div
@@ -18,7 +36,7 @@ const SettingPage = ({
         'flex flex-col absolute left-0 top-0 overflow-hidden w-60 h-fit bg-white transition-all duration-300 shadow-lg rounded-lg',
         isOpen
           ? 'opacity-100 scale-100 -translate-x-full -translate-y-full'
-          : 'opacity-0 scale-50'
+          : 'opacity-0 scale-0'
       )}
     >
       <div className='relative flex items-center justify-end px-2 py-2 text-center bg-slate-100'>
@@ -30,15 +48,15 @@ const SettingPage = ({
           onClick={onCancel}
         />
       </div>
-      <div className='flex-1 gap-2 p-4 text-sm'>
+      <div className='flex flex-col flex-1 gap-4 p-4 text-sm'>
         <div className='flex items-center justify-between'>
           <span className='text-gray-700'>显示非本月日期</span>
-          <div className='relative inline-block w-10 align-middle transition duration-200 ease-in select-none'>
+          <div className='relative inline-block align-middle transition duration-200 ease-in select-none'>
             <input
               type='checkbox'
               className='opacity-0 sr-only peer'
               id='toggle'
-              checked={preference.showExtraDays}
+              checked={showExtraDays}
               onChange={toggleShowExtraDays}
             />
             <label
@@ -49,7 +67,14 @@ const SettingPage = ({
             </label>
           </div>
         </div>
-        <div></div>
+        <div className='flex items-center justify-between'>
+          <span>一周的开始</span>
+          <RadioButtonGroup
+            value={firstDayOfWeek}
+            options={options}
+            onChange={handleOptionChange}
+          />
+        </div>
       </div>
       <span className='py-2 text-xs text-center bg-slate-100 md:text-sm'>
         v0.0.1
@@ -59,7 +84,7 @@ const SettingPage = ({
 };
 
 export const SettingPopup = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className='relative flex justify-end'>

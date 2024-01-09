@@ -9,7 +9,7 @@ const Calendar = ({ isSharing }: { isSharing?: boolean }) => {
   const { currentMonth, dateList } = useCalendar();
   const { selectedDate, setSelectedDate } = useSelectedDate();
   const {
-    preference: { showExtraDays },
+    preference: { firstDayOfWeek, showExtraDays },
   } = usePreference();
 
   const handleDateClick = (date: Date) => {
@@ -38,7 +38,7 @@ const Calendar = ({ isSharing }: { isSharing?: boolean }) => {
 
   return (
     <div className='grid w-full grid-cols-7 gap-2 p-2 md:gap-4 md:p-6'>
-      <WeekdayHeader />
+      <WeekdayHeader firstDayOfWeek={firstDayOfWeek} />
       {dateList.map(renderDate)}
     </div>
   );
