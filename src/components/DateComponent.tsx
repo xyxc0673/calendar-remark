@@ -26,7 +26,7 @@ const DateComponent = ({
   return (
     <div
       className={clsxm(
-        'gap-0.5 relative flex flex-col justify-center p-1 md:p-2 text-center text-gray-700 w-full aspect-square rounded-xl cursor-pointer transition-all duration-100',
+        'group gap-0.5 relative flex flex-col justify-center p-1 md:p-2 text-center text-gray-700 dark:text-gray-200 w-full aspect-square rounded-xl cursor-pointer transition-all',
         className
       )}
       onClick={onClick}
@@ -34,7 +34,7 @@ const DateComponent = ({
       <span className='text-2xl leading-6 max-md:scale-75'>{dateOfMonth}</span>
       <span
         className={clsxm(
-          'max-md:scale-75 text-xs text-gray-400',
+          'max-md:scale-75 text-xs text-zinc-800 dark:text-zinc-200',
           dateClassName
         )}
       >

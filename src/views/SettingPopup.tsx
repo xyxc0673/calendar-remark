@@ -3,6 +3,7 @@ import { CrossCircle, Settings } from '../assets/icons';
 import { FirstDayOfWeek, usePreference } from '../hooks/usePreference';
 import clsxm from '../libs/clsxm';
 import { RadioButtonGroup } from '../components/Radio';
+import ThemeToggle from '../components/ThemeToggle';
 
 const SettingPage = ({
   isOpen,
@@ -33,24 +34,24 @@ const SettingPage = ({
   return (
     <div
       className={clsxm(
-        'flex flex-col absolute left-0 top-0 overflow-hidden w-60 h-fit bg-white transition-all duration-300 shadow-lg rounded-lg',
+        'flex flex-col absolute left-0 top-0 overflow-hidden w-60 h-fit bg-white dark:bg-zinc-800 border border-zinc-400/20 dark:border-zinc-500/30 dark:text-zinc-200 transition-all duration-300 shadow-lg rounded-lg',
         isOpen
           ? 'opacity-100 scale-100 -translate-x-full -translate-y-full'
           : 'opacity-0 scale-0'
       )}
     >
-      <div className='relative flex items-center justify-end px-2 py-2 text-center bg-slate-100'>
+      <div className='relative flex items-center justify-end px-2 py-2 text-center bg-slate-100 dark:bg-zinc-600'>
         <span className='absolute py-2 text-xs text-center -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 md:text-sm'>
           设置
         </span>
         <CrossCircle
-          className='text-gray-500 transition-all duration-200 cursor-pointer size-4 md:size-6 hover:text-gray-700 hover:rotate-90'
+          className='text-gray-500 transition-all duration-200 cursor-pointer size-4 md:size-6 hover:text-gray-700 hover:rotate-90 dark:stroke-gray-400'
           onClick={onCancel}
         />
       </div>
       <div className='flex flex-col flex-1 gap-4 p-4 text-sm'>
         <div className='flex items-center justify-between'>
-          <span className='text-gray-700'>显示非本月日期</span>
+          <span>显示非本月日期</span>
           <div className='relative inline-block align-middle transition duration-200 ease-in select-none'>
             <input
               type='checkbox'
@@ -76,7 +77,7 @@ const SettingPage = ({
           />
         </div>
       </div>
-      <span className='py-2 text-xs text-center bg-slate-100 md:text-sm'>
+      <span className='py-2 text-xs text-center bg-slate-100 md:text-sm dark:bg-zinc-600'>
         v0.0.1
       </span>
     </div>
@@ -87,13 +88,15 @@ export const SettingPopup = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className='relative flex justify-end'>
+    <div className='relative flex justify-end gap-4'>
+      <ThemeToggle />
+
       <div className='relative'>
         <div
-          className='flex items-center justify-center transition-all duration-200 border border-transparent rounded-lg cursor-pointer size-6 md:size-8 group hover:bg-white hover:border-slate-600'
+          className='flex items-center justify-center transition-all duration-200 border border-transparent rounded-lg cursor-pointer size-6 md:size-8 group hover:bg-white hover:border-slate-600 dark:border-zinc-400/20'
           onClick={() => setIsOpen(!isOpen)}
         >
-          <Settings className='size-4 md:size-6' />
+          <Settings className='size-4 md:size-6 dark:stroke-zinc-400' />
         </div>
         <SettingPage isOpen={isOpen} onCancel={() => setIsOpen(false)} />
       </div>

@@ -30,19 +30,19 @@ const ShareModal = () => {
       <div className='absolute w-screen px-2 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 md:w-fit'>
         <div
           className={clsxm(
-            'bg-white rounded-lg shadow-md transition-all duration-300',
+            'bg-white rounded-lg shadow-md transition-all duration-300 dark:bg-zinc-600',
             isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-125'
           )}
         >
           <div className='p-1 md:p-4'>
             <div>
-              <div ref={ref} className='p-2 bg-white'>
-                <div className='bg-white w-full md:w-[37.5rem] rounded-lg overflow-hidden  md:shadow-lg shadow-slate-200 text-sm md:text-base'>
-                  <div className='w-full px-1 py-2 text-center md:px-2 md:py-4 bg-slate-100'>
+              <div ref={ref} className='p-2 bg-white dark:bg-zinc-600'>
+                <div className='bg-white dark:bg-zinc-800 w-full md:w-[37.5rem] rounded-lg overflow-hidden  md:shadow-lg shadow-slate-200 text-sm md:text-base'>
+                  <div className='w-full px-1 py-2 text-center md:px-2 md:py-4 bg-slate-100 dark:bg-zinc-900/20 dark:text-zinc-200'>
                     Calendar Remark
                   </div>
                   <Calendar isSharing />
-                  <div className='flex items-center justify-center w-full gap-1 px-1 py-2 text-sm md:gap-2 md:px-2 md:py-4 bg-slate-100 md:text-base'>
+                  <div className='flex items-center justify-center w-full gap-1 px-1 py-2 text-sm md:gap-2 md:px-2 md:py-4 bg-slate-100 dark:bg-zinc-900/20 md:text-base dark:text-zinc-200'>
                     <img src='/favicon.svg' className='w-4 h-4 md:w-6 md:h-6' />
                     <span>calendar.xym.im</span>
                   </div>

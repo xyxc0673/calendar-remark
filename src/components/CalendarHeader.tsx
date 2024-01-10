@@ -49,7 +49,7 @@ const CalendarHeader = () => {
     currentMonth > today.getMonth();
 
   return (
-    <div className='relative flex items-center justify-center gap-1.5 px-3 py-2 md:gap-4 md:px-6 md:py-4 bg-slate-100'>
+    <div className='relative flex items-center justify-center gap-1.5 px-3 py-2 md:gap-4 md:px-6 md:py-4 bg-slate-100 dark:bg-zinc-900/20'>
       <Dropdown
         options={holidayList}
         value={selectedHoliday}
@@ -69,15 +69,15 @@ const CalendarHeader = () => {
       />
       <button
         className={clsxm(
-          'h-8 flex items-center translate-x-full opacity-0 overflow-hidden transition-all duration-200 text-xs md:text-sm leading-none absolute right-3 px-2 py-1 rounded-md text-slate-600 border border-transparent hover:border-gray-600',
+          'h-8 flex items-center translate-x-full opacity-0 overflow-hidden transition-all duration-200 text-xs md:text-sm leading-none absolute right-3 px-2 py-1 rounded-md text-slate-600 border border-transparent hover:border-gray-600 dark:text-black',
           showBackToToday &&
-            'w-fit bg-slate-200 opacity-100 -translate-x-0 pl-0'
+            'w-fit bg-slate-200 opacity-100 -translate-x-0 pl-0 dark:bg-zinc-200'
         )}
         onClick={resetDate}
       >
         <ChevronDown
           className={clsxm(
-            'h-4 md:h-6 w-0 text-gray-500 transition-all duration-300 rotate-0 scale-50',
+            'h-4 md:h-6 w-0 text-gray-500 transition-all duration-300 rotate-0 scale-50 dark:text-gray-400',
             showBackToToday && 'w-4 md:w-6 scale-100',
             isAfterToday && 'rotate-90',
             !isAfterToday && '-rotate-90',

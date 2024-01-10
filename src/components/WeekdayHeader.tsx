@@ -14,9 +14,8 @@ const WeekdayHeader = ({ firstDayOfWeek }: { firstDayOfWeek: number }) => {
         <div
           key={key}
           className={clsxm(
-            'p-1 md:p-2 text-center font-light text-sm md:text-base',
-            key === 0 && 'text-red-500',
-            key === 6 && 'text-red-500'
+            'p-1 md:p-2 text-center font-light text-sm md:text-base dark:text-gray-300',
+            (key === 0 || key === 6) && 'text-red-500 dark:text-red-400'
           )}
         >
           {day}
