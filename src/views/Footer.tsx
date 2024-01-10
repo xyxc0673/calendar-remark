@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CrossCircle, Settings } from '../assets/icons';
+import { CrossCircle, Github, Settings } from '../assets/icons';
 import { FirstDayOfWeek, usePreference } from '../hooks/usePreference';
 import clsxm from '../libs/clsxm';
 import { RadioButtonGroup } from '../components/Radio';
@@ -107,6 +107,13 @@ export const Footer = () => {
         光阴荏苒，日月如梭
       </div>
       <div className='flex gap-4 px-4 py-1 rounded-full bg-slate-100 dark:bg-zinc-900/20'>
+        <a
+          href='https://github.com/xyxc0673/calendar-remark'
+          target='_blank'
+          className='flex items-center justify-center transition-all duration-200 border border-transparent rounded-lg cursor-pointer size-6 md:size-8 group hover:bg-white hover:border-slate-500 dark:hover:bg-zinc-600'
+        >
+          <Github className='size-4 md:size-6 dark:stroke-zinc-400' />
+        </a>
         <ThemeToggle />
         <SettingButton />
       </div>
