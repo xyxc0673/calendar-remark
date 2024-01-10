@@ -46,18 +46,17 @@ const DateContainer = ({
       badgeText={badgeText}
       showBadge={showBadge}
       className={clsxm(
-        !isSelected && !disabled && 'hover:bg-blue-100',
-        isRestDay && 'bg-red-100/50',
+        !isSelected && !disabled && 'hover:bg-blue-100 dark:hover:bg-zinc-600',
         !isCurrentMonth && 'opacity-50',
-        (isWeekend || isRestDay) && 'text-red-500',
-        isRestDay && 'opacity-100',
-        isToday && 'text-blue-500',
+        (isWeekend || isRestDay) && 'text-red-500 dark:text-red-500',
+        isRestDay && 'bg-red-200 opacity-100 dark:bg-red-200',
+        isToday && 'text-blue-500 dark:text-blue-500',
         isSelected && 'bg-blue-400 text-white',
         disabled && 'cursor-default'
       )}
       dateClassName={clsxm(
-        (isWeekend || isRestDay) && 'text-red-500',
-        isToday && 'text-blue-500',
+        (isWeekend || isRestDay) && 'text-red-500 dark:text-red-500',
+        isToday && 'text-blue-500 dark:text-blue-500',
         isSelected && 'text-white'
       )}
       badgeClassName={clsxm(

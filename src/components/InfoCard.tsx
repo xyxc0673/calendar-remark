@@ -8,7 +8,12 @@ export const InfoCard = ({
   children: React.ReactNode;
 }) => {
   return (
-    <div className={clsxm('p-4 rounded-lg bg-slate-100', className)}>
+    <div
+      className={clsxm(
+        'p-4 rounded-lg bg-slate-100 dark:bg-zinc-900/20',
+        className
+      )}
+    >
       {children}
     </div>
   );

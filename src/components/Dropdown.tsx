@@ -51,7 +51,7 @@ const Dropdown = <T extends DefaultOptionType>({
       onMouseLeave={() => setActive(false)}
     >
       <div
-        className='flex items-center md:py-1 py-0.5 pl-1.5 pr-0.5 md:pl-3 md:pr-1 transition-colors duration-200 bg-white border border-transparent rounded cursor-pointer hover:border-gray-600'
+        className='flex items-center md:py-1 py-0.5 pl-1.5 pr-0.5 md:pl-3 md:pr-1 transition-colors duration-200 bg-white border border-transparent rounded cursor-pointer dark:bg-zinc-200 hover:border-gray-600 dark:hover:border-gray-200'
         onClick={() => setActive(!active)}
         onMouseEnter={() => setActive(true)}
       >
@@ -69,7 +69,7 @@ const Dropdown = <T extends DefaultOptionType>({
       <div
         ref={listRef}
         className={clsxm(
-          'absolute z-50 left-1/2 -translate-x-1/2 flex flex-col invisible w-fit translate-y-0 gap-1 p-1 overflow-hidden overflow-y-auto transition-all duration-300 bg-white rounded shadow opacity-0 max-h-60 md:max-h-96 shadow-slate-200 top-full scrollbar-track-white scrollbar-thumb-slate-300 scrollbar-thin scrollbar-thumb-rounded-full',
+          'absolute z-50 left-1/2 -translate-x-1/2 flex flex-col invisible w-fit translate-y-0 gap-1 p-1 overflow-hidden overflow-y-auto transition-all duration-300 bg-white dark:bg-zinc-200 rounded shadow opacity-0 max-h-60 md:max-h-96 shadow-slate-200 top-full scrollbar-track-white scrollbar-thumb-slate-300 scrollbar-thin scrollbar-thumb-rounded-full',
           active && 'translate-y-1 opacity-100 visible'
         )}
       >
@@ -80,7 +80,7 @@ const Dropdown = <T extends DefaultOptionType>({
             className={clsxm(
               'text-zinc-500 opacity-80 hover:opacity-100 whitespace-nowrap hover:text-slate-900 inline-block w-full px-3 py-1 text-center border border-transparent rounded cursor-pointer hover:border-gray-600 transition-all duration-200 text-sm md:text-base',
               option.value === value &&
-                'bg-slate-200 opacity-100 text-slate-900'
+                'bg-slate-200 opacity-100 text-slate-900 dark:bg-zinc-300 dark:text-slate-900'
             )}
             onClick={() => handleChange(option)}
           >
