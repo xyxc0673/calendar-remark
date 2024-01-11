@@ -103,10 +103,10 @@ const SettingButton = () => {
 export const Footer = () => {
   return (
     <div className='relative flex items-center justify-between h-8 md:h-10'>
-      <div className='flex items-center h-full px-4 py-1 text-sm rounded-full bg-slate-100 dark:bg-zinc-900/20 dark:text-zinc-200'>
+      <div className='flex items-center h-full px-4 py-1 text-sm rounded-full bg-slate-100 dark:bg-black/40 dark:text-zinc-200'>
         光阴荏苒，日月如梭
       </div>
-      <div className='flex gap-4 px-4 py-1 rounded-full bg-slate-100 dark:bg-zinc-900/20'>
+      <div className='flex gap-4 px-4 py-1 rounded-full bg-slate-100 dark:bg-black/40'>
         <a
           href='https://github.com/xyxc0673/calendar-remark'
           target='_blank'
