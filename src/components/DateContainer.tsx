@@ -51,13 +51,13 @@ const DateContainer = ({
         (isWeekend || isRestDay) && 'text-red-500 dark:text-red-500',
         isRestDay && 'bg-red-200 opacity-100 dark:bg-red-200',
         isToday && 'text-blue-500 dark:text-blue-500',
-        isSelected && 'bg-blue-400 text-white',
+        isSelected && 'bg-blue-400 text-white dark:text-white dark:bg-blue-400',
         disabled && 'cursor-default'
       )}
       dateClassName={clsxm(
         (isWeekend || isRestDay) && 'text-red-500 dark:text-red-500',
         isToday && 'text-blue-500 dark:text-blue-500',
-        isSelected && 'text-white'
+        isSelected && 'text-white dark:text-white'
       )}
       badgeClassName={clsxm(
         day.dayType === DAY_TYPE.REST_DAY && 'bg-red-500',
