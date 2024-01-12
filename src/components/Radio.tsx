@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import clsxm from '../libs/clsxm';
 
 export const RadioButtonGroup = ({
@@ -11,6 +11,10 @@ export const RadioButtonGroup = ({
   onChange?: (value: string | number) => void;
 }) => {
   const [selected, setSelected] = useState(value);
+
+  useEffect(() => {
+    setSelected(value);
+  }, [value]);
 
   const selectedIndex = options.findIndex((opt) => opt.value === selected);
   const translateAmount = selectedIndex * 100;
