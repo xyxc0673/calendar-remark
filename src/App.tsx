@@ -9,6 +9,7 @@ import ShareModal from './components/ShareModal';
 import { Footer } from './views/Footer';
 import 'dayjs/locale/zh-cn';
 import weekOfYear from 'dayjs/plugin/weekOfYear';
+import YearProgressCard from './components/YearProgressCard';
 
 dayjs.locale('zh-cn');
 dayjs.extend(weekOfYear);
@@ -28,6 +29,7 @@ function App() {
             <div className='w-full md:w-[37.5rem] p-4 gap-3 flex flex-col'>
               <DayInfoCard />
               <LunarInfoCard />
+              <YearProgressCard />
             </div>
           </div>
           <Footer />
