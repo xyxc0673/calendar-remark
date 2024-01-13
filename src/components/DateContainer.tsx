@@ -14,6 +14,10 @@ const getContent = (day: Day) => {
     return day.solarTerm;
   }
 
+  if (day.festivals.length > 0) {
+    return day.festivals[0];
+  }
+
   return day.lunarDate;
 };
 
