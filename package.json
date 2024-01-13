@@ -16,6 +16,7 @@
     "dayjs": "^1.11.10",
     "jotai": "^2.6.1",
     "lunar-typescript": "^1.6.13",
+    "nanoid": "^5.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tailwind-merge": "^2.2.0"
