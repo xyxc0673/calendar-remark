@@ -10,6 +10,7 @@ import { Footer } from './views/Footer';
 import 'dayjs/locale/zh-cn';
 import weekOfYear from 'dayjs/plugin/weekOfYear';
 import YearProgressCard from './components/YearProgressCard';
+import PlaceHolderImage from './components/PlaceHolderImage';
 
 dayjs.locale('zh-cn');
 dayjs.extend(weekOfYear);
@@ -30,6 +31,7 @@ function App() {
               <DayInfoCard />
               <LunarInfoCard />
               <YearProgressCard />
+              <PlaceHolderImage />
             </div>
           </div>
           <Footer />
