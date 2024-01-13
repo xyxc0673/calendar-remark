@@ -44,7 +44,7 @@ const YearProgressCard = () => {
         {yearProgressList.map((progress, index) => (
           <div
             key={index}
-            className='flex items-center justify-between w-full h-4 text-sm rounded-md bg-slate-200 dark:bg-zinc-400'
+            className='flex items-center justify-between w-full h-4 overflow-hidden text-sm rounded-md bg-slate-200 dark:bg-zinc-400'
           >
             <div
               className='h-full rounded-md bg-slate-400 dark:bg-zinc-500'
