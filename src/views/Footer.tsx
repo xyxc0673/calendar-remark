@@ -4,6 +4,7 @@ import { FirstDayOfWeek, usePreference } from '../hooks/usePreference';
 import clsxm from '../libs/clsxm';
 import { RadioButtonGroup } from '../components/Radio';
 import ThemeToggle from '../components/ThemeToggle';
+import Checkbox from '../components/Checkbox';
 
 const SettingPage = ({
   isOpen,
@@ -52,21 +53,7 @@ const SettingPage = ({
       <div className='flex flex-col flex-1 gap-4 p-4 text-sm'>
         <div className='flex items-center justify-between'>
           <span>显示非本月日期</span>
-          <div className='relative inline-block align-middle transition duration-200 ease-in select-none'>
-            <input
-              type='checkbox'
-              className='opacity-0 sr-only peer'
-              id='toggle'
-              checked={showExtraDays}
-              onChange={toggleShowExtraDays}
-            />
-            <label
-              htmlFor='toggle'
-              className='relative flex h-5 w-10 md:h-6 md:w-11 cursor-pointer items-center rounded-full bg-gray-400 px-0.5 outline-gray-400 transition-colors before:h-4 before:w-4  md:before:h-5 md:before:w-5 before:rounded-full before:bg-white before:shadow before:transition-transform before:duration-300 peer-checked:bg-blue-500 peer-checked:before:translate-x-full peer-focus-visible:outline peer-focus-visible:outline-offset-2 peer-focus-visible:outline-gray-400 peer-checked:peer-focus-visible:outline-blue-500'
-            >
-              <span className='sr-only'>Enable</span>
-            </label>
-          </div>
+          <Checkbox checked={showExtraDays} onChange={toggleShowExtraDays} />
         </div>
         <div className='flex items-center justify-between'>
           <span>一周的开始</span>
