@@ -4,6 +4,7 @@ import { FirstDayOfWeek, usePreference } from '../hooks/usePreference';
 import clsxm from '../libs/clsxm';
 import { RadioButtonGroup } from '../components/Radio';
 import ThemeToggle from '../components/ThemeToggle';
+import Checkbox from '../components/Checkbox';
 
 const SettingPage = ({
   isOpen,
@@ -52,21 +53,7 @@ const SettingPage = ({
       <div className='flex flex-col flex-1 gap-4 p-4 text-sm'>
         <div className='flex items-center justify-between'>
           <span>显示非本月日期</span>
-          <div className='relative inline-block align-middle transition duration-200 ease-in select-none'>
-            <input
-              type='checkbox'
-              className='opacity-0 sr-only peer'
-              id='toggle'
-              checked={showExtraDays}
-              onChange={toggleShowExtraDays}
-            />
-            <label
-              htmlFor='toggle'
-              className='relative flex h-5 w-10 md:h-6 md:w-11 cursor-pointer items-center rounded-full bg-gray-400 px-0.5 outline-gray-400 transition-colors before:h-4 before:w-4  md:before:h-5 md:before:w-5 before:rounded-full before:bg-white before:shadow before:transition-transform before:duration-300 peer-checked:bg-blue-500 peer-checked:before:translate-x-full peer-focus-visible:outline peer-focus-visible:outline-offset-2 peer-focus-visible:outline-gray-400 peer-checked:peer-focus-visible:outline-blue-500'
-            >
-              <span className='sr-only'>Enable</span>
-            </label>
-          </div>
+          <Checkbox checked={showExtraDays} onChange={toggleShowExtraDays} />
         </div>
         <div className='flex items-center justify-between'>
           <span>一周的开始</span>
@@ -103,8 +90,20 @@ const SettingButton = () => {
 export const Footer = () => {
   return (
     <div className='relative flex items-center justify-between h-8 md:h-10'>
-      <div className='flex items-center h-full px-4 py-1 text-sm rounded-full bg-slate-100 dark:bg-black/40 dark:text-zinc-200'>
-        光阴荏苒，日月如梭
+      <div className='relative flex items-center h-full px-4 py-1 overflow-hidden text-sm rounded-full cursor-default group bg-slate-100 dark:bg-black/40 dark:text-zinc-200'>
+        <span className='transition-all duration-200 group-hover:-translate-y-full group-hover:opacity-0'>
+          光阴荏苒，日月如梭
+        </span>
+        <span className='absolute transition-all duration-200 -translate-x-1/2 translate-y-full opacity-0 left-1/2 text-nowrap group-hover:translate-y-0 group-hover:opacity-100'>
+          A Project By{' '}
+          <a
+            href='https://xym.im'
+            target='_blank'
+            className='bg-gradient-to-r from-[#e68765] to-[#f0b7a3] bg-clip_text text_transparent font_bold font-bold text-transparent bg-clip-text'
+          >
+            XYXC
+          </a>
+        </span>
       </div>
       <div className='flex gap-4 px-4 py-1 rounded-full bg-slate-100 dark:bg-black/40'>
         <a

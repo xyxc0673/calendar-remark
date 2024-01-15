@@ -5,6 +5,7 @@ import useRestDay from './useRestDay';
 import useWorkday from './useWorkday';
 import { DAY_TYPE, HOLIDAY } from '../configs/holidays';
 import { useSolarTerm } from './useSolarTerm';
+import useFestivals from './useFestivals';
 
 export type Day = {
   date: Date;
@@ -19,6 +20,7 @@ export type Day = {
   isWorkDay: boolean;
   dayType?: DAY_TYPE;
   solarTerm?: string;
+  festivals: string[];
 };
 
 const getLunarDate = (date: Date) => {
@@ -37,6 +39,7 @@ const useDay = (date: Date): Day => {
   const restDay = useRestDay(date);
   const workDay = useWorkday(date);
   const solarTerm = useSolarTerm(date);
+  const festivals = useFestivals(date);
   const currentDate = new Date();
 
   const lunarDate = getLunarDate(date);
@@ -72,6 +75,7 @@ const useDay = (date: Date): Day => {
     isToday,
     dayType,
     solarTerm,
+    festivals,
   };
 };
 

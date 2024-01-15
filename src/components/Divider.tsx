@@ -10,8 +10,7 @@ const Divider = ({
   return (
     <div
       className={clsxm(
-        'w-full h-full',
-        direction === 'horizontal' ? 'border-b' : 'border-r',
+        direction === 'horizontal' ? 'border-b w-full' : 'border-r h-full',
         'border-gray-200 dark:border-zinc-600',
         className
       )}

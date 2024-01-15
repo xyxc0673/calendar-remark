@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import clsxm from '../libs/clsxm';
+import { customAlphabet } from 'nanoid';
+const nanoid = customAlphabet('1234567890abcdef', 10);
 
 export const RadioButtonGroup = ({
   value,
@@ -35,31 +37,34 @@ export const RadioButtonGroup = ({
           }}
         />
 
-        {options.map((option, index) => (
-          <div
-            key={option.value}
-            className='relative z-10 px-1 text-center text-white'
-          >
-            <input
-              id={`option-${index}`}
-              type='radio'
-              name='radio'
-              value={option.value}
-              checked={selected === option.value}
-              onChange={() => handleChange(option.value)}
-              className='sr-only' // Hide the default radio button
-            />
-            <label
-              htmlFor={`option-${index}`}
-              className={clsxm(
-                'cursor-pointer p-2 transition-colors duration-200',
-                selected === option.value ? 'text-white' : 'text-gray-700'
-              )}
+        {options.map((option) => {
+          const id = nanoid();
+
+          return (
+            <div
+              key={option.value}
+              className='relative z-10 px-1 text-center text-white'
             >
-              {option.label}
-            </label>
-          </div>
-        ))}
+              <input
+                id={id}
+                type='radio'
+                value={option.value}
+                checked={selected === option.value}
+                onChange={() => handleChange(option.value)}
+                className='sr-only' // Hide the default radio button
+              />
+              <label
+                htmlFor={id}
+                className={clsxm(
+                  'cursor-pointer p-2 transition-colors duration-200',
+                  selected === option.value ? 'text-white' : 'text-gray-700'
+                )}
+              >
+                {option.label}
+              </label>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
