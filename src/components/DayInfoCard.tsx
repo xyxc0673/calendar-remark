@@ -43,8 +43,18 @@ const EditArea = ({ date, isEditing }: { date: Date; isEditing: boolean }) => {
       return day.solarTerm;
     }
 
+    if (day.festivals.length > 0) {
+      return day.festivals[0];
+    }
+
     return day.lunarDate;
-  }, [customDay.content, day.holiday, day.lunarDate, day.solarTerm]);
+  }, [
+    customDay.content,
+    day.festivals,
+    day.holiday,
+    day.lunarDate,
+    day.solarTerm,
+  ]);
 
   const dayType = useMemo(() => {
     if (customDay.theme) {
