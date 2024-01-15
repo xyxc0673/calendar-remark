@@ -95,7 +95,7 @@ export const Footer = () => {
           光阴荏苒，日月如梭
         </span>
         <span className='absolute transition-all duration-200 -translate-x-1/2 translate-y-full opacity-0 left-1/2 text-nowrap group-hover:translate-y-0 group-hover:opacity-100'>
-          A project by{' '}
+          A Project By{' '}
           <a
             href='https://xym.im'
             target='_blank'
