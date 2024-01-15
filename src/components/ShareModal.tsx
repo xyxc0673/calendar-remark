@@ -33,7 +33,7 @@ const ShareModal = () => {
     return (
       <div
         className={clsxm(
-          'relative px-1 mt-2 mx-2 overflow-hidden transition-all duration-200 rounded-lg p-2 text-sm md:text-base',
+          'relative px-1 mt-2 mx-2 md:mx-4 overflow-hidden transition-all duration-200 rounded-lg p-2 text-sm md:text-base mb-2',
           showCustomArea && 'bg-slate-100'
         )}
       >
@@ -53,12 +53,12 @@ const ShareModal = () => {
           className={clsxm(
             'transition-all duration-200 flex flex-col justify-center',
             showCustomArea
-              ? 'h-40 opacity-100 visible'
+              ? 'h-44 opacity-100 visible'
               : 'h-0 opacity-0 invisible'
           )}
         >
           <Divider direction='horizontal' className='my-2' />
-          <div className='flex flex-col gap-3'>
+          <div className='flex flex-col gap-3 py-2'>
             <div className='flex flex-col gap-1'>
               <div className='flex items-center gap-2'>
                 <span className='text-nowrap'>显示头部</span>
@@ -121,8 +121,8 @@ const ShareModal = () => {
         >
           <div className='p-1 md:p-4'>
             <div>
-              <div ref={ref} className='p-2 bg-white dark:bg-zinc-600'>
-                <div className='bg-white dark:bg-zinc-800 w-full md:w-[37.5rem] rounded-lg overflow-hidden  md:shadow-lg shadow-slate-200 text-sm md:text-base'>
+              <div ref={ref} className='p-2 bg-white md:p-4 dark:bg-zinc-600'>
+                <div className='bg-white dark:bg-zinc-800 w-full md:w-[37.5rem] rounded-lg overflow-hidden md:shadow-lg shadow-slate-200 text-sm md:text-base'>
                   {showHeader && (
                     <div className='w-full px-1 py-2 text-center md:px-2 md:py-4 bg-slate-100 dark:bg-zinc-900/20 dark:text-zinc-200'>
                       {headerText}
