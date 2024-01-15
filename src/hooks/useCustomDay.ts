@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 interface CustomDay {
   badge?: string;
   content?: string;
-  theme?: 'workday' | 'restDay';
+  theme?: '' | 'workday' | 'restDay';
 }
 
 const customDayMapAtom = atomWithStorage<Record<string, CustomDay>>(
@@ -39,7 +39,7 @@ export const useCustomDay = (date: Date) => {
     updateCustomDay({ ...customDay, content });
   };
 
-  const updateTheme = (theme: 'workday' | 'restDay') => {
+  const updateTheme = (theme: '' | 'workday' | 'restDay') => {
     updateCustomDay({ ...customDay, theme });
   };
 
@@ -49,6 +49,7 @@ export const useCustomDay = (date: Date) => {
 
   return {
     customDay,
+    updateCustomDay,
     updateBadge,
     updateContent,
     updateTheme,

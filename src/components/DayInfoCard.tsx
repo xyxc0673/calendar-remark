@@ -11,7 +11,7 @@ import useDay from '../hooks/useDay';
 import Divider from './Divider';
 
 const EditArea = ({ date, isEditing }: { date: Date; isEditing: boolean }) => {
-  const { customDay, updateBadge, updateContent, updateTheme } =
+  const { customDay, updateCustomDay, updateBadge, updateContent } =
     useCustomDay(date);
   const day = useDay(date);
 
@@ -67,6 +67,27 @@ const EditArea = ({ date, isEditing }: { date: Date; isEditing: boolean }) => {
     { value: 'restDay', label: '休' },
   ];
 
+  const handleUpdateTheme = (theme: string | number) => {
+    let newBadge: string = '';
+
+    switch (theme) {
+      case 'workday':
+        newBadge = '班';
+        break;
+      case 'restDay':
+        newBadge = '休';
+        break;
+      default:
+        newBadge = '';
+    }
+
+    updateCustomDay({
+      ...customDay,
+      badge: newBadge,
+      theme: theme as '' | 'workday' | 'restDay',
+    });
+  };
+
   return (
     <div
       className={clsxm(
@@ -99,7 +120,7 @@ const EditArea = ({ date, isEditing }: { date: Date; isEditing: boolean }) => {
         <RadioButtonGroup
           value={dayType}
           options={options}
-          onChange={(item) => updateTheme(item as 'workday' | 'restDay')}
+          onChange={handleUpdateTheme}
         />
       </div>
     </div>
