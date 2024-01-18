@@ -108,21 +108,21 @@ const ShareModal = () => {
   return (
     <div
       className={clsxm(
-        'fixed inset-0 z-20 flex justify-center items-center transition-all duration-300 invisible',
+        'fixed inset-0 z-20 flex justify-center items-center transition-all duration-300 invisible overflow-y-scroll',
         isOpen ? 'visible bg-black/40' : 'invisible'
       )}
     >
-      <div className='absolute w-screen px-2 -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 md:w-fit'>
+      <div className='absolute w-screen h-full px-2 pt-16 -translate-x-1/2 left-1/2 md:w-fit'>
         <div
           className={clsxm(
             'bg-white rounded-lg shadow-md transition-all duration-300 dark:bg-zinc-600',
             isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-125'
           )}
         >
-          <div className='p-1 md:p-4'>
+          <div className='p-1 md:p-4 '>
             <div>
               <div ref={ref} className='p-2 bg-white md:p-4 dark:bg-zinc-600'>
-                <div className='bg-white dark:bg-zinc-800 w-full md:w-[37.5rem] rounded-lg overflow-hidden md:shadow-lg shadow-slate-200 text-sm md:text-base'>
+                <div className='bg-white dark:bg-zinc-800 w-full md:w-[37.5rem] rounded-lg md:shadow-lg shadow-slate-200 text-sm md:text-base'>
                   {showHeader && (
                     <div className='w-full px-1 py-2 text-center md:px-2 md:py-4 bg-slate-100 dark:bg-zinc-900/20 dark:text-zinc-200'>
                       {headerText}
