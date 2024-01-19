@@ -1,5 +1,7 @@
 # Calendar Remark
 
+[简体中文](./README-zh_CN.md)
+
 A simple calendar with nice design for remarking a date.
 
 [Online Demo](https://calendar.xym.im/)
