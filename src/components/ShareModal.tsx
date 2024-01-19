@@ -29,6 +29,11 @@ const ShareModal = () => {
     }
   };
 
+  const handleClose = () => {
+    setIsOpen(false);
+    setShowCustomArea(false);
+  };
+
   const renderCustomArea = () => {
     return (
       <div
@@ -119,7 +124,7 @@ const ShareModal = () => {
             isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-125'
           )}
         >
-          <div className='p-1 md:p-4 '>
+          <div className='p-1 md:p-4'>
             <div>
               <div ref={ref} className='p-2 bg-white md:p-4 dark:bg-zinc-600'>
                 <div className='bg-white dark:bg-zinc-800 w-full md:w-[37.5rem] rounded-lg md:shadow-lg shadow-slate-200 text-sm md:text-base'>
@@ -147,7 +152,7 @@ const ShareModal = () => {
           <div className='flex justify-end gap-4 px-6 py-4'>
             <button
               className='px-3 py-1 text-sm text-white transition-all duration-200 bg-red-500 rounded-md hover:bg-red-600 md:text-base'
-              onClick={() => setIsOpen(false)}
+              onClick={handleClose}
             >
               关闭
             </button>
