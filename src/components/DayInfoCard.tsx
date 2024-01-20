@@ -9,6 +9,7 @@ import clsxm from '../libs/clsxm';
 import { holidayDetails } from '../configs/holidays';
 import useDay from '../hooks/useDay';
 import Divider from './Divider';
+import { Input } from './ui';
 
 const EditArea = ({ date, isEditing }: { date: Date; isEditing: boolean }) => {
   const { customDay, updateCustomDay, updateBadge, updateContent } =
@@ -110,21 +111,19 @@ const EditArea = ({ date, isEditing }: { date: Date; isEditing: boolean }) => {
       <Divider direction='horizontal' className='my-3' />
       <div className='flex items-center h-full gap-3'>
         <span className='hidden text-nowrap md:inline-block'>日期底部内容</span>
-        <input
+        <Input
           type='text'
           placeholder='例如：春节'
-          maxLength={6}
           value={content}
-          className='w-full px-1.5 py-0.5 text-sm transition-all duration-200 border border-gray-300 rounded-md dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent'
+          maxLength={6}
           onChange={(e) => updateContent(e.target.value)}
         />
         <span className='hidden text-nowrap md:inline-block'>标记</span>
-        <input
+        <Input
           type='text'
           placeholder='例如：休'
-          value={badge}
-          className='w-full px-1.5 py-0.5 text-sm transition-all duration-200 border border-gray-300 rounded-md dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent'
           maxLength={2}
+          value={badge}
           onChange={(e) => updateBadge(e.target.value)}
         />
         <RadioButtonGroup
