@@ -45,6 +45,14 @@ $ pnpm build
 $ pnpm start
 ```
 
+## 部署
+
+Calendar Remark 可以部署到任何静态站点托管服务，例如 [Vercel](https://vercel.com/)、[Netlify](https://www.netlify.com/)、[Cloudflare Pages](https://pages.cloudflare.com/)、[GitHub Pages](https://pages.github.com/) 等。
+
+### 使用 Vercel 一键部署
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fxyxc0673%2Fcalendar-remark)
+
 ## License
 
 MIT

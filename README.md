@@ -47,6 +47,14 @@ $ pnpm build
 $ pnpm start
 ```
 
+## Deploy
+
+Calendar Remark can be deployed to any static site hosting service, such as [Vercel](https://vercel.com/), [Netlify](https://www.netlify.com/), [Cloudflare Pages](https://pages.cloudflare.com/), [GitHub Pages](https://pages.github.com/), etc.
+
+### Deploy with Vercel
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fxyxc0673%2Fcalendar-remark)
+
 ## License
 
 MIT
