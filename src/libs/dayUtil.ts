@@ -1,5 +1,5 @@
-import { DAY_TYPE } from '../configs/holidays';
-import { Day } from '../hooks/useDay';
+import { DAY_TYPE } from '@/configs/holidays';
+import { Day } from '@/hooks/useDay';
 
 export const getBadgeText = (day: Day) => {
   if (day.dayType === DAY_TYPE.REST_DAY) {

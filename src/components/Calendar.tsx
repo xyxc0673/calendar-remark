@@ -1,9 +1,9 @@
 import WeekdayHeader from './WeekdayHeader';
 import DateContainer from './DateContainer';
-import { useSelectedDate } from '../hooks/useSelectedDate';
-import useCalendar from '../hooks/useCalendar';
-import { isSameDate } from '../libs/date';
-import { usePreference } from '../hooks/usePreference';
+import useCalendar from '@/hooks/useCalendar';
+import { usePreference } from '@/hooks/usePreference';
+import { useSelectedDate } from '@/hooks/useSelectedDate';
+import { isSameDate } from '@/libs/date';
 
 const Calendar = ({ isSharing }: { isSharing?: boolean }) => {
   const { currentMonth, dateList } = useCalendar();

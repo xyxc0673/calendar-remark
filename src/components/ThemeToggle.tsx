@@ -1,6 +1,6 @@
+import { Sun, Moon } from '@/assets/icons';
+import { useTheme } from '@/hooks/useTheme';
 import { useEffect } from 'react';
-import { Sun, Moon } from '../assets/icons';
-import { useTheme } from '../hooks/useTheme';
 
 const ThemeToggle = () => {
   const { isDarkMode, toggleDarkMode } = useTheme();

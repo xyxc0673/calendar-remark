@@ -1,10 +1,10 @@
+import { CrossCircle, Settings, Github } from '@/assets/icons';
+import Checkbox from '@/components/Checkbox';
+import { RadioButtonGroup } from '@/components/Radio';
+import ThemeToggle from '@/components/ThemeToggle';
+import { usePreference, FirstDayOfWeek } from '@/hooks/usePreference';
+import clsxm from '@/libs/clsxm';
 import { useState } from 'react';
-import { CrossCircle, Github, Settings } from '../assets/icons';
-import { FirstDayOfWeek, usePreference } from '../hooks/usePreference';
-import clsxm from '../libs/clsxm';
-import { RadioButtonGroup } from '../components/Radio';
-import ThemeToggle from '../components/ThemeToggle';
-import Checkbox from '../components/Checkbox';
 
 const SettingPage = ({
   isOpen,

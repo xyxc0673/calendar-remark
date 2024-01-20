@@ -1,4 +1,4 @@
-import { HOLIDAY, holidayDetails, holidays } from '../configs/holidays';
+import { HOLIDAY, holidays, holidayDetails } from '@/configs/holidays';
 
 export type HolidaySelect = {
   value: HOLIDAY;

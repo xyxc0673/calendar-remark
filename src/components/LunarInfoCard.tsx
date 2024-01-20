@@ -1,7 +1,7 @@
+import { useIsMobile } from '@/hooks/useIsMobile';
+import { useSelectedDate } from '@/hooks/useSelectedDate';
 import { Lunar } from 'lunar-typescript';
-import { useSelectedDate } from '../hooks/useSelectedDate';
 import { InfoCard } from './InfoCard';
-import { useIsMobile } from '../hooks/useIsMobile';
 
 const LunarInfoCard = () => {
   const { selectedDate } = useSelectedDate();

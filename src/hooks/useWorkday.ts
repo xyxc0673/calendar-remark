@@ -1,4 +1,4 @@
-import { workdays } from '../configs/holidays';
+import { workdays } from '@/configs/holidays';
 import day from 'dayjs';
 
 const useWorkday = (date: Date) => {

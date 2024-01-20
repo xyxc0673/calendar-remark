@@ -1,6 +1,6 @@
+import { ChevronDown } from '@/assets/icons';
+import clsxm from '@/libs/clsxm';
 import { useState, useRef, useEffect } from 'react';
-import { ChevronDown } from '../assets/icons';
-import clsxm from '../libs/clsxm';
 
 type DefaultOptionType = {
   label: React.ReactNode;

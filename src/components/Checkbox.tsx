@@ -1,4 +1,4 @@
-import { useNanoId } from '../hooks/useNanoId';
+import { useNanoId } from '@/hooks/useNanoId';
 
 const Checkbox = ({
   checked,

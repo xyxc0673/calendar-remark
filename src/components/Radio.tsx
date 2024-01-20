@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import clsxm from '../libs/clsxm';
 import { customAlphabet } from 'nanoid';
+import clsxm from '@/libs/clsxm';
 const nanoid = customAlphabet('1234567890abcdef', 10);
 
 export const RadioButtonGroup = ({

@@ -1,14 +1,14 @@
 import dayjs from 'dayjs';
 import { InfoCard } from './InfoCard';
-import { useSelectedDate } from '../hooks/useSelectedDate';
-import { LogoutRight, PencilBox, RotateRight } from '../assets/icons';
 import { useMemo, useState } from 'react';
-import { useCustomDay } from '../hooks/useCustomDay';
 import { RadioButtonGroup } from './Radio';
-import clsxm from '../libs/clsxm';
-import { holidayDetails } from '../configs/holidays';
-import useDay from '../hooks/useDay';
 import Divider from './Divider';
+import { LogoutRight, PencilBox, RotateRight } from '@/assets/icons';
+import { holidayDetails } from '@/configs/holidays';
+import { useCustomDay } from '@/hooks/useCustomDay';
+import useDay from '@/hooks/useDay';
+import { useSelectedDate } from '@/hooks/useSelectedDate';
+import clsxm from '@/libs/clsxm';
 import { Input } from './ui';
 
 const EditArea = ({ date, isEditing }: { date: Date; isEditing: boolean }) => {

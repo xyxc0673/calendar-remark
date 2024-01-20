@@ -1,4 +1,4 @@
-import { holidays } from '../configs/holidays';
+import { holidays } from '@/configs/holidays';
 import day from 'dayjs';
 
 const useHoliday = (date: Date) => {

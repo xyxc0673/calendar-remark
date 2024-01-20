@@ -1,5 +1,5 @@
-import { useSelectedDate } from '../hooks/useSelectedDate';
-import { getPercentageOfYear, isSameDate } from '../libs/date';
+import { useSelectedDate } from '@/hooks/useSelectedDate';
+import { getPercentageOfYear, isSameDate } from '@/libs/date';
 import { InfoCard } from './InfoCard';
 
 // selectedDate 为 Date 对象，表示当前选中的日期

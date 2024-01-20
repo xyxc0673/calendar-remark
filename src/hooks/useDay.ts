@@ -3,9 +3,9 @@ import useHoliday from './useHoliday';
 import useIsWeekend from './useIsWeekend';
 import useRestDay from './useRestDay';
 import useWorkday from './useWorkday';
-import { DAY_TYPE, HOLIDAY } from '../configs/holidays';
 import { useSolarTerm } from './useSolarTerm';
 import useFestivals from './useFestivals';
+import { HOLIDAY, DAY_TYPE } from '@/configs/holidays';
 
 export type Day = {
   date: Date;

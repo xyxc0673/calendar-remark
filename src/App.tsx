@@ -1,16 +1,16 @@
 import dayjs from 'dayjs';
 import './App.css';
+import 'dayjs/locale/zh-cn';
+import weekOfYear from 'dayjs/plugin/weekOfYear';
 import Calendar from './components/Calendar';
 import CalendarHeader from './components/CalendarHeader';
 import DayInfoCard from './components/DayInfoCard';
 import LunarInfoCard from './components/LunarInfoCard';
+import PlaceHolderImage from './components/PlaceHolderImage';
 import RecentHoliday from './components/RecentHoliday';
 import ShareModal from './components/ShareModal';
-import { Footer } from './views/Footer';
-import 'dayjs/locale/zh-cn';
-import weekOfYear from 'dayjs/plugin/weekOfYear';
 import YearProgressCard from './components/YearProgressCard';
-import PlaceHolderImage from './components/PlaceHolderImage';
+import { Footer } from './views/Footer';
 
 dayjs.locale('zh-cn');
 dayjs.extend(weekOfYear);

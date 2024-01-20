@@ -1,11 +1,11 @@
-import { atom, useAtom } from 'jotai';
-import clsxm from '../libs/clsxm';
-import Calendar from './Calendar';
+import { ChevronDown } from '@/assets/icons';
+import clsxm from '@/libs/clsxm';
+import { downloadFromBase64 } from '@/libs/download';
 import { useToPng } from '@hugocxl/react-to-image';
-import { downloadFromBase64 } from '../libs/download';
-import Checkbox from './Checkbox';
+import { atom, useAtom } from 'jotai';
 import { useState } from 'react';
-import { ChevronDown } from '../assets/icons';
+import Calendar from './Calendar';
+import Checkbox from './Checkbox';
 import Divider from './Divider';
 
 export const shareModalOpenAtom = atom<boolean>(false);

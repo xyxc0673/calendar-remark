@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
-import { HolidayDetails, holidayDetails, holidays } from '../configs/holidays';
+import { HolidayDetails, holidayDetails, holidays } from '@/configs/holidays';
 
 type NearestHoliday = {
   date: Date;

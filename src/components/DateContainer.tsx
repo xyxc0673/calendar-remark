@@ -1,8 +1,8 @@
-import { holidayDetails } from '../configs/holidays';
-import { useCustomDay } from '../hooks/useCustomDay';
-import useDay, { Day } from '../hooks/useDay';
-import clsxm from '../libs/clsxm';
-import { getBadgeText } from '../libs/dayUtil';
+import { holidayDetails } from '@/configs/holidays';
+import { useCustomDay } from '@/hooks/useCustomDay';
+import useDay, { Day } from '@/hooks/useDay';
+import clsxm from '@/libs/clsxm';
+import { getBadgeText } from '@/libs/dayUtil';
 import DateComponent from './DateComponent';
 
 const getContent = (day: Day) => {

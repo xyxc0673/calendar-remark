@@ -1,5 +1,5 @@
-import { days } from '../configs/constant';
-import clsxm from '../libs/clsxm';
+import { days } from '@/configs/constant';
+import clsxm from '@/libs/clsxm';
 
 const WeekdayHeader = ({ firstDayOfWeek }: { firstDayOfWeek: number }) => {
   // 根据 firstDayOfWeek 的值来调整 days Map 的顺序

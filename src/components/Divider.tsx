@@ -1,4 +1,4 @@
-import clsxm from '../libs/clsxm';
+import clsxm from '@/libs/clsxm';
 
 const Divider = ({
   direction = 'horizontal',

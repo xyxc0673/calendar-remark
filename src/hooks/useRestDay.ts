@@ -1,4 +1,4 @@
-import { restDays } from '../configs/holidays';
+import { restDays } from '@/configs/holidays';
 import day from 'dayjs';
 
 const useRestDay = (date: Date) => {
