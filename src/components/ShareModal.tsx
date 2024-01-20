@@ -2,16 +2,14 @@ import { ChevronDown } from '@/assets/icons';
 import clsxm from '@/libs/clsxm';
 import { downloadFromBase64 } from '@/libs/download';
 import { useToPng } from '@hugocxl/react-to-image';
-import { atom, useAtom } from 'jotai';
 import { useState } from 'react';
 import Calendar from './Calendar';
 import Checkbox from './Checkbox';
 import Divider from './Divider';
-
-export const shareModalOpenAtom = atom<boolean>(false);
+import { useShareModal } from '@/hooks/useShareModal';
 
 const ShareModal = () => {
-  const [isOpen, setIsOpen] = useAtom(shareModalOpenAtom);
+  const { isOpen, closeShareModal } = useShareModal();
   const [showHeader, setShowHeader] = useState(true);
   const [showFooter, setShowFooter] = useState(true);
   const [headerText, setHeaderText] = useState('节假日安排');
@@ -30,7 +28,7 @@ const ShareModal = () => {
   };
 
   const handleClose = () => {
-    setIsOpen(false);
+    closeShareModal();
     setShowCustomArea(false);
   };
 

@@ -1,15 +1,14 @@
 import { ChevronDown, ShareExport } from '@/assets/icons';
+import { useShareModal } from '@/hooks/useShareModal';
 import useCalendar from '@/hooks/useCalendar';
 import useNextHoliday from '@/hooks/useRecentHoliday';
 import { useSelectedDate } from '@/hooks/useSelectedDate';
-import { useSetAtom } from 'jotai';
-import { shareModalOpenAtom } from './ShareModal';
 
 const RecentHoliday = () => {
   const { today, setCurrentMonth, setCurrentYear } = useCalendar();
   const { setSelectedDate } = useSelectedDate();
   const recentHoliday = useNextHoliday(today);
-  const setShareModalOpenOpen = useSetAtom(shareModalOpenAtom);
+  const { openShareModal } = useShareModal();
 
   if (!recentHoliday) {
     return null;
@@ -45,7 +44,7 @@ const RecentHoliday = () => {
       </div>
       <button
         className='flex items-center justify-center w-6 h-6 transition-all duration-200 bg-white border border-transparent rounded cursor-pointer dark:bg-zinc-200 md:rounded-lg md:h-8 md:w-8 hover:border-gray-600'
-        onClick={() => setShareModalOpenOpen(true)}
+        onClick={openShareModal}
       >
         <ShareExport className='w-4 h-4 md:h-5 md:w-5' />
       </button>
