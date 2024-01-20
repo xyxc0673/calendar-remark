@@ -175,7 +175,7 @@ const DayInfoCard = () => {
   const weekNumber = dayjs(selectedDate).week();
   const [isEditing, setIsEditing] = useState(false);
   const Icon = isEditing ? LogoutRight : PencilBox;
-  const { resetCustomDay } = useCustomDay(selectedDate);
+  const { customDay, resetCustomDay } = useCustomDay(selectedDate);
 
   return (
     <InfoCard className='flex flex-col dark:text-zinc-200'>
@@ -202,7 +202,7 @@ const DayInfoCard = () => {
         </div>
       </div>
       <EditArea
-        key={selectedDate.toDateString()}
+        key={selectedDate.toDateString() + customDay.badge}
         date={selectedDate}
         isEditing={isEditing}
       />
