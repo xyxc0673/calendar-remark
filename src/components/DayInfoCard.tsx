@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { InfoCard } from './InfoCard';
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { RadioButtonGroup } from './Radio';
 import Divider from './Divider';
 import { LogoutRight, PencilBox, RotateRight } from '@/assets/icons';
@@ -15,6 +15,7 @@ const EditArea = ({ date, isEditing }: { date: Date; isEditing: boolean }) => {
   const { customDay, updateCustomDay, updateBadge, updateContent } =
     useCustomDay(date);
   const day = useDay(date);
+  const compositionFlag = useRef(false);
 
   const badge = useMemo(() => {
     if (customDay.badge) {
@@ -30,6 +31,8 @@ const EditArea = ({ date, isEditing }: { date: Date; isEditing: boolean }) => {
     }
     return '';
   }, [customDay.badge, day.isWorkDay, day.isRestDay]);
+
+  const [badgeValue, setBadgeValue] = useState(badge);
 
   const content = useMemo(() => {
     if (customDay.content) {
@@ -99,6 +102,28 @@ const EditArea = ({ date, isEditing }: { date: Date; isEditing: boolean }) => {
     });
   };
 
+  // 限制为一个中文或者数字或者英文
+  const handleBadgeUpdate = (value: string) => {
+    if (compositionFlag.current) {
+      setBadgeValue(value);
+      return;
+    }
+
+    // eslint-disable-next-line no-control-regex
+    const reg = /^[^\x00-\xff]{0,1}$|^[a-zA-Z\d]{0,1}$/;
+
+    let newValue = '';
+
+    if (reg.test(value)) {
+      newValue = value;
+    } else {
+      // 截取第一个字符，用于一次性输入多个字符的情况
+      newValue = value.slice(0, 1);
+    }
+    setBadgeValue(newValue);
+    updateBadge(newValue);
+  };
+
   return (
     <div
       className={clsxm(
@@ -120,11 +145,18 @@ const EditArea = ({ date, isEditing }: { date: Date; isEditing: boolean }) => {
         />
         <span className='hidden text-nowrap md:inline-block'>标记</span>
         <Input
+          name='badge'
           type='text'
           placeholder='例如：休'
-          maxLength={2}
-          value={badge}
-          onChange={(e) => updateBadge(e.target.value)}
+          value={badgeValue}
+          onChange={(e) => handleBadgeUpdate(e.target.value)}
+          onCompositionStart={() => {
+            compositionFlag.current = true;
+          }}
+          onCompositionEnd={(e) => {
+            compositionFlag.current = false;
+            handleBadgeUpdate(e.currentTarget.value);
+          }}
         />
         <RadioButtonGroup
           value={dayType}
@@ -169,7 +201,11 @@ const DayInfoCard = () => {
           </button>
         </div>
       </div>
-      <EditArea date={selectedDate} isEditing={isEditing} />
+      <EditArea
+        key={selectedDate.toDateString()}
+        date={selectedDate}
+        isEditing={isEditing}
+      />
     </InfoCard>
   );
 };
