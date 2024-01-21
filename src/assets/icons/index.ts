@@ -8,3 +8,5 @@ export { Github } from './Github';
 export { PencilBox } from './PencilBox';
 export { LogoutRight } from './LogoutRight';
 export { RotateRight } from './RotateRight';
+export { LayoutHorizontal } from './LayoutHorizontal';
+export { LayoutVertical } from './LayoutVertical';

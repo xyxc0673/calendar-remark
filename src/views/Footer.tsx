@@ -1,4 +1,10 @@
-import { CrossCircle, Settings, Github } from '@/assets/icons';
+import {
+  CrossCircle,
+  Settings,
+  Github,
+  LayoutVertical,
+  LayoutHorizontal,
+} from '@/assets/icons';
 import Checkbox from '@/components/Checkbox';
 import { RadioButtonGroup } from '@/components/Radio';
 import ThemeToggle from '@/components/ThemeToggle';
@@ -87,6 +93,25 @@ const SettingButton = () => {
   );
 };
 
+const LayoutToggle = () => {
+  const {
+    preference: { desktopLayout },
+    toggleDesktopLayout,
+  } = usePreference();
+
+  const Icon =
+    desktopLayout === 'horizontal' ? LayoutVertical : LayoutHorizontal;
+
+  return (
+    <button
+      className='relative items-center justify-center hidden transition-all duration-200 border border-transparent rounded-lg cursor-pointer md:flex size-6 md:size-8 group hover:bg-white hover:border-slate-500 dark:hover:bg-zinc-600'
+      onClick={toggleDesktopLayout}
+    >
+      <Icon className='size-4 md:size-6 dark:stroke-zinc-400' />
+    </button>
+  );
+};
+
 export const Footer = () => {
   return (
     <div className='relative flex items-center justify-between h-8 md:h-10'>
@@ -113,6 +138,7 @@ export const Footer = () => {
         >
           <Github className='size-4 md:size-6 dark:stroke-zinc-400' />
         </a>
+        <LayoutToggle />
         <ThemeToggle />
         <SettingButton />
       </div>

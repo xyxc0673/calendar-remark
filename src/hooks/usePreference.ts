@@ -11,11 +11,13 @@ type Preference = {
   showExtraDays: boolean;
   // 每周的第一天是周几
   firstDayOfWeek: FirstDayOfWeek;
+  desktopLayout: 'horizontal' | 'vertical';
 };
 
 const preferenceAtom = atomWithStorage<Preference>('preference', {
   showExtraDays: true,
   firstDayOfWeek: FirstDayOfWeek.Sunday,
+  desktopLayout: 'horizontal',
 });
 
 export const usePreference = () => {
@@ -39,11 +41,20 @@ export const usePreference = () => {
     setPreference((prev) => ({ ...prev, showExtraDays: !prev.showExtraDays }));
   };
 
+  const toggleDesktopLayout = () => {
+    setPreference((prev) => ({
+      ...prev,
+      desktopLayout:
+        prev.desktopLayout === 'horizontal' ? 'vertical' : 'horizontal',
+    }));
+  };
+
   return {
     preference,
     setPreference,
     setFirstDayOfWeekToMonday,
     setFirstDayOfWeekToSunday,
     toggleShowExtraDays,
+    toggleDesktopLayout,
   };
 };
