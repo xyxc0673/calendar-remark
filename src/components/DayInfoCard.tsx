@@ -18,7 +18,7 @@ const EditArea = ({ date, isEditing }: { date: Date; isEditing: boolean }) => {
   const compositionFlag = useRef(false);
 
   const badge = useMemo(() => {
-    if (customDay.badge) {
+    if (customDay.badge !== undefined) {
       return customDay.badge;
     }
 

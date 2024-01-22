@@ -41,10 +41,10 @@ const DateContainer = ({
   const day = useDay(date);
   const { customDay } = useCustomDay(date);
   const { isToday, isRestDay, isWeekend, isWorkDay } = day;
-  const { theme, badge, content: customContent } = customDay;
+  const { theme, badge: customBadge, content: customContent } = customDay;
   const isCurrentMonth = date.getMonth() === currentMonth;
 
-  const badgeText = badge || getBadgeText(day);
+  const badgeText = getBadgeText(day, customBadge);
 
   const contentText = getContent(day, customContent);
 
