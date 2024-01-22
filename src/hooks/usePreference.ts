@@ -45,36 +45,36 @@ export const usePreference = () => {
   }, [storedPreference]);
 
   const setFirstDayOfWeekToMonday = () => {
-    setPreference((prev) => ({
-      ...prev,
+    setPreference({
+      ...preference,
       firstDayOfWeek: FirstDayOfWeek.Monday,
-    }));
+    });
   };
 
   const setFirstDayOfWeekToSunday = () => {
-    setPreference((prev) => ({
-      ...prev,
+    setPreference({
+      ...preference,
       firstDayOfWeek: FirstDayOfWeek.Sunday,
-    }));
+    });
   };
 
   const toggleShowExtraDays = () => {
-    setPreference((prev) => ({ ...prev, showExtraDays: !prev.showExtraDays }));
+    setPreference({ ...preference, showExtraDays: !preference.showExtraDays });
   };
 
   const toggleShowDateContent = () => {
-    setPreference((prev) => ({
-      ...prev,
-      showDateContent: !prev.showDateContent,
-    }));
+    setPreference({
+      ...preference,
+      showDateContent: !preference.showDateContent,
+    });
   };
 
   const toggleDesktopLayout = () => {
-    setPreference((prev) => ({
-      ...prev,
+    setPreference({
+      ...preference,
       desktopLayout:
-        prev.desktopLayout === 'horizontal' ? 'vertical' : 'horizontal',
-    }));
+        preference.desktopLayout === 'horizontal' ? 'vertical' : 'horizontal',
+    });
   };
 
   return {
