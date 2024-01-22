@@ -9,7 +9,7 @@ const Calendar = ({ isSharing }: { isSharing?: boolean }) => {
   const { currentMonth, dateList } = useCalendar();
   const { selectedDate, setSelectedDate } = useSelectedDate();
   const {
-    preference: { firstDayOfWeek, showExtraDays },
+    preference: { firstDayOfWeek, showExtraDays, showDateContent },
   } = usePreference();
 
   const handleDateClick = (date: Date) => {
@@ -30,6 +30,7 @@ const Calendar = ({ isSharing }: { isSharing?: boolean }) => {
         date={date}
         currentMonth={currentMonth}
         disabled={isSharing}
+        showContent={showDateContent}
         isSelected={!isSharing && isSameDate(date, selectedDate)}
         onClick={() => handleDateClick(date)}
       />

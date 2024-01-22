@@ -14,7 +14,7 @@ const DateComponent = ({
   showBadge?: boolean;
   badgeText?: string;
   badgeClassName?: string;
-  content: string;
+  content?: string;
   className?: string;
   dateClassName?: string;
   onClick?: () => void;
@@ -32,14 +32,16 @@ const DateComponent = ({
       onClick={onClick}
     >
       <span className='text-2xl leading-6 max-md:scale-75'>{dateOfMonth}</span>
-      <span
-        className={clsxm(
-          'max-md:scale-75 text-xs text-zinc-800 dark:text-zinc-200',
-          dateClassName
-        )}
-      >
-        {content}
-      </span>
+      {content && (
+        <span
+          className={clsxm(
+            'max-md:scale-75 text-xs text-zinc-800 dark:text-zinc-200',
+            dateClassName
+          )}
+        >
+          {content}
+        </span>
+      )}
       {canShowBadge && (
         <span
           className={clsxm(

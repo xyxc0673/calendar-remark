@@ -30,12 +30,14 @@ const DateContainer = ({
   currentMonth,
   isSelected,
   disabled,
+  showContent,
   onClick,
 }: {
   date: Date;
   currentMonth: number;
   isSelected: boolean;
   disabled?: boolean;
+  showContent?: boolean;
   onClick?: () => void;
 }) => {
   const day = useDay(date);
@@ -46,7 +48,7 @@ const DateContainer = ({
 
   const badgeText = getBadgeText(day, customBadge);
 
-  const contentText = getContent(day, customContent);
+  const contentText = showContent ? getContent(day, customContent) : '';
 
   const showBadge = badgeText !== '';
 

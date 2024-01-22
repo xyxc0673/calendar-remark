@@ -7,10 +7,12 @@ export enum FirstDayOfWeek {
 }
 
 type Preference = {
-  // 不显示非本月的日期
+  // 显示非本月的日期
   showExtraDays: boolean;
   // 每周的第一天是周几
   firstDayOfWeek: FirstDayOfWeek;
+  // 显示日期底部的内容
+  showDateContent: boolean;
   desktopLayout: 'horizontal' | 'vertical';
 };
 
@@ -18,6 +20,7 @@ const preferenceAtom = atomWithStorage<Preference>('preference', {
   showExtraDays: true,
   firstDayOfWeek: FirstDayOfWeek.Sunday,
   desktopLayout: 'horizontal',
+  showDateContent: true,
 });
 
 export const usePreference = () => {
@@ -41,6 +44,13 @@ export const usePreference = () => {
     setPreference((prev) => ({ ...prev, showExtraDays: !prev.showExtraDays }));
   };
 
+  const toggleShowDateContent = () => {
+    setPreference((prev) => ({
+      ...prev,
+      showDateContent: !prev.showDateContent,
+    }));
+  };
+
   const toggleDesktopLayout = () => {
     setPreference((prev) => ({
       ...prev,
@@ -55,6 +65,7 @@ export const usePreference = () => {
     setFirstDayOfWeekToMonday,
     setFirstDayOfWeekToSunday,
     toggleShowExtraDays,
+    toggleShowDateContent,
     toggleDesktopLayout,
   };
 };
