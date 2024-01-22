@@ -1,11 +1,13 @@
 import { Lunar } from 'lunar-typescript';
-import useHoliday from './useHoliday';
-import useIsWeekend from './useIsWeekend';
-import useRestDay from './useRestDay';
-import useWorkday from './useWorkday';
-import { useSolarTerm } from './useSolarTerm';
-import useFestivals from './useFestivals';
 import { HOLIDAY, DAY_TYPE } from '@/configs/holidays';
+import {
+  getFestivals,
+  getHoliday,
+  getRestDay,
+  getSolarTerm,
+  getWorkday,
+  isWeekendDate,
+} from '@/libs/date';
 
 export type Day = {
   date: Date;
@@ -34,15 +36,15 @@ const getLunarDate = (date: Date) => {
 };
 
 const useDay = (date: Date): Day => {
-  const isWeekend = useIsWeekend(date);
-  const holiday = useHoliday(date);
-  const restDay = useRestDay(date);
-  const workDay = useWorkday(date);
-  const solarTerm = useSolarTerm(date);
-  const festivals = useFestivals(date);
   const currentDate = new Date();
 
+  const isWeekend = isWeekendDate(date);
+  const holiday = getHoliday(date);
+  const workDay = getWorkday(date);
+  const restDay = getRestDay(date);
   const lunarDate = getLunarDate(date);
+  const solarTerm = getSolarTerm(date);
+  const festivals = getFestivals(date);
 
   const isHoliday = holiday !== undefined;
   const isRestDay = isHoliday || restDay !== undefined;

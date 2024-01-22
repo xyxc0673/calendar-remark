@@ -1,10 +1,14 @@
 import { ChevronDown } from '@/assets/icons';
 import useCalendar from '@/hooks/useCalendar';
-import { useHolidays, HolidaySelect } from '@/hooks/useHolidays';
 import { useSelectedDate } from '@/hooks/useSelectedDate';
 import { useSelectedHoliday } from '@/hooks/useSelectedHoliday';
 import clsxm from '@/libs/clsxm';
-import { isSameDate, isAfterDate } from '@/libs/date';
+import {
+  isSameDate,
+  isAfterDate,
+  HolidaySelect,
+  getHolidays,
+} from '@/libs/date';
 import Dropdown from './Dropdown';
 
 const CalendarHeader = () => {
@@ -21,7 +25,7 @@ const CalendarHeader = () => {
   const { selectedDate, setSelectedDate } = useSelectedDate();
   const { selectedHoliday, setSelectedHoliday } = useSelectedHoliday();
 
-  const holidayList = useHolidays();
+  const holidayList = getHolidays();
 
   const navigateToHoliday = (nextHoliday: HolidaySelect) => {
     const date = new Date(nextHoliday.date);
