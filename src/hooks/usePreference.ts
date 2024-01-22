@@ -1,5 +1,6 @@
 import { useAtom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
+import { useMemo } from 'react';
 
 export enum FirstDayOfWeek {
   Sunday,
@@ -16,15 +17,32 @@ type Preference = {
   desktopLayout: 'horizontal' | 'vertical';
 };
 
-const preferenceAtom = atomWithStorage<Preference>('preference', {
+const initialPreference: Preference = {
   showExtraDays: true,
   firstDayOfWeek: FirstDayOfWeek.Sunday,
   desktopLayout: 'horizontal',
   showDateContent: true,
-});
+};
+
+const preferenceAtom = atomWithStorage<Preference>(
+  'preference',
+  initialPreference,
+  undefined,
+  {
+    getOnInit: true,
+  }
+);
 
 export const usePreference = () => {
-  const [preference, setPreference] = useAtom(preferenceAtom);
+  const [storedPreference, setPreference] = useAtom(preferenceAtom);
+
+  // 合并默认值和存储的值，以防止新增加的配置项尚未被存储导致的问题
+  const preference = useMemo(() => {
+    return {
+      ...initialPreference,
+      ...storedPreference,
+    };
+  }, [storedPreference]);
 
   const setFirstDayOfWeekToMonday = () => {
     setPreference((prev) => ({
