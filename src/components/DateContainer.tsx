@@ -5,7 +5,11 @@ import clsxm from '@/libs/clsxm';
 import { getBadgeText } from '@/libs/dayUtil';
 import DateComponent from './DateComponent';
 
-const getContent = (day: Day) => {
+const getContent = (day: Day, customContent?: string) => {
+  if (customContent !== undefined) {
+    return customContent;
+  }
+
   if (day.holiday) {
     return holidayDetails[day.holiday].chinese;
   }
@@ -37,12 +41,12 @@ const DateContainer = ({
   const day = useDay(date);
   const { customDay } = useCustomDay(date);
   const { isToday, isRestDay, isWeekend, isWorkDay } = day;
-  const { theme, badge, content } = customDay;
+  const { theme, badge, content: customContent } = customDay;
   const isCurrentMonth = date.getMonth() === currentMonth;
 
   const badgeText = badge || getBadgeText(day);
 
-  const contentText = content || getContent(day);
+  const contentText = getContent(day, customContent);
 
   const showBadge = badgeText !== '';
 

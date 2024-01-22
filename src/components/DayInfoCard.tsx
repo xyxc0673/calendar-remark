@@ -35,7 +35,7 @@ const EditArea = ({ date, isEditing }: { date: Date; isEditing: boolean }) => {
   const [badgeValue, setBadgeValue] = useState(badge);
 
   const content = useMemo(() => {
-    if (customDay.content) {
+    if (customDay.content !== undefined) {
       return customDay.content;
     }
 
