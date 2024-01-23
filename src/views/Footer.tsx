@@ -5,8 +5,8 @@ import {
   LayoutVertical,
   LayoutHorizontal,
 } from '@/assets/icons';
-import Checkbox from '@/components/Checkbox';
-import { RadioButtonGroup } from '@/components/Radio';
+import Checkbox from '@/components/ui/Checkbox';
+import { RadioButtonGroup } from '@/components/ui';
 import ThemeToggle from '@/components/ThemeToggle';
 import { usePreference, FirstDayOfWeek } from '@/hooks/usePreference';
 import clsxm from '@/libs/clsxm';

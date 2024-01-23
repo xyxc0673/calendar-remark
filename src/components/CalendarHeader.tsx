@@ -9,7 +9,7 @@ import {
   HolidaySelect,
   getHolidays,
 } from '@/libs/date';
-import Dropdown from './Dropdown';
+import { Dropdown } from './ui';
 
 const CalendarHeader = () => {
   const yearList = Array.from({ length: 151 }, (_, i) => ({

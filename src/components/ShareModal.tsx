@@ -4,8 +4,7 @@ import { downloadFromBase64 } from '@/libs/download';
 import { useToPng } from '@hugocxl/react-to-image';
 import { useState } from 'react';
 import Calendar from './Calendar';
-import Checkbox from './Checkbox';
-import Divider from './Divider';
+import { Checkbox, Divider } from './ui';
 import { useShareModal } from '@/hooks/useShareModal';
 
 const ShareModal = () => {

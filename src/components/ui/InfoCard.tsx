@@ -1,10 +1,10 @@
 import clsxm from '@/libs/clsxm';
 
-export const InfoCard = ({
+const InfoCard = ({
   className,
   children,
 }: {
-  className: string;
+  className?: string;
   children: React.ReactNode;
 }) => {
   return (
@@ -18,3 +18,5 @@ export const InfoCard = ({
     </div>
   );
 };
+
+export default InfoCard;

@@ -1,6 +1,6 @@
 import { useSelectedDate } from '@/hooks/useSelectedDate';
 import { getPercentageOfYear, isSameDate } from '@/libs/date';
-import { InfoCard } from './InfoCard';
+import { InfoCard } from './ui';
 
 // selectedDate 为 Date 对象，表示当前选中的日期
 // 展示当前日期的年进度，将一年分为 12 个块，每个块代表一个月

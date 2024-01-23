@@ -1,8 +1,7 @@
 import dayjs from 'dayjs';
-import { InfoCard } from './InfoCard';
+import { InfoCard } from './ui';
 import { useMemo, useRef, useState } from 'react';
-import { RadioButtonGroup } from './Radio';
-import Divider from './Divider';
+import { RadioButtonGroup, Divider } from './ui';
 import { LogoutRight, PencilBox, RotateRight } from '@/assets/icons';
 import { holidayDetails } from '@/configs/holidays';
 import { useCustomDay } from '@/hooks/useCustomDay';

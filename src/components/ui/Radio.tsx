@@ -3,7 +3,7 @@ import { customAlphabet } from 'nanoid';
 import clsxm from '@/libs/clsxm';
 const nanoid = customAlphabet('1234567890abcdef', 10);
 
-export const RadioButtonGroup = ({
+const RadioButtonGroup = ({
   value,
   options,
   onChange,
@@ -69,3 +69,5 @@ export const RadioButtonGroup = ({
     </div>
   );
 };
+
+export default RadioButtonGroup;
