@@ -123,6 +123,27 @@ const EditArea = ({ date, isEditing }: { date: Date; isEditing: boolean }) => {
     updateBadge(newValue);
   };
 
+  const handleUpdateContent: React.ChangeEventHandler<HTMLInputElement> = (
+    e
+  ) => {
+    updateContent(e.target.value);
+  };
+
+  const handleUpdateBadge: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    updateBadge(e.target.value);
+  };
+
+  const handleCompositionStart = () => {
+    compositionFlag.current = true;
+  };
+
+  const handleCompositionEnd = (
+    e: React.CompositionEvent<HTMLInputElement>
+  ) => {
+    compositionFlag.current = false;
+    handleBadgeUpdate(e.currentTarget.value);
+  };
+
   return (
     <div
       className={clsxm(
@@ -140,7 +161,8 @@ const EditArea = ({ date, isEditing }: { date: Date; isEditing: boolean }) => {
           placeholder='例如：春节'
           value={content}
           maxLength={6}
-          onChange={(e) => updateContent(e.target.value)}
+          allowClear
+          onChange={handleUpdateContent}
         />
         <span className='hidden text-nowrap md:inline-block'>标记</span>
         <Input
@@ -148,14 +170,10 @@ const EditArea = ({ date, isEditing }: { date: Date; isEditing: boolean }) => {
           type='text'
           placeholder='例如：休'
           value={badgeValue}
-          onChange={(e) => handleBadgeUpdate(e.target.value)}
-          onCompositionStart={() => {
-            compositionFlag.current = true;
-          }}
-          onCompositionEnd={(e) => {
-            compositionFlag.current = false;
-            handleBadgeUpdate(e.currentTarget.value);
-          }}
+          allowClear
+          onChange={handleUpdateBadge}
+          onCompositionStart={handleCompositionStart}
+          onCompositionEnd={handleCompositionEnd}
         />
         <RadioButtonGroup
           value={dayType}

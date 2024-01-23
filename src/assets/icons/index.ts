@@ -10,3 +10,4 @@ export { LogoutRight } from './LogoutRight';
 export { RotateRight } from './RotateRight';
 export { LayoutHorizontal } from './LayoutHorizontal';
 export { LayoutVertical } from './LayoutVertical';
+export { CrossCircleDuoSolid } from './CrossCircleDuoSolid';
