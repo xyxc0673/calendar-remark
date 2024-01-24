@@ -8,12 +8,12 @@ A simple calendar with nice design for remarking a date.
 
 ## Screenshots
 
-![Screenshot-1](./screenshots/screenshot-1.png)
+![Screenshot-1](./screenshots/screenshot-1.jpeg)
 
 <details>
   <summary>Click here to show/hide more screenshots</summary>
   <img src="./screenshots/screenshot-2.jpeg" />
-  <img src="./screenshots/screenshot-3.png" />
+  <img src="./screenshots/screenshot-3.jpeg" />
 </details>
 
 ## Features
