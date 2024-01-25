@@ -118,7 +118,7 @@ const ShareModal = () => {
         <div
           className={clsxm(
             'bg-white rounded-lg shadow-md transition-all duration-300 dark:bg-zinc-600',
-            isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-125'
+            isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
           )}
         >
           <div className='p-1 md:p-4'>
