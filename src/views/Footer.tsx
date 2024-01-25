@@ -43,10 +43,10 @@ const SettingPage = ({
   return (
     <div
       className={clsxm(
-        'flex flex-col absolute left-0 top-0 overflow-hidden w-60 h-fit bg-white dark:bg-zinc-800 border border-zinc-400/20 dark:border-zinc-500/30 dark:text-zinc-200 transition-all duration-300 shadow-lg rounded-lg',
+        'flex flex-col absolute left-0 -top-3 overflow-hidden w-60 h-fit bg-white dark:bg-zinc-800 border border-zinc-400/20 dark:border-zinc-500/30 dark:text-zinc-200 transition-all duration-300 shadow-lg rounded-lg origin-bottom-right -translate-x-full -translate-y-full',
         isOpen
-          ? 'opacity-100 scale-100 -translate-x-full -translate-y-full'
-          : 'opacity-0 scale-0'
+          ? 'opacity-100 scale-100 visible'
+          : 'opacity-0 scale-95 invisible'
       )}
     >
       <div className='relative flex items-center justify-end px-2 py-2 text-center bg-slate-100 dark:bg-zinc-600'>
