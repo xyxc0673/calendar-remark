@@ -124,7 +124,7 @@ const ShareModal = () => {
           <div className='p-1 md:p-4'>
             <div>
               <div ref={ref} className='p-2 bg-white md:p-4 dark:bg-zinc-600'>
-                <div className='bg-white dark:bg-zinc-800 w-full md:w-[37.5rem] rounded-lg md:shadow-lg shadow-slate-200 text-sm md:text-base'>
+                <div className='bg-white dark:bg-zinc-800 w-full md:w-[37.5rem] rounded-lg md:shadow-lg shadow-slate-200 text-sm md:text-base overflow-hidden'>
                   {showHeader && (
                     <div className='w-full px-1 py-2 text-center md:px-2 md:py-4 bg-slate-100 dark:bg-zinc-900/20 dark:text-zinc-200'>
                       {headerText}
