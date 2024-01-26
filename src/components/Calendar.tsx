@@ -1,16 +1,23 @@
 import WeekdayHeader from './WeekdayHeader';
 import DateContainer from './DateContainer';
-import useCalendar from '@/hooks/useCalendar';
-import { usePreference } from '@/hooks/usePreference';
+import { FirstDayOfWeek } from '@/hooks/usePreference';
 import { useSelectedDate } from '@/hooks/useSelectedDate';
 import { isSameDate } from '@/libs/date';
 
-const Calendar = ({ isSharing }: { isSharing?: boolean }) => {
-  const { currentMonth, dateList } = useCalendar();
+const DateGrid = ({
+  currentMonth,
+  dateList,
+  showExtraDays,
+  showDateContent,
+  isSharing,
+}: {
+  currentMonth: number;
+  dateList: Date[];
+  showExtraDays: boolean;
+  showDateContent: boolean;
+  isSharing?: boolean;
+}) => {
   const { selectedDate, setSelectedDate } = useSelectedDate();
-  const {
-    preference: { firstDayOfWeek, showExtraDays, showDateContent },
-  } = usePreference();
 
   const handleDateClick = (date: Date) => {
     if (isSharing) {
@@ -37,10 +44,34 @@ const Calendar = ({ isSharing }: { isSharing?: boolean }) => {
     );
   };
 
+  return dateList.map(renderDate);
+};
+
+const Calendar = ({
+  isSharing,
+  currentMonth,
+  dateList,
+  firstDayOfWeek,
+  showExtraDays,
+  showDateContent,
+}: {
+  isSharing?: boolean;
+  currentMonth: number;
+  dateList: Date[];
+  firstDayOfWeek: FirstDayOfWeek;
+  showExtraDays: boolean;
+  showDateContent: boolean;
+}) => {
   return (
     <div className='grid w-full grid-cols-7 gap-2 p-2 md:gap-4 md:p-6'>
       <WeekdayHeader firstDayOfWeek={firstDayOfWeek} />
-      {dateList.map(renderDate)}
+      <DateGrid
+        currentMonth={currentMonth}
+        dateList={dateList}
+        showExtraDays={showExtraDays}
+        showDateContent={showDateContent}
+        isSharing={isSharing}
+      />
     </div>
   );
 };

@@ -6,6 +6,8 @@ import { useState } from 'react';
 import Calendar from './Calendar';
 import { Checkbox, Divider } from './ui';
 import { useShareModal } from '@/hooks/useShareModal';
+import { usePreference } from '@/hooks/usePreference';
+import useCalendar from '@/hooks/useCalendar';
 
 const ShareModal = () => {
   const { isOpen, closeShareModal } = useShareModal();
@@ -14,6 +16,10 @@ const ShareModal = () => {
   const [headerText, setHeaderText] = useState('节假日安排');
   const [footerText, setFooterText] = useState('Calendar Remark');
   const [showCustomArea, setShowCustomArea] = useState(false);
+  const { currentMonth, dateList } = useCalendar();
+  const {
+    preference: { firstDayOfWeek, showExtraDays, showDateContent },
+  } = usePreference();
   const [state, covertToPng, ref] = useToPng<HTMLDivElement>({
     onSuccess: (data) => {
       downloadFromBase64(data, `${headerText} - Calendar Remark.png`);
@@ -130,7 +136,14 @@ const ShareModal = () => {
                       {headerText}
                     </div>
                   )}
-                  <Calendar isSharing />
+                  <Calendar
+                    isSharing
+                    firstDayOfWeek={firstDayOfWeek}
+                    showExtraDays={showExtraDays}
+                    showDateContent={showDateContent}
+                    currentMonth={currentMonth}
+                    dateList={dateList}
+                  />
                   {showFooter && (
                     <div className='flex items-center justify-center w-full gap-1 px-1 py-2 text-sm md:gap-2 md:px-2 md:py-4 bg-slate-100 dark:bg-zinc-900/20 md:text-base dark:text-zinc-200'>
                       <img

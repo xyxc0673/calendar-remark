@@ -2,17 +2,15 @@ import dayjs from 'dayjs';
 import './App.css';
 import 'dayjs/locale/zh-cn';
 import weekOfYear from 'dayjs/plugin/weekOfYear';
-import Calendar from './components/Calendar';
-import CalendarHeader from './components/CalendarHeader';
 import DayInfoCard from './components/DayInfoCard';
 import LunarInfoCard from './components/LunarInfoCard';
 import PlaceHolderImage from './components/PlaceHolderImage';
-import RecentHoliday from './components/RecentHoliday';
 import ShareModal from './components/ShareModal';
 import YearProgressCard from './components/YearProgressCard';
 import { Footer } from './views/Footer';
 import { usePreference } from './hooks/usePreference';
 import clsxm from './libs/clsxm';
+import FullCalendar from './views/FullCalendar';
 
 dayjs.locale('zh-cn');
 dayjs.extend(weekOfYear);
@@ -35,11 +33,7 @@ function App() {
               isHorizontal ? 'md:flex-row' : 'md:flex-col'
             )}
           >
-            <div className='w-full md:w-[37.5rem] overflow-hidden rounded-lg shadow-lg md:border-r max-md:dark:border-b shadow-slate-200 dark:shadow-none border-zinc-400/20'>
-              <CalendarHeader />
-              <Calendar />
-              <RecentHoliday />
-            </div>
+            <FullCalendar />
             <div className='w-full md:w-[37.5rem] p-4 gap-3 flex flex-col'>
               <DayInfoCard />
               <LunarInfoCard />
