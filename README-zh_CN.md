@@ -6,12 +6,12 @@ Calendar Remark 是一款设计简洁，可供标记以及生成分享图的日�
 
 ## 截图
 
-![Screenshot-1](./screenshots/screenshot-1.png)
+![Screenshot-1](./screenshots/screenshot-1.jpeg)
 
 <details>
   <summary>点击这里去显示或者隐藏更多截图</summary>
   <img src="./screenshots/screenshot-2.jpeg" />
-  <img src="./screenshots/screenshot-3.png" />
+  <img src="./screenshots/screenshot-3.jpeg" />
 </details>
 
 ## 特性
