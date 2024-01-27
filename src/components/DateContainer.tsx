@@ -31,6 +31,7 @@ const DateContainer = ({
   isSelected,
   disabled,
   showContent,
+  highlightToday,
   onClick,
 }: {
   date: Date;
@@ -38,6 +39,7 @@ const DateContainer = ({
   isSelected: boolean;
   disabled?: boolean;
   showContent?: boolean;
+  highlightToday?: boolean;
   onClick?: () => void;
 }) => {
   const day = useDay(date);
@@ -50,7 +52,9 @@ const DateContainer = ({
 
   const contentText = showContent ? getContent(day, customContent) : '';
 
-  const showBadge = badgeText !== '';
+  const showBadge =
+    (isToday && highlightToday && badgeText !== '') ||
+    (!isToday && badgeText !== '');
 
   const isRestDayTheme = theme === 'restDay' || isRestDay;
 
@@ -68,18 +72,18 @@ const DateContainer = ({
         !isCurrentMonth && 'opacity-50',
         (isWeekend || isRestDayTheme) && 'text-red-500 dark:text-red-500',
         isRestDayTheme && 'bg-red-200 opacity-100 dark:bg-red-200',
-        isToday && 'text-blue-500 dark:text-blue-500',
+        highlightToday && isToday && 'text-blue-500 dark:text-blue-500',
         isSelected && 'bg-blue-400 text-white dark:text-white dark:bg-blue-400',
         disabled && 'cursor-default'
       )}
       dateClassName={clsxm(
         (isWeekend || isRestDayTheme) && 'text-red-500 dark:text-red-500',
-        isToday && 'text-blue-500 dark:text-blue-500',
+        highlightToday && isToday && 'text-blue-500 dark:text-blue-500',
         isSelected && 'text-white dark:text-white'
       )}
       badgeClassName={clsxm(
         isRestDayTheme && 'bg-red-500',
-        isWorkdayTheme && 'bg-blue-900',
+        highlightToday && isWorkdayTheme && 'bg-blue-900',
         isToday && 'bg-blue-500'
       )}
       onClick={onClick}
@@ -88,3 +92,7 @@ const DateContainer = ({
 };
 
 export default DateContainer;
+
+DateContainer.defaultProps = {
+  highlightToday: true,
+};

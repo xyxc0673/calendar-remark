@@ -11,6 +11,7 @@ import useCalendar from '@/hooks/useCalendar';
 
 const ShareModal = () => {
   const { isOpen, closeShareModal } = useShareModal();
+  const [highlightToday, setHighlightToday] = useState(false);
   const [showHeader, setShowHeader] = useState(true);
   const [showFooter, setShowFooter] = useState(true);
   const [headerText, setHeaderText] = useState('节假日安排');
@@ -61,12 +62,19 @@ const ShareModal = () => {
           className={clsxm(
             'transition-all duration-200 flex flex-col justify-center',
             showCustomArea
-              ? 'h-44 opacity-100 visible'
+              ? 'h-50 opacity-100 visible'
               : 'h-0 opacity-0 invisible'
           )}
         >
           <Divider direction='horizontal' className='my-2' />
           <div className='flex flex-col gap-3 py-2'>
+            <div className='flex items-center gap-2'>
+              <span className='text-nowrap'>标记今日</span>
+              <Checkbox
+                checked={highlightToday}
+                onChange={() => setHighlightToday(!highlightToday)}
+              />
+            </div>
             <div className='flex flex-col gap-1'>
               <div className='flex items-center gap-2'>
                 <span className='text-nowrap'>显示头部</span>
@@ -75,7 +83,7 @@ const ShareModal = () => {
                   onChange={() => setShowHeader(!showHeader)}
                 />
               </div>
-              <div className='flex items-center justify-center w-full mt-2'>
+              <div className='flex items-center justify-center w-full'>
                 <input
                   type='text'
                   placeholder='例如：节假日安排'
@@ -95,7 +103,7 @@ const ShareModal = () => {
                   onChange={() => setShowFooter(!showFooter)}
                 />
               </div>
-              <div className='flex items-center justify-center w-full mt-2'>
+              <div className='flex items-center justify-center w-full'>
                 <input
                   type='text'
                   placeholder='例如：Calendar Remark'
@@ -143,6 +151,7 @@ const ShareModal = () => {
                     showDateContent={showDateContent}
                     currentMonth={currentMonth}
                     dateList={dateList}
+                    highlightToday={highlightToday}
                   />
                   {showFooter && (
                     <div className='flex items-center justify-center w-full gap-1 px-1 py-2 text-sm md:gap-2 md:px-2 md:py-4 bg-slate-100 dark:bg-zinc-900/20 md:text-base dark:text-zinc-200'>

@@ -93,3 +93,19 @@ export const isWeekendDate = (date: Date) => {
   const day = date.getDay();
   return day === 0 || day === 6;
 };
+
+export const getDatesInRange = (startDate: Date, endDate: Date) => {
+  if (startDate > endDate) {
+    throw new Error('开始日期不能大于结束日期');
+  }
+
+  const dates = [];
+  const currDate = startDate;
+
+  while (currDate <= endDate) {
+    dates.push(currDate);
+    currDate.setDate(currDate.getDate() + 1);
+  }
+
+  return dates;
+};

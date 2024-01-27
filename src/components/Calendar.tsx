@@ -10,12 +10,14 @@ const DateGrid = ({
   showExtraDays,
   showDateContent,
   isSharing,
+  highlightToday,
 }: {
   currentMonth: number;
   dateList: Date[];
   showExtraDays: boolean;
   showDateContent: boolean;
   isSharing?: boolean;
+  highlightToday?: boolean;
 }) => {
   const { selectedDate, setSelectedDate } = useSelectedDate();
 
@@ -40,6 +42,7 @@ const DateGrid = ({
         showContent={showDateContent}
         isSelected={!isSharing && isSameDate(date, selectedDate)}
         onClick={() => handleDateClick(date)}
+        highlightToday={highlightToday}
       />
     );
   };
@@ -54,6 +57,7 @@ const Calendar = ({
   firstDayOfWeek,
   showExtraDays,
   showDateContent,
+  highlightToday,
 }: {
   isSharing?: boolean;
   currentMonth: number;
@@ -61,6 +65,7 @@ const Calendar = ({
   firstDayOfWeek: FirstDayOfWeek;
   showExtraDays: boolean;
   showDateContent: boolean;
+  highlightToday?: boolean;
 }) => {
   return (
     <div className='grid w-full grid-cols-7 gap-2 p-2 md:gap-4 md:p-6'>
@@ -71,6 +76,7 @@ const Calendar = ({
         showExtraDays={showExtraDays}
         showDateContent={showDateContent}
         isSharing={isSharing}
+        highlightToday={highlightToday}
       />
     </div>
   );
