@@ -83,7 +83,7 @@ const DateContainer = ({
       )}
       badgeClassName={clsxm(
         isRestDayTheme && 'bg-red-500',
-        highlightToday && isWorkdayTheme && 'bg-blue-900',
+        isWorkdayTheme && 'bg-blue-900',
         isToday && 'bg-blue-500'
       )}
       onClick={onClick}
