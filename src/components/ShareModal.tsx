@@ -47,7 +47,7 @@ const ShareModal = () => {
         )}
       >
         <div
-          className='flex items-center cursor-pointer'
+          className='flex items-center cursor-pointer select-none'
           onClick={() => setShowCustomArea(!showCustomArea)}
         >
           <ChevronDown
@@ -62,60 +62,64 @@ const ShareModal = () => {
           className={clsxm(
             'transition-all duration-200 flex flex-col justify-center',
             showCustomArea
-              ? 'h-50 opacity-100 visible'
+              ? 'h-52 opacity-100 visible'
               : 'h-0 opacity-0 invisible'
           )}
         >
-          <Divider direction='horizontal' className='my-2' />
-          <div className='flex flex-col gap-3 py-2'>
-            <div className='flex items-center gap-2'>
-              <span className='text-nowrap'>标记今日</span>
-              <Checkbox
-                checked={highlightToday}
-                onChange={() => setHighlightToday(!highlightToday)}
-              />
-            </div>
-            <div className='flex flex-col gap-1'>
-              <div className='flex items-center gap-2'>
-                <span className='text-nowrap'>显示头部</span>
-                <Checkbox
-                  checked={showHeader}
-                  onChange={() => setShowHeader(!showHeader)}
-                />
+          {showCustomArea && (
+            <>
+              <Divider direction='horizontal' className='my-2' />
+              <div className='flex flex-col gap-3 py-2'>
+                <div className='flex items-center gap-2'>
+                  <span className='text-nowrap'>标记今日</span>
+                  <Checkbox
+                    checked={highlightToday}
+                    onChange={() => setHighlightToday(!highlightToday)}
+                  />
+                </div>
+                <div className='flex flex-col gap-1'>
+                  <div className='flex items-center gap-2'>
+                    <span className='text-nowrap'>显示头部</span>
+                    <Checkbox
+                      checked={showHeader}
+                      onChange={() => setShowHeader(!showHeader)}
+                    />
+                  </div>
+                  <div className='flex items-center justify-center w-full'>
+                    <input
+                      type='text'
+                      placeholder='例如：节假日安排'
+                      maxLength={20}
+                      value={headerText}
+                      className='w-full px-2 py-1 text-sm transition-all duration-200 border border-gray-300 rounded-md dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent'
+                      onChange={(e) => setHeaderText(e.target.value)}
+                      disabled={!showHeader}
+                    />
+                  </div>
+                </div>
+                <div className='flex flex-col gap-1'>
+                  <div className='flex items-center gap-2'>
+                    <span className='text-nowrap'>显示底部</span>
+                    <Checkbox
+                      checked={showFooter}
+                      onChange={() => setShowFooter(!showFooter)}
+                    />
+                  </div>
+                  <div className='flex items-center justify-center w-full'>
+                    <input
+                      type='text'
+                      placeholder='例如：Calendar Remark'
+                      maxLength={20}
+                      value={footerText}
+                      className='w-full px-2 py-1 text-sm transition-all duration-200 border border-gray-300 rounded-md dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent'
+                      onChange={(e) => setFooterText(e.target.value)}
+                      disabled={!showFooter}
+                    />
+                  </div>
+                </div>
               </div>
-              <div className='flex items-center justify-center w-full'>
-                <input
-                  type='text'
-                  placeholder='例如：节假日安排'
-                  maxLength={20}
-                  value={headerText}
-                  className='w-full px-2 py-1 text-sm transition-all duration-200 border border-gray-300 rounded-md dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent'
-                  onChange={(e) => setHeaderText(e.target.value)}
-                  disabled={!showHeader}
-                />
-              </div>
-            </div>
-            <div className='flex flex-col gap-1'>
-              <div className='flex items-center gap-2'>
-                <span className='text-nowrap'>显示底部</span>
-                <Checkbox
-                  checked={showFooter}
-                  onChange={() => setShowFooter(!showFooter)}
-                />
-              </div>
-              <div className='flex items-center justify-center w-full'>
-                <input
-                  type='text'
-                  placeholder='例如：Calendar Remark'
-                  maxLength={20}
-                  value={footerText}
-                  className='w-full px-2 py-1 text-sm transition-all duration-200 border border-gray-300 rounded-md dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent'
-                  onChange={(e) => setFooterText(e.target.value)}
-                  disabled={!showFooter}
-                />
-              </div>
-            </div>
-          </div>
+            </>
+          )}
         </div>
       </div>
     );
