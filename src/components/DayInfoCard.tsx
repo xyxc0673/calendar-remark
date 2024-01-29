@@ -5,15 +5,15 @@ import { RadioButtonGroup, Divider } from './ui';
 import { LogoutRight, PencilBox, RotateRight } from '@/assets/icons';
 import { holidayDetails } from '@/configs/holidays';
 import { useCustomDay } from '@/hooks/useCustomDay';
-import useDay from '@/hooks/useDay';
 import { useSelectedDate } from '@/hooks/useSelectedDate';
 import clsxm from '@/libs/clsxm';
 import { Input } from './ui';
+import { generateDay } from '@/libs/day';
 
 const EditArea = ({ date, isEditing }: { date: Date; isEditing: boolean }) => {
   const { customDay, updateCustomDay, updateBadge, updateContent } =
     useCustomDay(date);
-  const day = useDay(date);
+  const day = generateDay(date);
   const compositionFlag = useRef(false);
 
   const badge = useMemo(() => {

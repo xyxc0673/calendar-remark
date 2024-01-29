@@ -109,3 +109,13 @@ export const getDatesInRange = (startDate: Date, endDate: Date) => {
 
   return dates;
 };
+
+export const getLunarDate = (date: Date) => {
+  const lunarDate = Lunar.fromDate(date);
+
+  if (lunarDate.getDay() === 1) {
+    return `${lunarDate.getMonthInChinese()}月`;
+  }
+
+  return lunarDate.getDayInChinese();
+};

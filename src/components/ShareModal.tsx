@@ -17,7 +17,7 @@ const ShareModal = () => {
   const [headerText, setHeaderText] = useState('节假日安排');
   const [footerText, setFooterText] = useState('Calendar Remark');
   const [showCustomArea, setShowCustomArea] = useState(false);
-  const { currentMonth, dateList } = useCalendar();
+  const { dateList } = useCalendar();
   const {
     preference: { firstDayOfWeek, showExtraDays, showDateContent },
   } = usePreference();
@@ -153,7 +153,6 @@ const ShareModal = () => {
                     firstDayOfWeek={firstDayOfWeek}
                     showExtraDays={showExtraDays}
                     showDateContent={showDateContent}
-                    currentMonth={currentMonth}
                     dateList={dateList}
                     highlightToday={highlightToday}
                   />

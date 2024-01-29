@@ -3,23 +3,28 @@ import DateContainer from './DateContainer';
 import { FirstDayOfWeek } from '@/hooks/usePreference';
 import { useSelectedDate } from '@/hooks/useSelectedDate';
 import { isSameDate } from '@/libs/date';
+import { Day } from '@/interfaces/day';
+import { useMemo } from 'react';
+import { generateDay } from '@/libs/day';
+import { useAtomValue } from 'jotai';
+import { currentMonthAtom } from '@/hooks/useCalendar';
 
 const DateGrid = ({
-  currentMonth,
   dateList,
   showExtraDays,
   showDateContent,
   isSharing,
   highlightToday,
 }: {
-  currentMonth: number;
   dateList: Date[];
   showExtraDays: boolean;
   showDateContent: boolean;
   isSharing?: boolean;
   highlightToday?: boolean;
 }) => {
+  const currentMonth = useAtomValue(currentMonthAtom);
   const { selectedDate, setSelectedDate } = useSelectedDate();
+  const dayList = useMemo(() => dateList.map(generateDay), [dateList]);
 
   const handleDateClick = (date: Date) => {
     if (isSharing) {
@@ -28,31 +33,33 @@ const DateGrid = ({
     setSelectedDate(date);
   };
 
-  const renderDate = (date: Date) => {
-    if (!showExtraDays && date.getMonth() !== currentMonth) {
+  const renderDate = (day: Day) => {
+    const { date } = day;
+    const isCurrentMonth = date.getMonth() === currentMonth;
+
+    if (!showExtraDays && !isCurrentMonth) {
       return <div key={date.toString()} />;
     }
 
     return (
       <DateContainer
         key={date.toString()}
-        date={date}
-        currentMonth={currentMonth}
+        day={day}
         disabled={isSharing}
         showContent={showDateContent}
         isSelected={!isSharing && isSameDate(date, selectedDate)}
         onClick={() => handleDateClick(date)}
         highlightToday={highlightToday}
+        isCurrentMonth={isCurrentMonth}
       />
     );
   };
 
-  return dateList.map(renderDate);
+  return dayList.map(renderDate);
 };
 
 const Calendar = ({
   isSharing,
-  currentMonth,
   dateList,
   firstDayOfWeek,
   showExtraDays,
@@ -60,7 +67,6 @@ const Calendar = ({
   highlightToday,
 }: {
   isSharing?: boolean;
-  currentMonth: number;
   dateList: Date[];
   firstDayOfWeek: FirstDayOfWeek;
   showExtraDays: boolean;
@@ -71,7 +77,6 @@ const Calendar = ({
     <div className='grid w-full grid-cols-7 gap-2 p-2 md:gap-4 md:p-6'>
       <WeekdayHeader firstDayOfWeek={firstDayOfWeek} />
       <DateGrid
-        currentMonth={currentMonth}
         dateList={dateList}
         showExtraDays={showExtraDays}
         showDateContent={showDateContent}

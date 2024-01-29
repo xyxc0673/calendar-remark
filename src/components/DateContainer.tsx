@@ -1,9 +1,9 @@
 import { holidayDetails } from '@/configs/holidays';
 import { useCustomDay } from '@/hooks/useCustomDay';
-import useDay, { Day } from '@/hooks/useDay';
 import clsxm from '@/libs/clsxm';
-import { getBadgeText } from '@/libs/dayUtil';
+import { getBadgeText } from '@/libs/day';
 import DateComponent from './DateComponent';
+import { Day } from '@/interfaces/day';
 
 const getContent = (day: Day, customContent?: string) => {
   if (customContent !== undefined) {
@@ -26,27 +26,26 @@ const getContent = (day: Day, customContent?: string) => {
 };
 
 const DateContainer = ({
-  date,
-  currentMonth,
+  day,
   isSelected,
   disabled,
   showContent,
   highlightToday,
+  isCurrentMonth,
   onClick,
 }: {
-  date: Date;
-  currentMonth: number;
+  day: Day;
   isSelected: boolean;
   disabled?: boolean;
   showContent?: boolean;
   highlightToday?: boolean;
+  isCurrentMonth?: boolean;
   onClick?: () => void;
 }) => {
-  const day = useDay(date);
+  const { date } = day;
   const { customDay } = useCustomDay(date);
   const { isToday, isRestDay, isWeekend, isWorkDay } = day;
   const { theme, badge: customBadge, content: customContent } = customDay;
-  const isCurrentMonth = date.getMonth() === currentMonth;
 
   const badgeText = getBadgeText(day, customBadge);
 

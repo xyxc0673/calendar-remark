@@ -1,41 +1,32 @@
-import { Lunar } from 'lunar-typescript';
-import { HOLIDAY, DAY_TYPE } from '@/configs/holidays';
+import { DAY_TYPE } from '@/configs/holidays';
+import { Day } from '@/interfaces/day';
 import {
   getFestivals,
   getHoliday,
+  getLunarDate,
   getRestDay,
   getSolarTerm,
   getWorkday,
   isWeekendDate,
 } from '@/libs/date';
 
-export type Day = {
-  date: Date;
-  lunarDate: string;
-  isToday: boolean;
-  isWeekend: boolean;
-  holiday?: HOLIDAY;
-  restDay?: string;
-  workDay?: string;
-  isHoliday: boolean;
-  isRestDay: boolean;
-  isWorkDay: boolean;
-  dayType?: DAY_TYPE;
-  solarTerm?: string;
-  festivals: string[];
-};
-
-const getLunarDate = (date: Date) => {
-  const lunarDate = Lunar.fromDate(date);
-
-  if (lunarDate.getDay() === 1) {
-    return `${lunarDate.getMonthInChinese()}月`;
+export const getBadgeText = (day: Day, customBadge?: string) => {
+  if (customBadge !== undefined) {
+    return customBadge;
   }
-
-  return lunarDate.getDayInChinese();
+  if (day.dayType === DAY_TYPE.REST_DAY) {
+    return '休';
+  }
+  if (day.dayType === DAY_TYPE.WORKDAY) {
+    return '班';
+  }
+  if (day.isToday) {
+    return '今';
+  }
+  return '';
 };
 
-const useDay = (date: Date): Day => {
+export const generateDay = (date: Date): Day => {
   const currentDate = new Date();
 
   const isWeekend = isWeekendDate(date);
@@ -80,5 +71,3 @@ const useDay = (date: Date): Day => {
     festivals,
   };
 };
-
-export default useDay;
