@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { atom, useAtom, useAtomValue } from 'jotai';
 import { usePreference } from './usePreference';
+import { generateDateList } from '@/libs/date';
 
 export const todayAtom = atom(new Date());
 export const currentMonthAtom = atom(new Date().getMonth());
@@ -49,38 +50,16 @@ const useCalendar = () => {
   };
 
   const dateList = useMemo(() => {
-    {
-      const daysInCurrentMonth = getDaysInMonth(currentMonth, currentYear);
-      const daysInPreviousMonth = getDaysInMonth(currentMonth - 1, currentYear);
-      const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
-      const startingDay = (firstDayOfMonth - firstDayOfWeek + 7) % 7;
+    const daysInMonth = getDaysInMonth(currentMonth, currentYear);
+    const startDateTime = new Date(currentYear, currentMonth, 1);
+    const endDateTime = new Date(currentYear, currentMonth, daysInMonth);
 
-      const dateList: Date[] = [];
-
-      // Render the last few days of the previous month
-      for (let i = 0; i < startingDay; i++) {
-        const day = daysInPreviousMonth - startingDay + i + 1;
-
-        dateList.push(new Date(currentYear, currentMonth - 1, day));
-      }
-
-      // Render all days of the current month
-      for (let i = 1; i <= daysInCurrentMonth; i++) {
-        dateList.push(new Date(currentYear, currentMonth, i));
-      }
-
-      // Render the first few days of the next month
-      const totalDaysRendered = startingDay + daysInCurrentMonth;
-      const remainingDays = 7 - (totalDaysRendered % 7);
-
-      if (remainingDays < 7) {
-        for (let i = 1; i <= remainingDays; i++) {
-          dateList.push(new Date(currentYear, currentMonth + 1, i));
-        }
-      }
-
-      return dateList;
-    }
+    const dateList = generateDateList(
+      startDateTime,
+      endDateTime,
+      firstDayOfWeek
+    );
+    return dateList;
   }, [currentMonth, currentYear, firstDayOfWeek]);
 
   return {
