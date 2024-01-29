@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react-swc';
 import { VitePWA, VitePWAOptions } from 'vite-plugin-pwa';
 import gzipPlugin from 'rollup-plugin-gzip';
 import path from 'path';
+import checker from 'vite-plugin-checker';
 
 const pwaOptions: Partial<VitePWAOptions> = {
   mode: 'development',
@@ -49,7 +50,12 @@ const pwaOptions: Partial<VitePWAOptions> = {
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), VitePWA(pwaOptions), gzipPlugin()],
+  plugins: [
+    react(),
+    VitePWA(pwaOptions),
+    gzipPlugin(),
+    checker({ typescript: true }),
+  ],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
