@@ -1,5 +1,4 @@
 import dayjs from 'dayjs';
-import './App.css';
 import 'dayjs/locale/zh-cn';
 import weekOfYear from 'dayjs/plugin/weekOfYear';
 import DayInfoCard from './components/DayInfoCard';

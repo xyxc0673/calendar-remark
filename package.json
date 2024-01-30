@@ -12,16 +12,19 @@
   },
   "dependencies": {
     "@hugocxl/react-to-image": "^0.0.9",
+    "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "dayjs": "^1.11.10",
     "jotai": "^2.6.1",
+    "lucide-react": "^0.319.0",
     "lunar-typescript": "^1.7.0",
     "nanoid": "^5.0.4",
     "rc-input": "^1.4.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-ga4": "^2.1.0",
-    "tailwind-merge": "^2.2.0"
+    "tailwind-merge": "^2.2.0",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",

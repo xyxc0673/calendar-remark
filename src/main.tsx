@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import ReactGA from 'react-ga4';
 import App from './App.tsx';
-import './index.css';
+import './styles/global.css';
 
 const TRACKING_ID = import.meta.env.VITE_GOOGLE_ANALYSIS_TRACKING_ID;
 
