@@ -32,6 +32,7 @@ const DateContainer = ({
   showContent,
   highlightToday,
   isCurrentMonth,
+  dimNonCurrentMonth,
   onClick,
 }: {
   day: Day;
@@ -40,6 +41,8 @@ const DateContainer = ({
   showContent?: boolean;
   highlightToday?: boolean;
   isCurrentMonth?: boolean;
+  // 添加一个参数决定不是当前月份的日期是否半透明
+  dimNonCurrentMonth?: boolean;
   onClick?: () => void;
 }) => {
   const { date } = day;
@@ -68,7 +71,7 @@ const DateContainer = ({
       showBadge={showBadge}
       className={clsxm(
         !isSelected && !disabled && 'hover:bg-blue-100 dark:hover:bg-zinc-600',
-        !isCurrentMonth && 'opacity-50',
+        !isCurrentMonth && dimNonCurrentMonth && 'opacity-50',
         (isWeekend || isRestDayTheme) && 'text-red-500 dark:text-red-500',
         isRestDayTheme && 'bg-red-200 opacity-100 dark:bg-red-200',
         highlightToday && isToday && 'text-blue-500 dark:text-blue-500',
@@ -94,4 +97,5 @@ export default DateContainer;
 
 DateContainer.defaultProps = {
   highlightToday: true,
+  dimNonCurrentMonth: true,
 };

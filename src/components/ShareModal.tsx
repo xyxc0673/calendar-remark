@@ -2,12 +2,15 @@ import { ChevronDown } from '@/assets/icons';
 import clsxm from '@/libs/clsxm';
 import { downloadFromBase64 } from '@/libs/download';
 import { useToPng } from '@hugocxl/react-to-image';
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Calendar from './Calendar';
-import { Checkbox, Divider } from './ui';
+import { Checkbox, DatePickerWithRange, Divider } from './ui';
 import { useShareModal } from '@/hooks/useShareModal';
 import { usePreference } from '@/hooks/usePreference';
 import useCalendar from '@/hooks/useCalendar';
+import { generateDateList } from '@/libs/date';
+import { DateRange } from 'react-day-picker';
+import { isSameMonth } from 'date-fns';
 
 const ShareModal = () => {
   const { isOpen, closeShareModal } = useShareModal();
@@ -17,7 +20,9 @@ const ShareModal = () => {
   const [headerText, setHeaderText] = useState('节假日安排');
   const [footerText, setFooterText] = useState('Calendar Remark');
   const [showCustomArea, setShowCustomArea] = useState(false);
-  const { dateList } = useCalendar();
+  const { currentYear, currentMonth } = useCalendar();
+  const [startDate, setStartDate] = useState<Date>();
+  const [endDate, setEndDate] = useState<Date>();
   const {
     preference: { firstDayOfWeek, showExtraDays, showDateContent },
   } = usePreference();
@@ -26,6 +31,17 @@ const ShareModal = () => {
       downloadFromBase64(data, `${headerText} - Calendar Remark.png`);
     },
   });
+
+  const dateList = useMemo<Date[]>(() => {
+    if (!startDate || !endDate) return [];
+
+    return generateDateList(startDate, endDate, firstDayOfWeek);
+  }, [startDate, endDate, firstDayOfWeek]);
+
+  const dimNonCurrentMonth = useMemo(() => {
+    if (!startDate || !endDate) return true;
+    return isSameMonth(startDate, endDate);
+  }, [startDate, endDate]);
 
   const handleSave = () => {
     if (state.status !== 'loading') {
@@ -37,6 +53,13 @@ const ShareModal = () => {
     closeShareModal();
     setShowCustomArea(false);
   };
+
+  useEffect(() => {
+    if (currentMonth !== -1 && currentYear) {
+      setStartDate(new Date(currentYear, currentMonth, 1));
+      setEndDate(new Date(currentYear, currentMonth + 1, 0));
+    }
+  }, [currentMonth, currentYear]);
 
   const renderCustomArea = () => {
     return (
@@ -125,6 +148,13 @@ const ShareModal = () => {
     );
   };
 
+  const handleDateChange = (range?: DateRange) => {
+    if (!range) return;
+
+    setStartDate(range.from);
+    setEndDate(range.to);
+  };
+
   return (
     <div
       className={clsxm(
@@ -135,12 +165,20 @@ const ShareModal = () => {
       <div className='absolute w-screen h-full px-2 pt-16 -translate-x-1/2 left-1/2 md:w-fit'>
         <div
           className={clsxm(
-            'bg-white rounded-lg shadow-md transition-all duration-300 dark:bg-zinc-600',
+            'flex flex-col bg-white rounded-lg shadow-md transition-all duration-300 dark:bg-zinc-600',
             isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
           )}
         >
           <div className='p-1 md:p-4'>
-            <div>
+            <div className='flex justify-center w-auto py-2'>
+              <DatePickerWithRange
+                from={startDate}
+                to={endDate}
+                max={366}
+                onChange={handleDateChange}
+              />
+            </div>
+            <div className='max-h-[50vh] overflow-y-auto scrollbar-track-white scrollbar-thumb-slate-300 scrollbar-thin scrollbar-thumb-rounded-full'>
               <div ref={ref} className='p-2 bg-white md:p-4 dark:bg-zinc-600'>
                 <div className='bg-white dark:bg-zinc-800 w-full md:w-[37.5rem] rounded-lg md:shadow-lg shadow-slate-200 text-sm md:text-base overflow-hidden'>
                   {showHeader && (
@@ -155,6 +193,7 @@ const ShareModal = () => {
                     showDateContent={showDateContent}
                     dateList={dateList}
                     highlightToday={highlightToday}
+                    dimNonCurrentMonth={dimNonCurrentMonth}
                   />
                   {showFooter && (
                     <div className='flex items-center justify-center w-full gap-1 px-1 py-2 text-sm md:gap-2 md:px-2 md:py-4 bg-slate-100 dark:bg-zinc-900/20 md:text-base dark:text-zinc-200'>

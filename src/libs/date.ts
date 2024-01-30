@@ -5,6 +5,7 @@ import {
   restDays,
   workdays,
 } from '@/configs/holidays';
+import { FirstDayOfWeek } from '@/hooks/usePreference';
 import dayjs from 'dayjs';
 import { Lunar, Solar } from 'lunar-typescript';
 
@@ -123,48 +124,29 @@ export const getLunarDate = (date: Date) => {
 export const generateDateList = (
   startDate: Date,
   endDate: Date,
-  firstDayOfWeek: number
+  firstDayOfWeek: FirstDayOfWeek
 ): Date[] => {
-  const startYear = startDate.getFullYear();
-  const startMonth = startDate.getMonth();
-  const endYear = endDate.getFullYear();
-  const endMonth = endDate.getMonth();
+  const start = new Date(startDate);
+  const end = new Date(endDate);
 
-  const getDaysInMonth = (month: number, year: number) => {
-    return new Date(year, month + 1, 0).getDate();
-  };
+  // 根据 firstDayOfWeek 调整开始日期
+  const dayOfWeek = start.getDay();
+  const difference =
+    dayOfWeek - (firstDayOfWeek === FirstDayOfWeek.Sunday ? 0 : 1);
+  start.setDate(start.getDate() - (difference >= 0 ? difference : 6));
+
+  // 根据 firstDayOfWeek 调整结束日期
+  const endDayOfWeek = end.getDay();
+  const endDifference =
+    (firstDayOfWeek === FirstDayOfWeek.Sunday ? 6 : 7) - endDayOfWeek;
+  end.setDate(end.getDate() + (endDifference > 0 ? endDifference : 0));
 
   const dateList: Date[] = [];
 
-  // 计算上个月需要显示的天数
-  const firstDayOfStartMonth = new Date(startYear, startMonth, 1).getDay();
-  let daysFromPrevMonth = (firstDayOfStartMonth - firstDayOfWeek + 7) % 7;
-  if (daysFromPrevMonth === 0) daysFromPrevMonth = 7;
-
-  const daysInPreviousMonth = getDaysInMonth(startMonth - 1, startYear);
-  for (let i = daysFromPrevMonth; i > 0; i--) {
-    dateList.push(
-      new Date(startYear, startMonth - 1, daysInPreviousMonth - i + 1)
-    );
-  }
-
-  // 当前月份的天数
-  const daysInStartMonth = getDaysInMonth(startMonth, startYear);
-  for (let i = 1; i <= daysInStartMonth; i++) {
-    dateList.push(new Date(startYear, startMonth, i));
-  }
-
-  // 计算下个月需要显示的天数
-  const lastDayOfEndMonth = new Date(
-    endYear,
-    endMonth,
-    daysInStartMonth
-  ).getDay();
-  let daysFromNextMonth = (7 - lastDayOfEndMonth + firstDayOfWeek - 1) % 7;
-  if (daysFromNextMonth === 7) daysFromNextMonth = 0;
-
-  for (let i = 1; i <= daysFromNextMonth; i++) {
-    dateList.push(new Date(endYear, endMonth + 1, i));
+  // 循环生成日期列表
+  while (start <= end) {
+    dateList.push(new Date(start));
+    start.setDate(start.getDate() + 1);
   }
 
   return dateList;

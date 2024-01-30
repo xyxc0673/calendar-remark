@@ -11,3 +11,6 @@ export { RotateRight } from './RotateRight';
 export { LayoutHorizontal } from './LayoutHorizontal';
 export { LayoutVertical } from './LayoutVertical';
 export { CrossCircleDuoSolid } from './CrossCircleDuoSolid';
+export { ChevronLeft } from './ChevronLeft';
+export { ChevronRight } from './ChevronRight';
+export { CalendarFilled } from './CalendarFilled';

@@ -15,12 +15,14 @@ const DateGrid = ({
   showDateContent,
   isSharing,
   highlightToday,
+  dimNonCurrentMonth,
 }: {
   dateList: Date[];
   showExtraDays: boolean;
   showDateContent: boolean;
   isSharing?: boolean;
   highlightToday?: boolean;
+  dimNonCurrentMonth?: boolean;
 }) => {
   const currentMonth = useAtomValue(currentMonthAtom);
   const { selectedDate, setSelectedDate } = useSelectedDate();
@@ -51,6 +53,7 @@ const DateGrid = ({
         onClick={() => handleDateClick(date)}
         highlightToday={highlightToday}
         isCurrentMonth={isCurrentMonth}
+        dimNonCurrentMonth={dimNonCurrentMonth}
       />
     );
   };
@@ -65,6 +68,7 @@ const Calendar = ({
   showExtraDays,
   showDateContent,
   highlightToday,
+  dimNonCurrentMonth,
 }: {
   isSharing?: boolean;
   dateList: Date[];
@@ -72,6 +76,7 @@ const Calendar = ({
   showExtraDays: boolean;
   showDateContent: boolean;
   highlightToday?: boolean;
+  dimNonCurrentMonth?: boolean;
 }) => {
   return (
     <div className='grid w-full grid-cols-7 gap-2 p-2 md:gap-4 md:p-6'>
@@ -82,6 +87,7 @@ const Calendar = ({
         showDateContent={showDateContent}
         isSharing={isSharing}
         highlightToday={highlightToday}
+        dimNonCurrentMonth={dimNonCurrentMonth}
       />
     </div>
   );
