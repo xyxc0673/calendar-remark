@@ -4,20 +4,18 @@ import { FirstDayOfWeek } from '@/hooks/usePreference';
 import { useSelectedDate } from '@/hooks/useSelectedDate';
 import { isSameDate } from '@/libs/date';
 import { Day } from '@/interfaces/day';
-import { useMemo } from 'react';
-import { generateDay } from '@/libs/day';
 import { useAtomValue } from 'jotai';
 import { currentMonthAtom } from '@/hooks/useCalendar';
 
 const DateGrid = ({
-  dateList,
+  dayList,
   showExtraDays,
   showDateContent,
   isSharing,
   highlightToday,
   dimNonCurrentMonth,
 }: {
-  dateList: Date[];
+  dayList: Day[];
   showExtraDays: boolean;
   showDateContent: boolean;
   isSharing?: boolean;
@@ -26,7 +24,6 @@ const DateGrid = ({
 }) => {
   const currentMonth = useAtomValue(currentMonthAtom);
   const { selectedDate, setSelectedDate } = useSelectedDate();
-  const dayList = useMemo(() => dateList.map(generateDay), [dateList]);
 
   const handleDateClick = (date: Date) => {
     if (isSharing) {
@@ -39,8 +36,8 @@ const DateGrid = ({
     const { date } = day;
     const isCurrentMonth = date.getMonth() === currentMonth;
 
-    if (!showExtraDays && !isCurrentMonth) {
-      return <div key={date.toString()} />;
+    if (!day.isInRange && !showExtraDays) {
+      return <div key={day.date.toString()} />;
     }
 
     return (
@@ -63,7 +60,7 @@ const DateGrid = ({
 
 const Calendar = ({
   isSharing,
-  dateList,
+  dayList,
   firstDayOfWeek,
   showExtraDays,
   showDateContent,
@@ -71,7 +68,7 @@ const Calendar = ({
   dimNonCurrentMonth,
 }: {
   isSharing?: boolean;
-  dateList: Date[];
+  dayList: Day[];
   firstDayOfWeek: FirstDayOfWeek;
   showExtraDays: boolean;
   showDateContent: boolean;
@@ -82,7 +79,7 @@ const Calendar = ({
     <div className='grid w-full grid-cols-7 gap-2 p-2 md:gap-4 md:p-6'>
       <WeekdayHeader firstDayOfWeek={firstDayOfWeek} />
       <DateGrid
-        dateList={dateList}
+        dayList={dayList}
         showExtraDays={showExtraDays}
         showDateContent={showDateContent}
         isSharing={isSharing}

@@ -14,4 +14,5 @@ export type Day = {
   dayType?: DAY_TYPE;
   solarTerm?: string;
   festivals: string[];
+  isInRange: boolean;
 };

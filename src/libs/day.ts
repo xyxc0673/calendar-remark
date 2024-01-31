@@ -26,7 +26,7 @@ export const getBadgeText = (day: Day, customBadge?: string) => {
   return '';
 };
 
-export const generateDay = (date: Date): Day => {
+export const generateDay = (date: Date, range?: [Date, Date]): Day => {
   const currentDate = new Date();
 
   const isWeekend = isWeekendDate(date);
@@ -55,6 +55,15 @@ export const generateDay = (date: Date): Day => {
     dayType = DAY_TYPE.WORKDAY;
   }
 
+  let isInRange = false;
+
+  if (range) {
+    const [startDate, endDate] = range;
+    isInRange =
+      date.getTime() >= startDate.getTime() &&
+      date.getTime() <= endDate.getTime();
+  }
+
   return {
     date,
     lunarDate,
@@ -69,5 +78,6 @@ export const generateDay = (date: Date): Day => {
     dayType,
     solarTerm,
     festivals,
+    isInRange,
   };
 };

@@ -10,11 +10,14 @@ import { usePreference } from '@/hooks/usePreference';
 import useCalendar from '@/hooks/useCalendar';
 import { generateDateList } from '@/libs/date';
 import { DateRange } from 'react-day-picker';
-import { isSameMonth } from 'date-fns';
+import { isFirstDayOfMonth, isLastDayOfMonth } from 'date-fns';
+import { Day } from '@/interfaces/day';
+import { generateDay } from '@/libs/day';
 
 const ShareModal = () => {
   const { isOpen, closeShareModal } = useShareModal();
   const [highlightToday, setHighlightToday] = useState(false);
+  const [completeWeek, setCompleteWeek] = useState(false);
   const [showHeader, setShowHeader] = useState(true);
   const [showFooter, setShowFooter] = useState(true);
   const [headerText, setHeaderText] = useState('节假日安排');
@@ -24,7 +27,7 @@ const ShareModal = () => {
   const [startDate, setStartDate] = useState<Date>();
   const [endDate, setEndDate] = useState<Date>();
   const {
-    preference: { firstDayOfWeek, showExtraDays, showDateContent },
+    preference: { firstDayOfWeek, showDateContent },
   } = usePreference();
   const [state, covertToPng, ref] = useToPng<HTMLDivElement>({
     onSuccess: (data) => {
@@ -32,15 +35,19 @@ const ShareModal = () => {
     },
   });
 
-  const dateList = useMemo<Date[]>(() => {
+  const dayList = useMemo<Day[]>(() => {
     if (!startDate || !endDate) return [];
 
-    return generateDateList(startDate, endDate, firstDayOfWeek);
+    const dateList = generateDateList(startDate, endDate, firstDayOfWeek);
+    const dayList = dateList.map((date) => {
+      return generateDay(date, [startDate, endDate]);
+    });
+    return dayList;
   }, [startDate, endDate, firstDayOfWeek]);
 
-  const dimNonCurrentMonth = useMemo(() => {
+  const isFullMonthSelected = useMemo(() => {
     if (!startDate || !endDate) return true;
-    return isSameMonth(startDate, endDate);
+    return isFirstDayOfMonth(startDate) && isLastDayOfMonth(endDate);
   }, [startDate, endDate]);
 
   const handleSave = () => {
@@ -93,52 +100,59 @@ const ShareModal = () => {
             <>
               <Divider direction='horizontal' className='my-2' />
               <div className='flex flex-col gap-3 py-2'>
+                <div className='grid grid-cols-2'>
+                  <div className='flex items-center gap-2'>
+                    <span className='text-nowrap'>标记今日</span>
+                    <Checkbox
+                      checked={highlightToday}
+                      onChange={() => setHighlightToday(!highlightToday)}
+                    />
+                  </div>
+                  <div className='flex items-center gap-2'>
+                    <span className='text-nowrap'>补全星期</span>
+                    <Checkbox
+                      checked={completeWeek}
+                      onChange={() => setCompleteWeek(!completeWeek)}
+                    />
+                  </div>
+                </div>
                 <div className='flex items-center gap-2'>
-                  <span className='text-nowrap'>标记今日</span>
+                  <span className='text-nowrap'>显示头部</span>
                   <Checkbox
-                    checked={highlightToday}
-                    onChange={() => setHighlightToday(!highlightToday)}
+                    checked={showHeader}
+                    onChange={() => setShowHeader(!showHeader)}
                   />
                 </div>
-                <div className='flex flex-col gap-1'>
-                  <div className='flex items-center gap-2'>
-                    <span className='text-nowrap'>显示头部</span>
-                    <Checkbox
-                      checked={showHeader}
-                      onChange={() => setShowHeader(!showHeader)}
-                    />
-                  </div>
-                  <div className='flex items-center justify-center w-full'>
-                    <input
-                      type='text'
-                      placeholder='例如：节假日安排'
-                      maxLength={20}
-                      value={headerText}
-                      className='w-full px-2 py-1 text-sm transition-all duration-200 border border-gray-300 rounded-md dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent'
-                      onChange={(e) => setHeaderText(e.target.value)}
-                      disabled={!showHeader}
-                    />
-                  </div>
+                <div className='flex items-center justify-center w-full gap-2'>
+                  <span className='text-nowrap'>头部内容</span>
+                  <input
+                    type='text'
+                    placeholder='例如：节假日安排'
+                    maxLength={20}
+                    value={headerText}
+                    className='w-full px-2 py-1 text-sm transition-all duration-200 border border-gray-300 rounded-md dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent'
+                    onChange={(e) => setHeaderText(e.target.value)}
+                    disabled={!showHeader}
+                  />
                 </div>
-                <div className='flex flex-col gap-1'>
-                  <div className='flex items-center gap-2'>
-                    <span className='text-nowrap'>显示底部</span>
-                    <Checkbox
-                      checked={showFooter}
-                      onChange={() => setShowFooter(!showFooter)}
-                    />
-                  </div>
-                  <div className='flex items-center justify-center w-full'>
-                    <input
-                      type='text'
-                      placeholder='例如：Calendar Remark'
-                      maxLength={20}
-                      value={footerText}
-                      className='w-full px-2 py-1 text-sm transition-all duration-200 border border-gray-300 rounded-md dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent'
-                      onChange={(e) => setFooterText(e.target.value)}
-                      disabled={!showFooter}
-                    />
-                  </div>
+                <div className='flex items-center gap-2'>
+                  <span className='text-nowrap'>显示底部</span>
+                  <Checkbox
+                    checked={showFooter}
+                    onChange={() => setShowFooter(!showFooter)}
+                  />
+                </div>
+                <div className='flex items-center justify-center w-full gap-2'>
+                  <span className='text-nowrap'>底部内容</span>
+                  <input
+                    type='text'
+                    placeholder='例如：Calendar Remark'
+                    maxLength={20}
+                    value={footerText}
+                    className='w-full px-2 py-1 text-sm transition-all duration-200 border border-gray-300 rounded-md dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent'
+                    onChange={(e) => setFooterText(e.target.value)}
+                    disabled={!showFooter}
+                  />
                 </div>
               </div>
             </>
@@ -178,7 +192,7 @@ const ShareModal = () => {
                 onChange={handleDateChange}
               />
             </div>
-            <div className='max-h-[50vh] overflow-y-auto scrollbar-track-white scrollbar-thumb-slate-300 scrollbar-thin scrollbar-thumb-rounded-full'>
+            <div className='h-[50vh] overflow-y-auto scrollbar-track-white scrollbar-thumb-slate-300 scrollbar-thin scrollbar-thumb-rounded-full'>
               <div ref={ref} className='p-2 bg-white md:p-4 dark:bg-zinc-600'>
                 <div className='bg-white dark:bg-zinc-800 w-full md:w-[37.5rem] rounded-lg md:shadow-lg shadow-slate-200 text-sm md:text-base overflow-hidden'>
                   {showHeader && (
@@ -189,11 +203,11 @@ const ShareModal = () => {
                   <Calendar
                     isSharing
                     firstDayOfWeek={firstDayOfWeek}
-                    showExtraDays={showExtraDays}
+                    showExtraDays={completeWeek}
                     showDateContent={showDateContent}
-                    dateList={dateList}
+                    dayList={dayList}
                     highlightToday={highlightToday}
-                    dimNonCurrentMonth={dimNonCurrentMonth}
+                    dimNonCurrentMonth={isFullMonthSelected}
                   />
                   {showFooter && (
                     <div className='flex items-center justify-center w-full gap-1 px-1 py-2 text-sm md:gap-2 md:px-2 md:py-4 bg-slate-100 dark:bg-zinc-900/20 md:text-base dark:text-zinc-200'>
