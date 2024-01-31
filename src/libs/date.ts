@@ -130,16 +130,20 @@ export const generateDateList = (
   const end = new Date(endDate);
 
   // 根据 firstDayOfWeek 调整开始日期
-  const dayOfWeek = start.getDay();
-  const difference =
-    dayOfWeek - (firstDayOfWeek === FirstDayOfWeek.Sunday ? 0 : 1);
-  start.setDate(start.getDate() - (difference >= 0 ? difference : 6));
+  let startDayOfWeek = start.getDay();
+  startDayOfWeek = startDayOfWeek === 0 ? 7 : startDayOfWeek; // 将星期日修正为7
+  const startDifference =
+    startDayOfWeek - (firstDayOfWeek === FirstDayOfWeek.Sunday ? 0 : 1);
+  start.setDate(start.getDate() - (startDifference >= 0 ? startDifference : 6));
 
   // 根据 firstDayOfWeek 调整结束日期
-  const endDayOfWeek = end.getDay();
+  let endDayOfWeek = end.getDay();
+  endDayOfWeek = endDayOfWeek === 0 ? 7 : endDayOfWeek; // 将星期日修正为7
   const endDifference =
     (firstDayOfWeek === FirstDayOfWeek.Sunday ? 6 : 7) - endDayOfWeek;
-  end.setDate(end.getDate() + (endDifference > 0 ? endDifference : 0));
+  end.setDate(
+    end.getDate() + (endDifference > 0 && endDifference < 7 ? endDifference : 0)
+  );
 
   const dateList: Date[] = [];
 
