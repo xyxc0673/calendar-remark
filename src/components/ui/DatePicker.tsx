@@ -11,6 +11,7 @@ import {
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import { CalendarFilled } from '@/assets/icons';
+import { usePreference } from '@/hooks/usePreference';
 
 type DatePickerProps = {
   from?: Date;
@@ -29,6 +30,9 @@ export function DatePickerWithRange({
   className,
   onChange,
 }: DatePickerProps) {
+  const {
+    preference: { firstDayOfWeek },
+  } = usePreference();
   const [date, setDate] = useState<DateRange | undefined>({
     from: from,
     to: to,
@@ -81,6 +85,7 @@ export function DatePickerWithRange({
             numberOfMonths={2}
             min={min}
             max={max}
+            weekStartsOn={firstDayOfWeek}
           />
         </PopoverContent>
       </Popover>
