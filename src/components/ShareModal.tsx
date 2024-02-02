@@ -2,30 +2,38 @@ import { ChevronDown } from '@/assets/icons';
 import clsxm from '@/libs/clsxm';
 import { downloadFromBase64 } from '@/libs/download';
 import { useToPng } from '@hugocxl/react-to-image';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import Calendar from './Calendar';
 import { Checkbox, DatePickerWithRange, Divider } from './ui';
 import { useShareModal } from '@/hooks/useShareModal';
 import { usePreference } from '@/hooks/usePreference';
-import useCalendar from '@/hooks/useCalendar';
 import { generateDateList } from '@/libs/date';
-import { DateRange } from 'react-day-picker';
-import { isFirstDayOfMonth, isLastDayOfMonth } from 'date-fns';
 import { Day } from '@/interfaces/day';
 import { generateDay } from '@/libs/day';
+import useSharingSettings from '@/hooks/useSharingSettings';
 
 const ShareModal = () => {
   const { isOpen, closeShareModal } = useShareModal();
-  const [highlightToday, setHighlightToday] = useState(false);
-  const [completeWeek, setCompleteWeek] = useState(false);
-  const [showHeader, setShowHeader] = useState(true);
-  const [showFooter, setShowFooter] = useState(true);
-  const [headerText, setHeaderText] = useState('节假日安排');
-  const [footerText, setFooterText] = useState('Calendar Remark');
-  const [showCustomArea, setShowCustomArea] = useState(false);
-  const { currentYear, currentMonth } = useCalendar();
-  const [startDate, setStartDate] = useState<Date>();
-  const [endDate, setEndDate] = useState<Date>();
+  const {
+    highlightToday,
+    setHighlightToday,
+    completeWeek,
+    setCompleteWeek,
+    showHeader,
+    setShowHeader,
+    showFooter,
+    setShowFooter,
+    headerText,
+    setHeaderText,
+    footerText,
+    setFooterText,
+    showCustomArea,
+    setShowCustomArea,
+    startDate,
+    endDate,
+    isFullMonthSelected,
+    handleDateChange,
+  } = useSharingSettings();
   const {
     preference: { firstDayOfWeek, showDateContent },
   } = usePreference();
@@ -45,11 +53,6 @@ const ShareModal = () => {
     return dayList;
   }, [startDate, endDate, firstDayOfWeek]);
 
-  const isFullMonthSelected = useMemo(() => {
-    if (!startDate || !endDate) return true;
-    return isFirstDayOfMonth(startDate) && isLastDayOfMonth(endDate);
-  }, [startDate, endDate]);
-
   const handleSave = () => {
     if (state.status !== 'loading') {
       covertToPng();
@@ -60,13 +63,6 @@ const ShareModal = () => {
     closeShareModal();
     setShowCustomArea(false);
   };
-
-  useEffect(() => {
-    if (currentMonth !== -1 && currentYear) {
-      setStartDate(new Date(currentYear, currentMonth, 1));
-      setEndDate(new Date(currentYear, currentMonth + 1, 0));
-    }
-  }, [currentMonth, currentYear]);
 
   const renderCustomArea = () => {
     return (
@@ -160,13 +156,6 @@ const ShareModal = () => {
         </div>
       </div>
     );
-  };
-
-  const handleDateChange = (range?: DateRange) => {
-    if (!range) return;
-
-    setStartDate(range.from);
-    setEndDate(range.to);
   };
 
   return (
