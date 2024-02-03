@@ -20,11 +20,12 @@ const SettingPage = ({
   onCancel: () => void;
 }) => {
   const {
-    preference: { firstDayOfWeek, showExtraDays, showDateContent },
+    preference: { firstDayOfWeek, showExtraDays, showDateContent, markWeekend },
     toggleShowExtraDays,
     setFirstDayOfWeekToMonday,
     setFirstDayOfWeekToSunday,
     toggleShowDateContent,
+    toggleMarkWeekend,
   } = usePreference();
 
   const options = [
@@ -59,6 +60,10 @@ const SettingPage = ({
         />
       </div>
       <div className='flex flex-col flex-1 gap-4 p-4 text-sm'>
+        <div className='flex items-center justify-between'>
+          <span>标记周末</span>
+          <Checkbox checked={markWeekend} onChange={toggleMarkWeekend} />
+        </div>
         <div className='flex items-center justify-between'>
           <span>显示非本月日期</span>
           <Checkbox checked={showExtraDays} onChange={toggleShowExtraDays} />

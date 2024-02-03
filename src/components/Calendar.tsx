@@ -9,6 +9,7 @@ import { currentMonthAtom } from '@/hooks/useCalendar';
 
 const DateGrid = ({
   dayList,
+  markWeekend,
   showExtraDays,
   showDateContent,
   isSharing,
@@ -16,6 +17,7 @@ const DateGrid = ({
   dimNonCurrentMonth,
 }: {
   dayList: Day[];
+  markWeekend: boolean;
   showExtraDays: boolean;
   showDateContent: boolean;
   isSharing?: boolean;
@@ -44,6 +46,7 @@ const DateGrid = ({
       <DateContainer
         key={date.toString()}
         day={day}
+        markWeekend={markWeekend}
         disabled={isSharing}
         showContent={showDateContent}
         isSelected={!isSharing && isSameDate(date, selectedDate)}
@@ -61,6 +64,7 @@ const DateGrid = ({
 const Calendar = ({
   isSharing,
   dayList,
+  markWeekend,
   firstDayOfWeek,
   showExtraDays,
   showDateContent,
@@ -69,6 +73,7 @@ const Calendar = ({
 }: {
   isSharing?: boolean;
   dayList: Day[];
+  markWeekend: boolean;
   firstDayOfWeek: FirstDayOfWeek;
   showExtraDays: boolean;
   showDateContent: boolean;
@@ -77,9 +82,13 @@ const Calendar = ({
 }) => {
   return (
     <div className='grid w-full grid-cols-7 gap-2 p-2 md:gap-4 md:p-6'>
-      <WeekdayHeader firstDayOfWeek={firstDayOfWeek} />
+      <WeekdayHeader
+        firstDayOfWeek={firstDayOfWeek}
+        markWeekend={markWeekend}
+      />
       <DateGrid
         dayList={dayList}
+        markWeekend={markWeekend}
         showExtraDays={showExtraDays}
         showDateContent={showDateContent}
         isSharing={isSharing}

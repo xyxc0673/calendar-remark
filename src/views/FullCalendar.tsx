@@ -7,7 +7,7 @@ import { usePreference } from '@/hooks/usePreference';
 const FullCalendar = () => {
   const { dayList } = useCalendar();
   const {
-    preference: { firstDayOfWeek, showExtraDays, showDateContent },
+    preference: { firstDayOfWeek, showExtraDays, showDateContent, markWeekend },
   } = usePreference();
 
   return (
@@ -18,6 +18,7 @@ const FullCalendar = () => {
         firstDayOfWeek={firstDayOfWeek}
         showExtraDays={showExtraDays}
         showDateContent={showDateContent}
+        markWeekend={markWeekend}
       />
       <RecentHoliday />
     </div>

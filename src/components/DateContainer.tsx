@@ -27,6 +27,7 @@ const getContent = (day: Day, customContent?: string) => {
 
 const DateContainer = ({
   day,
+  markWeekend,
   isSelected,
   disabled,
   showContent,
@@ -36,6 +37,7 @@ const DateContainer = ({
   onClick,
 }: {
   day: Day;
+  markWeekend?: boolean;
   isSelected: boolean;
   disabled?: boolean;
   showContent?: boolean;
@@ -72,14 +74,16 @@ const DateContainer = ({
       className={clsxm(
         !isSelected && !disabled && 'hover:bg-blue-100 dark:hover:bg-zinc-600',
         !isCurrentMonth && dimNonCurrentMonth && 'opacity-50',
-        (isWeekend || isRestDayTheme) && 'text-red-500 dark:text-red-500',
+        ((markWeekend && isWeekend) || isRestDayTheme) &&
+          'text-red-500 dark:text-red-500',
         isRestDayTheme && 'bg-red-200 opacity-100 dark:bg-red-200',
         highlightToday && isToday && 'text-blue-500 dark:text-blue-500',
         isSelected && 'bg-blue-400 text-white dark:text-white dark:bg-blue-400',
         disabled && 'cursor-default'
       )}
       dateClassName={clsxm(
-        (isWeekend || isRestDayTheme) && 'text-red-500 dark:text-red-500',
+        ((markWeekend && isWeekend) || isRestDayTheme) &&
+          'text-red-500 dark:text-red-500',
         highlightToday && isToday && 'text-blue-500 dark:text-blue-500',
         isSelected && 'text-white dark:text-white'
       )}

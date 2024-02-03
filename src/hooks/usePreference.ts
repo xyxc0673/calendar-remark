@@ -14,6 +14,8 @@ type Preference = {
   firstDayOfWeek: FirstDayOfWeek;
   // 显示日期底部的内容
   showDateContent: boolean;
+  // 是否标记周末
+  markWeekend: boolean;
   desktopLayout: 'horizontal' | 'vertical';
 };
 
@@ -21,6 +23,7 @@ const initialPreference: Preference = {
   showExtraDays: true,
   firstDayOfWeek: FirstDayOfWeek.Sunday,
   desktopLayout: 'horizontal',
+  markWeekend: true,
   showDateContent: true,
 };
 
@@ -77,6 +80,13 @@ export const usePreference = () => {
     });
   };
 
+  const toggleMarkWeekend = () => {
+    setPreference({
+      ...preference,
+      markWeekend: !preference.markWeekend,
+    });
+  };
+
   return {
     preference,
     setPreference,
@@ -85,5 +95,6 @@ export const usePreference = () => {
     toggleShowExtraDays,
     toggleShowDateContent,
     toggleDesktopLayout,
+    toggleMarkWeekend,
   };
 };
