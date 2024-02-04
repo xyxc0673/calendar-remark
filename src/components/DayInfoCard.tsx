@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { InfoCard } from './ui';
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { RadioButtonGroup, Divider } from './ui';
 import { LogoutRight, PencilBox, RotateRight } from '@/assets/icons';
 import { holidayDetails } from '@/configs/holidays';
@@ -16,22 +16,21 @@ const EditArea = ({ date, isEditing }: { date: Date; isEditing: boolean }) => {
   const day = generateDay(date);
   const compositionFlag = useRef(false);
 
-  const badge = useMemo(() => {
+  const [badgeValue, setBadgeValue] = useState<string | undefined>();
+
+  useEffect(() => {
+    let badge = '';
+
     if (customDay.badge !== undefined) {
-      return customDay.badge;
+      badge = customDay.badge;
+    } else if (day.isWorkDay) {
+      badge = '班';
+    } else if (day.isRestDay) {
+      badge = '休';
     }
 
-    if (day.isWorkDay) {
-      return '班';
-    }
-
-    if (day.isRestDay) {
-      return '休';
-    }
-    return '';
+    setBadgeValue(badge);
   }, [customDay.badge, day.isWorkDay, day.isRestDay]);
-
-  const [badgeValue, setBadgeValue] = useState(badge);
 
   const content = useMemo(() => {
     if (customDay.content !== undefined) {
@@ -102,7 +101,7 @@ const EditArea = ({ date, isEditing }: { date: Date; isEditing: boolean }) => {
   };
 
   // 限制为一个中文或者数字或者英文
-  const handleBadgeUpdate = (value: string) => {
+  const validateBadgeValue = (value: string) => {
     if (compositionFlag.current) {
       setBadgeValue(value);
       return;
@@ -130,7 +129,7 @@ const EditArea = ({ date, isEditing }: { date: Date; isEditing: boolean }) => {
   };
 
   const handleUpdateBadge: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    updateBadge(e.target.value);
+    validateBadgeValue(e.target.value);
   };
 
   const handleCompositionStart = () => {
@@ -141,7 +140,7 @@ const EditArea = ({ date, isEditing }: { date: Date; isEditing: boolean }) => {
     e: React.CompositionEvent<HTMLInputElement>
   ) => {
     compositionFlag.current = false;
-    handleBadgeUpdate(e.currentTarget.value);
+    validateBadgeValue(e.currentTarget.value);
   };
 
   return (
@@ -192,7 +191,7 @@ const DayInfoCard = () => {
   const weekNumber = dayjs(selectedDate).week();
   const [isEditing, setIsEditing] = useState(false);
   const Icon = isEditing ? LogoutRight : PencilBox;
-  const { customDay, resetCustomDay } = useCustomDay(selectedDate);
+  const { resetCustomDay } = useCustomDay(selectedDate);
 
   return (
     <InfoCard className='flex flex-col dark:text-zinc-200'>
@@ -218,11 +217,7 @@ const DayInfoCard = () => {
           </button>
         </div>
       </div>
-      <EditArea
-        key={selectedDate.toDateString() + customDay.badge}
-        date={selectedDate}
-        isEditing={isEditing}
-      />
+      <EditArea date={selectedDate} isEditing={isEditing} />
     </InfoCard>
   );
 };
