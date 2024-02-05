@@ -9,24 +9,6 @@ import { FirstDayOfWeek } from '@/hooks/usePreference';
 import dayjs from 'dayjs';
 import { Lunar, Solar } from 'lunar-typescript';
 
-export const isSameDate = (date1?: Date, date2?: Date) => {
-  if (!date1 || !date2) {
-    return false;
-  }
-  return (
-    date1.getDate() === date2.getDate() &&
-    date1.getMonth() === date2.getMonth() &&
-    date1.getFullYear() === date2.getFullYear()
-  );
-};
-
-export const isAfterDate = (date1?: Date, date2?: Date) => {
-  if (!date1 || !date2) {
-    return false;
-  }
-  return date1.getTime() > date2.getTime();
-};
-
 export const getPercentageOfYear = (date: Date): number => {
   const startOfYear = new Date(date.getFullYear(), 0, 1); // 当年的第一天
   const endOfYear = new Date(date.getFullYear(), 11, 31); // 当年的最后一天
@@ -88,11 +70,6 @@ export const getHolidays = (): HolidaySelect[] => {
     date: date,
   }));
   return result;
-};
-
-export const isWeekendDate = (date: Date) => {
-  const day = date.getDay();
-  return day === 0 || day === 6;
 };
 
 export const getDatesInRange = (startDate: Date, endDate: Date) => {

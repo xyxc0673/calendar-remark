@@ -1,6 +1,7 @@
 import { useSelectedDate } from '@/hooks/useSelectedDate';
-import { getPercentageOfYear, isSameDate } from '@/libs/date';
+import { getPercentageOfYear } from '@/libs/date';
 import { InfoCard } from './ui';
+import { isSameDay } from 'date-fns';
 
 // selectedDate 为 Date 对象，表示当前选中的日期
 // 展示当前日期的年进度，将一年分为 12 个块，每个块代表一个月
@@ -22,7 +23,7 @@ const YearProgressCard = () => {
 
   const dayOfYearProgress = getPercentageOfYear(selectedDate);
 
-  const ifIsSameDate = isSameDate(selectedDate, new Date());
+  const ifIsSameDate = isSameDay(selectedDate, new Date());
 
   const getTitle = () => {
     const progressText = `${dayOfYearProgress.toFixed(2)}%`;

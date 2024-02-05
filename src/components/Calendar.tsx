@@ -2,10 +2,10 @@ import WeekdayHeader from './WeekdayHeader';
 import DateContainer from './DateContainer';
 import { FirstDayOfWeek } from '@/hooks/usePreference';
 import { useSelectedDate } from '@/hooks/useSelectedDate';
-import { isSameDate } from '@/libs/date';
 import { Day } from '@/interfaces/day';
 import { useAtomValue } from 'jotai';
 import { currentMonthAtom } from '@/hooks/useCalendar';
+import { isSameDay } from 'date-fns';
 
 const DateGrid = ({
   dayList,
@@ -49,7 +49,7 @@ const DateGrid = ({
         markWeekend={markWeekend}
         disabled={isSharing}
         showContent={showDateContent}
-        isSelected={!isSharing && isSameDate(date, selectedDate)}
+        isSelected={!isSharing && isSameDay(date, selectedDate)}
         onClick={() => handleDateClick(date)}
         highlightToday={highlightToday}
         isCurrentMonth={isCurrentMonth}

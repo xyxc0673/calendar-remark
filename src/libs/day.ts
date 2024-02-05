@@ -7,8 +7,8 @@ import {
   getRestDay,
   getSolarTerm,
   getWorkday,
-  isWeekendDate,
 } from '@/libs/date';
+import { isWeekend as isWeekendFunc } from 'date-fns';
 
 export const getBadgeText = (day: Day, customBadge?: string) => {
   if (customBadge !== undefined) {
@@ -29,7 +29,7 @@ export const getBadgeText = (day: Day, customBadge?: string) => {
 export const generateDay = (date: Date, range?: [Date, Date]): Day => {
   const currentDate = new Date();
 
-  const isWeekend = isWeekendDate(date);
+  const isWeekend = isWeekendFunc(date);
   const holiday = getHoliday(date);
   const workDay = getWorkday(date);
   const restDay = getRestDay(date);

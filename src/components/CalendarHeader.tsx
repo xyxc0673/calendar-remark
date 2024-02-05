@@ -3,13 +3,9 @@ import useCalendar from '@/hooks/useCalendar';
 import { useSelectedDate } from '@/hooks/useSelectedDate';
 import { useSelectedHoliday } from '@/hooks/useSelectedHoliday';
 import clsxm from '@/libs/clsxm';
-import {
-  isSameDate,
-  isAfterDate,
-  HolidaySelect,
-  getHolidays,
-} from '@/libs/date';
+import { HolidaySelect, getHolidays } from '@/libs/date';
 import { Dropdown } from './ui';
+import { isAfter, isSameDay } from 'date-fns';
 
 const CalendarHeader = () => {
   const yearList = Array.from({ length: 151 }, (_, i) => ({
@@ -43,12 +39,12 @@ const CalendarHeader = () => {
   };
 
   const showBackToToday =
-    !isSameDate(selectedDate, today) ||
+    !isSameDay(selectedDate, today) ||
     currentMonth !== today.getMonth() ||
     currentYear !== today.getFullYear();
 
   const isAfterToday =
-    isAfterDate(selectedDate, today) ||
+    isAfter(selectedDate, today) ||
     currentYear > today.getFullYear() ||
     currentMonth > today.getMonth();
 
