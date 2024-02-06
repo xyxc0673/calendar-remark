@@ -105,22 +105,30 @@ export const generateDateList = (
 ): Date[] => {
   const start = new Date(startDate);
   const end = new Date(endDate);
+  const isFirstDayOfWeekSunday = firstDayOfWeek === FirstDayOfWeek.Sunday;
+  const isFirstDayOfWeekMonday = firstDayOfWeek === FirstDayOfWeek.Monday;
 
-  // 根据 firstDayOfWeek 调整开始日期
   let startDayOfWeek = start.getDay();
-  startDayOfWeek = startDayOfWeek === 0 ? 7 : startDayOfWeek; // 将星期日修正为7
-  const startDifference =
-    startDayOfWeek - (firstDayOfWeek === FirstDayOfWeek.Sunday ? 0 : 1);
-  start.setDate(start.getDate() - (startDifference >= 0 ? startDifference : 6));
-
-  // 根据 firstDayOfWeek 调整结束日期
   let endDayOfWeek = end.getDay();
-  endDayOfWeek = endDayOfWeek === 0 ? 7 : endDayOfWeek; // 将星期日修正为7
-  const endDifference =
-    (firstDayOfWeek === FirstDayOfWeek.Sunday ? 6 : 7) - endDayOfWeek;
-  end.setDate(
-    end.getDate() + (endDifference > 0 && endDifference < 7 ? endDifference : 0)
-  );
+
+  // 根据 firstDayOfWeek 调整开始日期和结束日期
+  // 如果 firstDayOfWeek 是周一，那么周日的值应该是 7
+  if (isFirstDayOfWeekMonday) {
+    if (startDayOfWeek === 0) {
+      startDayOfWeek = 7;
+    }
+    if (endDayOfWeek === 0) {
+      endDayOfWeek = 7;
+    }
+  }
+
+  const startDifference = startDayOfWeek - (isFirstDayOfWeekSunday ? 0 : 1);
+
+  start.setDate(start.getDate() - startDifference);
+
+  const endDifference = (isFirstDayOfWeekSunday ? 6 : 7) - endDayOfWeek;
+
+  end.setDate(end.getDate() + endDifference);
 
   const dateList: Date[] = [];
 
