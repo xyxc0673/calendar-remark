@@ -1,6 +1,4 @@
 import { DateRange } from 'react-day-picker';
-
-import { cn } from '@/lib/utils';
 import {
   Button,
   DatePickerCalendar,
@@ -12,6 +10,7 @@ import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import { CalendarFilled } from '@/assets/icons';
 import { usePreference } from '@/hooks/usePreference';
+import clsxm from '@/libs/clsxm';
 
 type DatePickerProps = {
   from?: Date;
@@ -50,13 +49,13 @@ export function DatePickerWithRange({
   };
 
   return (
-    <div className={cn('grid gap-2', className)}>
+    <div className={clsxm('grid gap-2', className)}>
       <Popover>
         <PopoverTrigger asChild>
           <Button
             id='date'
             variant={'outline'}
-            className={cn(
+            className={clsxm(
               'justify-start text-left font-normal',
               !date && 'text-muted-foreground'
             )}
