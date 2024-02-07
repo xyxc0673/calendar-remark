@@ -44,7 +44,7 @@ const useCalendar = () => {
 
   const getDaysInMonth = (month: number, year: number) => {
     const date = new Date();
-    date.setMonth(month);
+    date.setMonth(month + 1);
     date.setFullYear(year);
     date.setDate(0);
     return date.getDate();
