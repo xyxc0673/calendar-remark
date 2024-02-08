@@ -72,22 +72,6 @@ export const getHolidays = (): HolidaySelect[] => {
   return result;
 };
 
-export const getDatesInRange = (startDate: Date, endDate: Date) => {
-  if (startDate > endDate) {
-    throw new Error('开始日期不能大于结束日期');
-  }
-
-  const dates = [];
-  const currDate = startDate;
-
-  while (currDate <= endDate) {
-    dates.push(currDate);
-    currDate.setDate(currDate.getDate() + 1);
-  }
-
-  return dates;
-};
-
 export const getLunarDate = (date: Date) => {
   const lunarDate = Lunar.fromDate(date);
 
