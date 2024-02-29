@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import 'dayjs/locale/zh-cn';
 import weekOfYear from 'dayjs/plugin/weekOfYear';
+import { GTMProvider } from '@elgorditosalsero/react-gtm-hook';
 import DayInfoCard from './components/DayInfoCard';
 import LunarInfoCard from './components/LunarInfoCard';
 import PlaceHolderImage from './components/PlaceHolderImage';
@@ -14,7 +15,11 @@ import FullCalendar from './views/FullCalendar';
 dayjs.locale('zh-cn');
 dayjs.extend(weekOfYear);
 
+const GTM_ID = import.meta.env.VITE_GTM_ID;
+
 function App() {
+  const gtmParams = { id: GTM_ID };
+
   const {
     preference: { desktopLayout },
   } = usePreference();
@@ -22,7 +27,7 @@ function App() {
   const isHorizontal = desktopLayout === 'horizontal';
 
   return (
-    <>
+    <GTMProvider state={gtmParams}>
       <ShareModal />
       <div className='flex items-center justify-center w-full min-h-screen p-4 md:p-20 bg-slate-200 dark:bg-black/80'>
         <div className='flex flex-col gap-3 max-md:w-full'>
@@ -43,7 +48,7 @@ function App() {
           <Footer />
         </div>
       </div>
-    </>
+    </GTMProvider>
   );
 }
 

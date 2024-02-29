@@ -8,9 +8,11 @@
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "generate-pwa-assets": "pwa-assets-generator"
+    "generate-pwa-assets": "pwa-assets-generator",
+    "test": "vitest"
   },
   "dependencies": {
+    "@elgorditosalsero/react-gtm-hook": "^2.7.2",
     "@hugocxl/react-to-image": "^0.0.9",
     "@radix-ui/react-popover": "^1.0.7",
     "@radix-ui/react-slot": "^1.0.2",
@@ -25,7 +27,6 @@
     "react": "^18.2.0",
     "react-day-picker": "^8.10.0",
     "react-dom": "^18.2.0",
-    "react-ga4": "^2.1.0",
     "tailwind-merge": "^2.2.0",
     "tailwindcss-animate": "^1.0.7"
   },
@@ -47,6 +48,7 @@
     "typescript": "^5.2.2",
     "vite": "^5.0.8",
     "vite-plugin-checker": "^0.6.2",
-    "vite-plugin-pwa": "^0.17.4"
+    "vite-plugin-pwa": "^0.17.4",
+    "vitest": "^1.2.2"
   }
 }
