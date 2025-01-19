@@ -59,7 +59,7 @@ const EditArea = ({ date, isEditing }: { date: Date; isEditing: boolean }) => {
   ]);
 
   const dayType = useMemo(() => {
-    if (customDay.theme) {
+    if (customDay.theme !== undefined) {
       return customDay.theme;
     }
     if (day.isWorkDay) {

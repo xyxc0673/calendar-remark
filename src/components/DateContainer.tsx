@@ -60,13 +60,17 @@ const DateContainer = ({
     (isToday && highlightToday && badgeText !== '') ||
     (!isToday && badgeText !== '');
 
+  const isCustomNone = theme === '';
+
   const isCustomRestDay = theme === 'restDay';
 
   const isCustomWorkday = theme === 'workday';
 
-  const isRestDayTheme = !isCustomWorkday && (theme === 'restDay' || isRestDay);
+  const isRestDayTheme =
+    !isCustomNone && !isCustomWorkday && (theme === 'restDay' || isRestDay);
 
-  const isWorkdayTheme = !isCustomRestDay && (theme === 'workday' || isWorkDay);
+  const isWorkdayTheme =
+    !isCustomNone && !isCustomRestDay && (theme === 'workday' || isWorkDay);
 
   return (
     <DateComponent
