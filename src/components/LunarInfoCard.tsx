@@ -2,10 +2,20 @@ import { useIsMobile } from '@/hooks/useIsMobile';
 import { useSelectedDate } from '@/hooks/useSelectedDate';
 import { Lunar } from 'lunar-typescript';
 import { InfoCard } from './ui';
+import { useTranslation } from 'react-i18next';
 
 const LunarInfoCard = () => {
   const { selectedDate } = useSelectedDate();
   const isMobile = useIsMobile();
+  const { t, i18n } = useTranslation();
+
+  // 判断是否为中文环境
+  const isChineseLocale = i18n.language.startsWith('zh');
+
+  // 如果不是中文环境，不显示农历信息
+  if (!isChineseLocale) {
+    return null;
+  }
 
   const lunarDate = Lunar.fromDate(selectedDate);
 
@@ -46,22 +56,24 @@ const LunarInfoCard = () => {
   return (
     <InfoCard className='flex gap-4 md:gap-10 dark:text-zinc-200'>
       <div className='flex flex-col gap-2 h-fit text-nowrap shrink-0'>
-        <span className='text-lg'>{`${lunarMonth}月${lunarDay}`}</span>
+        <span className='text-lg'>{`${lunarMonth}${t(
+          'common.month'
+        )}${lunarDay}`}</span>
         <div className='flex gap-2 text-sm text-nowrap'>
-          <span>{`${yearInGanZhi}年`}</span>
+          <span>{`${yearInGanZhi}${t('lunar.year')}`}</span>
           <span>{animal}</span>
         </div>
       </div>
-      <div className='flex flex-col justify-center gap-4 overflow-hidden text-nowrap'>
-        <div className='flex items-center gap-2 text-sm md:gap-4'>
+      <div className='flex overflow-hidden flex-col gap-4 justify-center text-nowrap'>
+        <div className='flex gap-2 items-center text-sm md:gap-4'>
           <span className='inline-block w-4 text-xs text-center border border-blue-500 aspect-square'>
-            宜
+            {t('lunar.suitable')}
           </span>
           {renderList(yiList)}
         </div>
-        <div className='flex items-center gap-2 text-sm md:gap-4'>
+        <div className='flex gap-2 items-center text-sm md:gap-4'>
           <span className='inline-block w-4 text-xs text-center border border-gray-400 aspect-square'>
-            忌
+            {t('lunar.avoid')}
           </span>
           {renderList(jiList)}
         </div>

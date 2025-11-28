@@ -9,19 +9,23 @@ import {
   getWorkday,
 } from '@/libs/date';
 import { isWeekend as isWeekendFunc } from 'date-fns';
+import i18n from '@/i18n';
 
 export const getBadgeText = (day: Day, customBadge?: string) => {
   if (customBadge !== undefined) {
     return customBadge;
   }
   if (day.dayType === DAY_TYPE.REST_DAY) {
-    return '休';
+    // i18n 短标记：restday
+    return i18n.t('common.badgeShort.restday', '休');
   }
   if (day.dayType === DAY_TYPE.WORKDAY) {
-    return '班';
+    // i18n 短标记：workday
+    return i18n.t('common.badgeShort.workday', '班');
   }
   if (day.isToday) {
-    return '今';
+    // i18n 短标记：today
+    return i18n.t('common.badgeShort.today', '今');
   }
   return '';
 };

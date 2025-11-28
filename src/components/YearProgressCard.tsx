@@ -2,6 +2,7 @@ import { useSelectedDate } from '@/hooks/useSelectedDate';
 import { getPercentageOfYear } from '@/libs/date';
 import { InfoCard } from './ui';
 import { isSameDay } from 'date-fns';
+import { useTranslation } from 'react-i18next';
 
 // selectedDate 为 Date 对象，表示当前选中的日期
 // 展示当前日期的年进度，将一年分为 12 个块，每个块代表一个月
@@ -25,14 +26,14 @@ const YearProgressCard = () => {
 
   const ifIsSameDate = isSameDay(selectedDate, new Date());
 
+  const { t } = useTranslation();
+
   const getTitle = () => {
     const progressText = `${dayOfYearProgress.toFixed(2)}%`;
     if (ifIsSameDate) {
-      return `今年已经过去了${progressText}`;
+      return t('yearProgress.progress') + ': ' + progressText;
     } else {
-      return `${
-        currentMonth + 1
-      }月${currentDay}日在今年的进度为${progressText}`;
+      return t('yearProgress.progress') + ': ' + progressText + ` (${currentMonth + 1}${t('common.month')}${currentDay}${t('common.day')})`;
     }
   };
 

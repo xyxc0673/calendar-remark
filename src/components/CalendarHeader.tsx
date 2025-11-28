@@ -6,22 +6,45 @@ import clsxm from '@/libs/clsxm';
 import { HolidaySelect, getHolidays } from '@/libs/date';
 import { Dropdown } from './ui';
 import { isAfter, isSameDay } from 'date-fns';
+import { useTranslation } from 'react-i18next';
+import { holidayDetails } from '@/configs/holidays';
 
 const CalendarHeader = () => {
+  const { t, i18n } = useTranslation();
+  const isChineseLocale = i18n.language.startsWith('zh');
+  
+  // 根据语言环境生成年份和月份列表
   const yearList = Array.from({ length: 151 }, (_, i) => ({
     value: i + 1900,
-    label: `${i + 1900}年`,
+    label: isChineseLocale ? `${i + 1900}年` : `${i + 1900}`,
   }));
+  
   const monthList = Array.from({ length: 12 }, (_, i) => ({
     value: i + 1,
-    label: `${i + 1}月`,
+    label: isChineseLocale 
+      ? `${i + 1}月` 
+      : new Date(2000, i, 1).toLocaleDateString('en-US', { month: 'short' }),
   }));
   const { today, currentYear, currentMonth, setCurrentMonth, setCurrentYear } =
     useCalendar();
   const { selectedDate, setSelectedDate } = useSelectedDate();
   const { selectedHoliday, setSelectedHoliday } = useSelectedHoliday();
 
-  const holidayList = getHolidays();
+  // 获取假期列表并根据语言环境调整显示
+  const holidayList = getHolidays().map(holiday => ({
+    ...holiday,
+    label: isChineseLocale 
+      ? holiday.label 
+      : (() => {
+          // 尝试从holidayDetails中获取英文名称
+          const holidayKey = Object.keys(holidayDetails).find(
+            key => holidayDetails[key as keyof typeof holidayDetails].chinese === holiday.label
+          );
+          return holidayKey 
+            ? holidayDetails[holidayKey as keyof typeof holidayDetails].english
+            : holiday.label;
+        })()
+  }));
 
   const navigateToHoliday = (nextHoliday: HolidaySelect) => {
     const date = new Date(nextHoliday.date);
@@ -53,7 +76,7 @@ const CalendarHeader = () => {
       <Dropdown
         options={holidayList}
         value={selectedHoliday}
-        placeholder='假期'
+        placeholder={t('calendar.holidays')}
         className='absolute left-3 min-w-9'
         onChange={navigateToHoliday}
       />
@@ -84,7 +107,7 @@ const CalendarHeader = () => {
             !showBackToToday && 'rotate-0'
           )}
         />
-        今日
+        {t('common.today')}
       </button>
     </div>
   );

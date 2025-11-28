@@ -9,28 +9,32 @@ import { useSelectedDate } from '@/hooks/useSelectedDate';
 import clsxm from '@/libs/clsxm';
 import { Input } from './ui';
 import { generateDay } from '@/libs/day';
+import { useTranslation } from 'react-i18next';
+import { BADGE_CONSTANTS, DAY_TYPES } from '@/configs/constant';
 
 const EditArea = ({ date, isEditing }: { date: Date; isEditing: boolean }) => {
   const { customDay, updateCustomDay, updateBadge, updateContent } =
     useCustomDay(date);
   const day = generateDay(date);
   const compositionFlag = useRef(false);
+  const { t, i18n } = useTranslation();
+  const isChineseLocale = i18n.language.startsWith('zh');
 
   const [badgeValue, setBadgeValue] = useState<string | undefined>();
 
   useEffect(() => {
-    let badge = '';
+    let badge: string = BADGE_CONSTANTS.EMPTY;
 
     if (customDay.badge !== undefined) {
       badge = customDay.badge;
     } else if (day.isWorkDay) {
-      badge = '班';
+      badge = isChineseLocale ? BADGE_CONSTANTS.WORKDAY_ZH : BADGE_CONSTANTS.WORKDAY_EN;
     } else if (day.isRestDay) {
-      badge = '休';
+      badge = isChineseLocale ? BADGE_CONSTANTS.RESTDAY_ZH : BADGE_CONSTANTS.RESTDAY_EN;
     }
 
     setBadgeValue(badge);
-  }, [customDay.badge, day.isWorkDay, day.isRestDay]);
+  }, [customDay.badge, day.isWorkDay, day.isRestDay, isChineseLocale]);
 
   const content = useMemo(() => {
     if (customDay.content !== undefined) {
@@ -38,7 +42,9 @@ const EditArea = ({ date, isEditing }: { date: Date; isEditing: boolean }) => {
     }
 
     if (day.holiday) {
-      return holidayDetails[day.holiday].chinese;
+      return isChineseLocale 
+        ? holidayDetails[day.holiday].chinese
+        : holidayDetails[day.holiday].english;
     }
 
     if (day.solarTerm) {
@@ -56,6 +62,7 @@ const EditArea = ({ date, isEditing }: { date: Date; isEditing: boolean }) => {
     day.holiday,
     day.lunarDate,
     day.solarTerm,
+    isChineseLocale,
   ]);
 
   const dayType = useMemo(() => {
@@ -63,34 +70,34 @@ const EditArea = ({ date, isEditing }: { date: Date; isEditing: boolean }) => {
       return customDay.theme;
     }
     if (day.isWorkDay) {
-      return 'workday';
+      return DAY_TYPES.WORKDAY;
     }
 
     if (day.isRestDay) {
-      return 'restDay';
+      return DAY_TYPES.RESTDAY;
     }
 
-    return '';
+    return DAY_TYPES.EMPTY;
   }, [customDay.theme, day.isWorkDay, day.isRestDay]);
 
   const options = [
-    { value: '', label: '无' },
-    { value: 'workday', label: '班' },
-    { value: 'restDay', label: '休' },
+    { value: DAY_TYPES.EMPTY, label: t('dayInfo.none', '无') },
+    { value: DAY_TYPES.WORKDAY, label: t('common.workday', '班') },
+    { value: DAY_TYPES.RESTDAY, label: t('common.restday', '休') },
   ];
 
   const handleUpdateTheme = (theme: string | number) => {
-    let newBadge: string = '';
+    let newBadge: string = BADGE_CONSTANTS.EMPTY;
 
     switch (theme) {
-      case 'workday':
-        newBadge = '班';
+      case DAY_TYPES.WORKDAY:
+        newBadge = isChineseLocale ? BADGE_CONSTANTS.WORKDAY_ZH : BADGE_CONSTANTS.WORKDAY_EN;
         break;
-      case 'restDay':
-        newBadge = '休';
+      case DAY_TYPES.RESTDAY:
+        newBadge = isChineseLocale ? BADGE_CONSTANTS.RESTDAY_ZH : BADGE_CONSTANTS.RESTDAY_EN;
         break;
       default:
-        newBadge = '';
+        newBadge = BADGE_CONSTANTS.EMPTY;
     }
 
     updateCustomDay({
@@ -154,20 +161,20 @@ const EditArea = ({ date, isEditing }: { date: Date; isEditing: boolean }) => {
     >
       <Divider direction='horizontal' className='my-3' />
       <div className='flex items-center h-full gap-3'>
-        <span className='hidden text-nowrap md:inline-block'>日期底部内容</span>
+        <span className='hidden text-nowrap md:inline-block'>{t('dayInfo.content')}</span>
         <Input
           type='text'
-          placeholder='例如：春节'
+          placeholder={t('dayInfo.contentPlaceholder')}
           value={content}
           maxLength={6}
           allowClear
           onChange={handleUpdateContent}
         />
-        <span className='hidden text-nowrap md:inline-block'>标记</span>
+        <span className='hidden text-nowrap md:inline-block'>{t('dayInfo.badge')}</span>
         <Input
           name='badge'
           type='text'
-          placeholder='例如：休'
+          placeholder={t('dayInfo.badgePlaceholder')}
           value={badgeValue}
           allowClear
           onChange={handleUpdateBadge}
@@ -186,7 +193,14 @@ const EditArea = ({ date, isEditing }: { date: Date; isEditing: boolean }) => {
 
 const DayInfoCard = () => {
   const { selectedDate } = useSelectedDate();
-  const formattedDate = dayjs(selectedDate).format('YYYY年MM月DD日');
+  const { t, i18n } = useTranslation();
+  const isChineseLocale = i18n.language.startsWith('zh');
+  
+  // 根据语言环境格式化日期
+  const formattedDate = isChineseLocale 
+    ? dayjs(selectedDate).format('YYYY年MM月DD日')
+    : dayjs(selectedDate).format('MMMM DD, YYYY');
+  
   const weekDay = dayjs(selectedDate).format('dddd');
   const weekNumber = dayjs(selectedDate).week();
   const [isEditing, setIsEditing] = useState(false);
@@ -196,7 +210,9 @@ const DayInfoCard = () => {
   return (
     <InfoCard className='flex flex-col dark:text-zinc-200'>
       <div className='relative flex items-center justify-end'>
-        <span className='absolute text-sm -translate-x-1/2 left-1/2 text-nowrap md:text-base'>{`${formattedDate} ${weekDay} 第${weekNumber}周`}</span>
+        <span className='absolute text-sm -translate-x-1/2 left-1/2 text-nowrap md:text-base'>
+          {`${formattedDate} ${weekDay} ${t('yearProgress.weekOfYear', { week: weekNumber })}`}
+        </span>
         <div className='flex gap-2'>
           <button
             className={clsxm(

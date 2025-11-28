@@ -1,0 +1,144 @@
+{
+  "common": {
+    "year": "Year",
+    "month": "Month",
+    "day": "Day",
+    "today": "Today",
+    "workday": "Work",
+    "restday": "Rest",
+    "holiday": "Holiday",
+    "save": "Save",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "close": "Close",
+    "badgeShort": {
+      "workday": "W",
+      "restday": "R",
+      "today": "T"
+    }
+  },
+  "calendar": {
+    "weekdays": {
+      "sunday": "Sun",
+      "monday": "Mon",
+      "tuesday": "Tue",
+      "wednesday": "Wed",
+      "thursday": "Thu",
+      "friday": "Fri",
+      "saturday": "Sat"
+    },
+    "months": {
+      "january": "January",
+      "february": "February",
+      "march": "March",
+      "april": "April",
+      "may": "May",
+      "june": "June",
+      "july": "July",
+      "august": "August",
+      "september": "September",
+      "october": "October",
+      "november": "November",
+      "december": "December"
+    },
+    "holidays": "Holidays"
+  },
+  "holidays": {
+    "newYearsDay": "New Year's Day",
+    "springFestival": "Spring Festival",
+    "tombSweepingDay": "Tomb-sweeping Day",
+    "labourDay": "Labour Day",
+    "dragonBoatFestival": "Dragon Boat Festival",
+    "nationalDay": "National Day",
+    "midAutumnFestival": "Mid-autumn Festival"
+  },
+  "lunar": {
+    "title": "Lunar Calendar",
+    "year": "Year",
+    "month": "Month",
+    "day": "Day",
+    "zodiac": "Zodiac",
+    "ganZhi": "Gan-Zhi",
+    "suitable": "Suitable",
+    "avoid": "Avoid",
+    "solarTerm": "Solar Term",
+    "festival": "Festival"
+  },
+  "dayInfo": {
+    "title": "Day Information",
+    "customNote": "Custom Note",
+    "addNote": "Add Note",
+    "editNote": "Edit Note",
+    "placeholder": "Enter note content...",
+    "badge": "Badge",
+    "content": "Date Content",
+    "contentPlaceholder": "e.g.: Spring Festival",
+    "badgePlaceholder": "e.g.: R",
+    "none": "None"
+  },
+  "yearProgress": {
+    "title": "Year Progress",
+    "progress": "Progress",
+    "daysElapsed": "Days Elapsed",
+    "daysRemaining": "Days Remaining",
+    "weekOfYear": "Week {{week}}"
+  },
+  "recentHoliday": {
+    "title": "Upcoming Holidays",
+    "next": "Next",
+    "daysUntil": "{{days}} days until",
+    "today": "Today",
+    "noUpcoming": "No upcoming holidays"
+  },
+  "share": {
+    "title": "Share Calendar",
+    "download": "Save Image",
+    "copy": "Copy Link",
+    "settings": "Share Settings",
+    "includeInfo": "Include Information",
+    "dayInfo": "Day Information",
+    "lunarInfo": "Lunar Information",
+    "yearProgress": "Year Progress",
+    "watermark": "Watermark",
+    "quality": "Image Quality",
+    "high": "High",
+    "medium": "Medium",
+    "low": "Low",
+    "highlightToday": "Highlight Today",
+    "completeWeek": "Complete Week",
+    "showHeader": "Show Header",
+    "headerContent": "Header Content",
+    "headerPlaceholder": "e.g.: Holiday Schedule",
+    "showFooter": "Show Footer",
+    "footerContent": "Footer Content",
+    "footerPlaceholder": "e.g.: Calendar Remark",
+    "defaultHeader": "Holiday Schedule",
+    "defaultFooter": "Calendar Remark",
+    "customization": "Customization"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "theme": "Theme",
+    "layout": "Layout",
+    "horizontal": "Horizontal",
+    "vertical": "Vertical",
+    "auto": "Auto",
+    "showDateContent": "Show Date Content",
+    "weekStart": "Week Starts On",
+    "markWeekend": "Mark Weekend",
+    "showExtraDays": "Show Extra Days"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "Follow System"
+  },
+  "footer": {
+    "madeWith": "Made with ❤️",
+    "openSource": "Open Source",
+    "timeFlies": "Time flies like an arrow"
+  }
+}

@@ -3,6 +3,7 @@ import { atom, useAtom, useAtomValue } from 'jotai';
 import { usePreference } from './usePreference';
 import { generateDateList } from '@/libs/date';
 import { generateDay } from '@/libs/day';
+import { useTranslation } from 'react-i18next';
 
 export const todayAtom = atom(new Date());
 export const currentMonthAtom = atom(new Date().getMonth());
@@ -15,6 +16,8 @@ const useCalendar = () => {
   const {
     preference: { firstDayOfWeek },
   } = usePreference();
+  const { i18n } = useTranslation();
+  const languageKey = i18n.language.startsWith('zh') ? 'zh' : 'en';
 
   const handlePreviousMonth = () => {
     if (currentMonth === 0) {
@@ -66,7 +69,7 @@ const useCalendar = () => {
     });
 
     return dayList;
-  }, [currentMonth, currentYear, firstDayOfWeek]);
+  }, [currentMonth, currentYear, firstDayOfWeek, languageKey]);
 
   return {
     today,

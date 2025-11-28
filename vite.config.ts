@@ -9,7 +9,7 @@ const pwaOptions: Partial<VitePWAOptions> = {
   mode: 'development',
   registerType: 'prompt',
   devOptions: {
-    enabled: true,
+    enabled: true
   },
   includeAssets: ['favicon.svg'],
   manifest: {
@@ -17,48 +17,41 @@ const pwaOptions: Partial<VitePWAOptions> = {
     short_name: 'Calendar Remark',
     theme_color: '#ffffff',
     description: 'A small and clean calendar app',
-    icons: [
-      {
-        src: '/pwa-64x64.png',
-        sizes: '192x192',
-        type: 'image/png',
-      },
-      {
-        src: '/pwa-192x192.png',
-        sizes: '192x192',
-        type: 'image/png',
-      },
-      {
-        src: '/pwa-512x512.png',
-        sizes: '512x512',
-        type: 'image/png',
-      },
-      {
-        src: '/apple-touch-icon-180x180.png',
-        sizes: '180x180',
-        type: 'image/png',
-      },
-      {
-        src: '/maskable-icon-512x512.png',
-        sizes: '512x512',
-        type: 'image/png',
-        purpose: 'maskable',
-      },
-    ],
-  },
+    icons: [{
+      src: '/pwa-64x64.png',
+      sizes: '192x192',
+      type: 'image/png'
+    }, {
+      src: '/pwa-192x192.png',
+      sizes: '192x192',
+      type: 'image/png'
+    }, {
+      src: '/pwa-512x512.png',
+      sizes: '512x512',
+      type: 'image/png'
+    }, {
+      src: '/apple-touch-icon-180x180.png',
+      sizes: '180x180',
+      type: 'image/png'
+    }, {
+      src: '/maskable-icon-512x512.png',
+      sizes: '512x512',
+      type: 'image/png',
+      purpose: 'maskable'
+    }]
+  }
 };
 
 // https://vitejs.dev/config/
+const plugins = [react(), VitePWA(pwaOptions), gzipPlugin(), checker({
+  typescript: true
+})];
+
 export default defineConfig({
-  plugins: [
-    react(),
-    VitePWA(pwaOptions),
-    gzipPlugin(),
-    checker({ typescript: true }),
-  ],
+  plugins: plugins,
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
-    },
-  },
+      '@': path.resolve(__dirname, './src')
+    }
+  }
 });

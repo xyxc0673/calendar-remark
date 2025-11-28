@@ -11,9 +11,11 @@ import { generateDateList } from '@/libs/date';
 import { Day } from '@/interfaces/day';
 import { generateDay } from '@/libs/day';
 import useSharingSettings from '@/hooks/useSharingSettings';
+import { useTranslation } from 'react-i18next';
 
 const ShareModal = () => {
   const { isOpen, closeShareModal } = useShareModal();
+  const { t } = useTranslation();
   const {
     highlightToday,
     setHighlightToday,
@@ -82,7 +84,7 @@ const ShareModal = () => {
               showCustomArea && 'rotate-180'
             )}
           />
-          <div>定制化</div>
+          <div>{t('share.customization')}</div>
         </div>
         <div
           className={clsxm(
@@ -98,14 +100,14 @@ const ShareModal = () => {
               <div className='flex flex-col gap-3 py-2'>
                 <div className='grid grid-cols-2'>
                   <div className='flex items-center gap-2'>
-                    <span className='text-nowrap'>标记今日</span>
+                    <span className='text-nowrap'>{t('share.highlightToday')}</span>
                     <Checkbox
                       checked={highlightToday}
                       onChange={() => setHighlightToday(!highlightToday)}
                     />
                   </div>
                   <div className='flex items-center gap-2'>
-                    <span className='text-nowrap'>补全星期</span>
+                    <span className='text-nowrap'>{t('share.completeWeek')}</span>
                     <Checkbox
                       checked={completeWeek}
                       onChange={() => setCompleteWeek(!completeWeek)}
@@ -113,17 +115,17 @@ const ShareModal = () => {
                   </div>
                 </div>
                 <div className='flex items-center gap-2'>
-                  <span className='text-nowrap'>显示头部</span>
+                  <span className='text-nowrap'>{t('share.showHeader')}</span>
                   <Checkbox
                     checked={showHeader}
                     onChange={() => setShowHeader(!showHeader)}
                   />
                 </div>
                 <div className='flex items-center justify-center w-full gap-2'>
-                  <span className='text-nowrap'>头部内容</span>
+                  <span className='text-nowrap'>{t('share.headerContent')}</span>
                   <input
                     type='text'
-                    placeholder='例如：节假日安排'
+                    placeholder={t('share.headerPlaceholder')}
                     maxLength={20}
                     value={headerText}
                     className='w-full px-2 py-1 text-sm transition-all duration-200 border border-gray-300 rounded-md dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent'
@@ -132,17 +134,17 @@ const ShareModal = () => {
                   />
                 </div>
                 <div className='flex items-center gap-2'>
-                  <span className='text-nowrap'>显示底部</span>
+                  <span className='text-nowrap'>{t('share.showFooter')}</span>
                   <Checkbox
                     checked={showFooter}
                     onChange={() => setShowFooter(!showFooter)}
                   />
                 </div>
                 <div className='flex items-center justify-center w-full gap-2'>
-                  <span className='text-nowrap'>底部内容</span>
+                  <span className='text-nowrap'>{t('share.footerContent')}</span>
                   <input
                     type='text'
-                    placeholder='例如：Calendar Remark'
+                    placeholder={t('share.footerPlaceholder')}
                     maxLength={20}
                     value={footerText}
                     className='w-full px-2 py-1 text-sm transition-all duration-200 border border-gray-300 rounded-md dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent'
@@ -219,13 +221,13 @@ const ShareModal = () => {
               className='px-3 py-1 text-sm text-white transition-all duration-200 bg-red-500 rounded-md hover:bg-red-600 md:text-base'
               onClick={handleClose}
             >
-              关闭
+              {t('common.close')}
             </button>
             <button
               className='px-3 py-1 text-sm text-white transition-all duration-200 bg-blue-500 rounded-md hover:bg-blue-600 md:text-base'
               onClick={() => handleSave()}
             >
-              保存图片
+              {t('share.download')}
             </button>
           </div>
         </div>

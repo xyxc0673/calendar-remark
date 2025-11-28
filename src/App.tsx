@@ -12,7 +12,6 @@ import { usePreference } from './hooks/usePreference';
 import clsxm from './libs/clsxm';
 import FullCalendar from './views/FullCalendar';
 
-dayjs.locale('zh-cn');
 dayjs.extend(weekOfYear);
 
 const GTM_ID = import.meta.env.VITE_GTM_ID;
@@ -29,11 +28,11 @@ function App() {
   return (
     <GTMProvider state={gtmParams}>
       <ShareModal />
-      <div className='flex items-center justify-center w-full min-h-screen p-4 md:p-20 bg-slate-200 dark:bg-black/80'>
+      <div className='flex justify-center items-center p-4 w-full min-h-screen md:p-20 bg-slate-200 dark:bg-black/80'>
         <div className='flex flex-col gap-3 max-md:w-full'>
           <div
             className={clsxm(
-              'flex flex-col w-full gap-2 overflow-hidden bg-white rounded-lg dark:bg-zinc-800 md:w-fit h-fit',
+              'flex overflow-hidden flex-col gap-2 w-full bg-white rounded-lg dark:bg-zinc-800 md:w-fit h-fit',
               isHorizontal ? 'md:flex-row' : 'md:flex-col'
             )}
           >

@@ -4,14 +4,17 @@ import clsxm from '@/libs/clsxm';
 import { getBadgeText } from '@/libs/day';
 import DateComponent from './DateComponent';
 import { Day } from '@/interfaces/day';
+import { useTranslation } from 'react-i18next';
 
-const getContent = (day: Day, customContent?: string) => {
+const getContent = (day: Day, customContent?: string, isChineseLocale: boolean = true) => {
   if (customContent !== undefined) {
     return customContent;
   }
 
   if (day.holiday) {
-    return holidayDetails[day.holiday].chinese;
+    return isChineseLocale 
+      ? holidayDetails[day.holiday].chinese
+      : holidayDetails[day.holiday].english;
   }
 
   if (day.solarTerm) {
@@ -49,12 +52,14 @@ const DateContainer = ({
 }) => {
   const { date } = day;
   const { customDay } = useCustomDay(date);
+  const { i18n } = useTranslation();
+  const isChineseLocale = i18n.language.startsWith('zh');
   const { isToday, isRestDay, isWeekend, isWorkDay } = day;
   const { theme, badge: customBadge, content: customContent } = customDay;
 
   const badgeText = getBadgeText(day, customBadge);
 
-  const contentText = showContent ? getContent(day, customContent) : '';
+  const contentText = showContent ? getContent(day, customContent, isChineseLocale) : '';
 
   const showBadge =
     (isToday && highlightToday && badgeText !== '') ||

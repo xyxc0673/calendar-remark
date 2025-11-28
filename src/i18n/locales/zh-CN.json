@@ -1,0 +1,144 @@
+{
+  "common": {
+    "year": "年",
+    "month": "月",
+    "day": "日",
+    "today": "今天",
+    "workday": "班",
+    "restday": "休",
+    "holiday": "节",
+    "save": "保存",
+    "cancel": "取消",
+    "edit": "编辑",
+    "delete": "删除",
+    "confirm": "确认",
+    "close": "关闭",
+    "badgeShort": {
+      "workday": "班",
+      "restday": "休",
+      "today": "今"
+    }
+  },
+  "calendar": {
+    "weekdays": {
+      "sunday": "日",
+      "monday": "一",
+      "tuesday": "二",
+      "wednesday": "三",
+      "thursday": "四",
+      "friday": "五",
+      "saturday": "六"
+    },
+    "months": {
+      "january": "一月",
+      "february": "二月",
+      "march": "三月",
+      "april": "四月",
+      "may": "五月",
+      "june": "六月",
+      "july": "七月",
+      "august": "八月",
+      "september": "九月",
+      "october": "十月",
+      "november": "十一月",
+      "december": "十二月"
+    },
+    "holidays": "假期"
+  },
+  "holidays": {
+    "newYearsDay": "元旦",
+    "springFestival": "春节",
+    "tombSweepingDay": "清明",
+    "labourDay": "劳动节",
+    "dragonBoatFestival": "端午",
+    "nationalDay": "国庆节",
+    "midAutumnFestival": "中秋"
+  },
+  "lunar": {
+    "title": "农历信息",
+    "year": "年",
+    "month": "月",
+    "day": "日",
+    "zodiac": "生肖",
+    "ganZhi": "干支",
+    "suitable": "宜",
+    "avoid": "忌",
+    "solarTerm": "节气",
+    "festival": "节日"
+  },
+  "dayInfo": {
+    "title": "日期信息",
+    "customNote": "自定义备注",
+    "addNote": "添加备注",
+    "editNote": "编辑备注",
+    "placeholder": "输入备注内容...",
+    "badge": "标记",
+    "content": "日期底部内容",
+    "contentPlaceholder": "例如：春节",
+    "badgePlaceholder": "例如：休",
+    "none": "无"
+  },
+  "yearProgress": {
+    "title": "年度进度",
+    "progress": "进度",
+    "daysElapsed": "已过天数",
+    "daysRemaining": "剩余天数",
+    "weekOfYear": "第{{week}}周"
+  },
+  "recentHoliday": {
+    "title": "最近节假日",
+    "next": "下一个",
+    "daysUntil": "还有{{days}}天",
+    "today": "今天",
+    "noUpcoming": "暂无即将到来的节假日"
+  },
+  "share": {
+    "title": "分享日历",
+    "download": "保存图片",
+    "copy": "复制链接",
+    "settings": "分享设置",
+    "includeInfo": "包含信息",
+    "dayInfo": "日期信息",
+    "lunarInfo": "农历信息",
+    "yearProgress": "年度进度",
+    "watermark": "水印",
+    "quality": "图片质量",
+    "high": "高",
+    "medium": "中",
+    "low": "低",
+    "highlightToday": "标记今日",
+    "completeWeek": "补全星期",
+    "showHeader": "显示头部",
+    "headerContent": "头部内容",
+    "headerPlaceholder": "例如：节假日安排",
+    "showFooter": "显示底部",
+    "footerContent": "底部内容",
+    "footerPlaceholder": "例如：Calendar Remark",
+    "defaultHeader": "节假日安排",
+    "defaultFooter": "Calendar Remark",
+    "customization": "定制化"
+  },
+  "settings": {
+    "title": "设置",
+    "language": "语言",
+    "theme": "主题",
+    "layout": "布局",
+    "horizontal": "水平",
+    "vertical": "垂直",
+    "auto": "自动",
+    "showDateContent": "显示日期底部内容",
+    "weekStart": "一周的开始",
+    "markWeekend": "标记周末",
+    "showExtraDays": "显示非本月日期"
+  },
+  "theme": {
+    "light": "浅色",
+    "dark": "深色",
+    "system": "跟随系统"
+  },
+  "footer": {
+    "madeWith": "用 ❤️ 制作",
+    "openSource": "开源项目",
+    "timeFlies": "光阴荏苒，日月如梭"
+  }
+}

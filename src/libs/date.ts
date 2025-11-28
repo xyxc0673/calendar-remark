@@ -7,7 +7,7 @@ import {
 } from '@/configs/holidays';
 import { FirstDayOfWeek } from '@/hooks/usePreference';
 import dayjs from 'dayjs';
-import { Lunar, Solar } from 'lunar-typescript';
+import { I18n, Lunar, Solar } from 'lunar-typescript';
 
 export const getPercentageOfYear = (date: Date): number => {
   const startOfYear = new Date(date.getFullYear(), 0, 1); // 当年的第一天
@@ -78,6 +78,8 @@ export const getLunarDate = (date: Date) => {
   if (lunarDate.getDay() === 1) {
     return `${lunarDate.getMonthInChinese()}月`;
   }
+
+  console.log('lunarDate', lunarDate.getMonthInChinese(), I18n.getLanguage());
 
   return lunarDate.getDayInChinese();
 };
