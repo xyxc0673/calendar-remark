@@ -128,17 +128,17 @@ const LayoutToggle = () => {
 
 export const Footer = () => {
   return (
-    <div className='relative flex items-center justify-between h-8 md:h-10'>
-      <div className='relative flex items-center h-full px-4 py-1 overflow-hidden text-sm rounded-full cursor-default group bg-slate-100 dark:bg-black/40 dark:text-zinc-200'>
-        <span className='transition-all duration-200 group-hover:-translate-y-full group-hover:opacity-0'>
+    <div className='flex relative justify-between items-center h-8 md:h-10'>
+      <div className='relative flex justify-center items-center h-full px-4 py-1 overflow-hidden text-sm rounded-full cursor-default bg-slate-100 dark:bg-black/40 dark:text-zinc-200 [--slide-duration:16s]'>
+        <span className='animate-slide-up will-change-transform'>
           光阴荏苒，日月如梭
         </span>
-        <span className='absolute transition-all duration-200 -translate-x-1/2 translate-y-full opacity-0 left-1/2 text-nowrap group-hover:translate-y-0 group-hover:opacity-100'>
+        <span className='absolute text-nowrap animate-slide-up will-change-transform [animation-delay:calc(var(--slide-duration)/2)] translate-y-full opacity-0'>
           A Project By{' '}
           <a
             href='https://xym.im'
             target='_blank'
-            className='bg-gradient-to-r from-[#e68765] to-[#f0b7a3] bg-clip_text text_transparent font_bold font-bold text-transparent bg-clip-text'
+            className='bg-gradient-to-r from-[#e68765] to-[#f0b7a3] bg-clip-text text-transparent font-bold'
           >
             XYXC
           </a>
